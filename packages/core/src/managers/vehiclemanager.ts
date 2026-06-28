@@ -35,7 +35,7 @@ export class VehicleManager {
 
         for (const cachedPlate of this.cache.keys()) {
             if (!activePlates.has(cachedPlate)) {
-                this.client.emit(ERLCEvents.vehicleRemove, this.cache.get(cachedPlate));
+                this.client.emit(ERLCEvents.vehicleRemove, this.cache.get(cachedPlate)!);
                 this.cache.delete(cachedPlate);
             }
         }

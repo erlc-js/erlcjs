@@ -40,7 +40,7 @@ export class PlayerManager {
 
         for (const cachedId of this.cache.keys()) {
             if (!activeIds.has(cachedId)) {
-                this.client.emit(ERLCEvents.playerLeave, this.cache.get(cachedId));
+                this.client.emit(ERLCEvents.playerLeave, this.cache.get(cachedId)!);
                 this.cache.delete(cachedId);
             }
         }

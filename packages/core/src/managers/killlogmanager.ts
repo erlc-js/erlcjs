@@ -22,7 +22,7 @@ export class KillLogManager {
             if (!cachedPlayer) {
                 const newKill = new KillLog(this.client, rawData);
                 this.cache.set(key, newKill);
-                this.client.emit(ERLCEvents.modCall, newKill);
+                this.client.emit(ERLCEvents.kill, newKill);
             }
         }
 

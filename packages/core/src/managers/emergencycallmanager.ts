@@ -35,7 +35,7 @@ export class EmergencyCallManager {
     
             for (const cachedCall of this.cache.keys()) {
                 if (!activeCalls.has(cachedCall)) {
-                    this.client.emit(ERLCEvents.emergencyCallRemove, this.cache.get(cachedCall));
+                    this.client.emit(ERLCEvents.emergencyCallRemove, this.cache.get(cachedCall)!);
                     this.cache.delete(cachedCall);
                 }
             }

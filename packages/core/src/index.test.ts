@@ -1,11 +1,11 @@
-import { Client, ERLCEvents, Vehicle } from "./index.js";
+import { Client, ERLCEvents } from "./index.js";
 
 const client = new Client({
     polling: true,
     serverKey: process.env.API_KEY!,
 })
 
-client.on(ERLCEvents.vehicleAdd, (vehicle: Vehicle) => {
+client.on(ERLCEvents.vehicleAdd, (vehicle) => {
     if (vehicle.name === 'Chevlon Commuter Van 2006' && vehicle.owner.permission === 'Normal') {
         vehicle.owner.message('Restricted vehicle. Change.')
         setTimeout(() => {
