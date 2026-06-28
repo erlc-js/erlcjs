@@ -14,7 +14,7 @@ export default defineConfig({
     base: '/erlcapi',
 	integrations: [
 		starlight({
-			title: 'syste',
+			title: 'ERLCApi',
 			social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/noinkin/erlcapi' }],
 			sidebar: [
 				{
