@@ -8,10 +8,13 @@ import { WebhookServer } from '../gateway/webhookserver.js';
 import { VehicleManager } from '../managers/vehiclemanager.js';
 
 export enum ERLCEvents {
+    poll = 'POLL',
     playerJoin = 'PLAYER_JOIN',
+    playerUpdate = 'PLAYER_UPDATE',
     playerLeave = 'PLAYER_LEAVE',
     vehicleAdd = 'VEHICLE_ADD',
-    vehicleRemove = 'VEHICLE_REMOVE'
+    vehicleRemove = 'VEHICLE_REMOVE',
+    vehicleUpdate = 'VEHICLE_UPDATE',
 }
 
 export class Client extends EventEmitter {
@@ -44,25 +47,11 @@ export class Client extends EventEmitter {
         console.log('begin polling')
         setInterval(async () => {
             try {
-                const oldIds = new Set(this.players.cache.keys());
-                const oldPlates = new Set(this.vehicles.cache.keys());
                 const server = await this.server.fetch();
+                this.emit(ERLCEvents.poll, server);
                 console.log('fetch')
                 if (server.Players) this.players.updateCache(server.Players);
                 if (server.Vehicles) this.vehicles.updateCache(server.Vehicles);
-                
-                for (const [id, player] of this.players.cache) {
-                    if (!oldIds.has(id)) this.emit(ERLCEvents.playerJoin, player);
-                }
-                for (const id of oldIds) {
-                    if (!this.players.cache.has(id)) this.emit(ERLCEvents.playerLeave, id);
-                }
-                for (const [plate, vehicle] of this.vehicles.cache) {
-                    if (!oldPlates.has(plate)) this.emit(ERLCEvents.vehicleAdd, vehicle);
-                }
-                for (const plate of oldPlates) {
-                    if (!this.vehicles.cache.has(plate)) this.emit(ERLCEvents.vehicleRemove, plate);
-                }
             } catch (err) {
                 this.emit('error', err);
             }

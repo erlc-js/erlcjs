@@ -1,4 +1,4 @@
-import { Client } from '../client/client.js';
+import { Client, ERLCEvents } from '../client/client.js';
 import { Player } from '../structures/player.js';
 import { type RawPlayerData, type RawServerData } from '../types/index.js';
 
@@ -28,15 +28,21 @@ export class PlayerManager {
             const cachedPlayer = this.cache.get(userId);
 
             if (cachedPlayer) {
+                const oldPlayer = new Player(this.client, cachedPlayer.toJSON());
                 cachedPlayer._patch(rawData);
+                this.client.emit(ERLCEvents.playerUpdate, oldPlayer, cachedPlayer);
             } else {
                 const newPlayer = new Player(this.client, rawData);
                 this.cache.set(newPlayer.id, newPlayer);
+                this.client.emit(ERLCEvents.playerJoin, newPlayer);
             }
         }
 
         for (const cachedId of this.cache.keys()) {
-            if (!activeIds.has(cachedId)) this.cache.delete(cachedId);
+            if (!activeIds.has(cachedId)) {
+                this.client.emit(ERLCEvents.playerLeave, this.cache.get(cachedId));
+                this.cache.delete(cachedId);
+            }
         }
 
         for (const cachedUser of this.nameToId.keys()) {

@@ -1,4 +1,4 @@
-import { Client } from "../client/client.js";
+import { Client, ERLCEvents } from "../client/client.js";
 import { Vehicle } from "../structures/vehicle.js";
 import type { RawServerData, RawVehicle } from "../types/index.js";
 
@@ -23,15 +23,21 @@ export class VehicleManager {
             const cachedVehicle = this.cache.get(plate);
 
             if (cachedVehicle) {
+                const oldVehicle = new Vehicle(this.client, cachedVehicle.toJSON());
                 cachedVehicle._patch(rawData);
+                this.client.emit(ERLCEvents.vehicleUpdate, oldVehicle, cachedVehicle);
             } else {
-                const newPlayer = new Vehicle(this.client, rawData);
-                this.cache.set(newPlayer.plate, newPlayer);
+                const newVehicle = new Vehicle(this.client, rawData);
+                this.cache.set(newVehicle.plate, newVehicle);
+                this.client.emit(ERLCEvents.vehicleAdd, newVehicle);
             }
         }
 
         for (const cachedPlate of this.cache.keys()) {
-            if (!activePlates.has(cachedPlate)) this.cache.delete(cachedPlate);
+            if (!activePlates.has(cachedPlate)) {
+                this.client.emit(ERLCEvents.vehicleRemove, this.cache.get(cachedPlate));
+                this.cache.delete(cachedPlate);
+            }
         }
 
         return this.cache;

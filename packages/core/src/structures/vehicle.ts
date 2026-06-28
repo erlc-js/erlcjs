@@ -29,4 +29,15 @@ export class Vehicle extends Base {
         this.colorName = data.ColorName;
         return this;
     }
+
+    public toJSON(): RawVehicle {
+        return {
+            Name: this.name,
+            Owner: this.ownerUsername,
+            Plate: this.plate,
+            ColorHex: this.colorHex,
+            Texture: this.texture,
+            ColorName: this.colorName,
+        }
+    }
 }
