@@ -43,6 +43,17 @@ export class Player extends Base {
     }
 
     public async message(text: string): Promise<void> {
-        await this.client.commands.execute(`:m ${this.username} ${text}`);
+        await this.client.commands.execute(`:pm ${this.username} ${text}`);
+    }
+
+    public toJSON(): RawPlayerData {
+        return {
+            Player: `${this.username}:${this.id}`,
+            Permission: this.permission,
+            Team: this.team,
+            Callsign: this.callsign!,
+            WantedStars: this.wantedLevel,
+            Location: { LocationX: this.location.x, LocationY: this.location.y, PostalCode: this.location.postalCode, StreetName: this.location.streetName, BuildingNumber: this.location.buildingNumber }
+        }
     }
 }

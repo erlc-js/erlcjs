@@ -4,6 +4,7 @@ import { type RawPlayerData, type RawServerData } from '../types/index.js';
 
 export class PlayerManager {
     public cache = new Map<number, Player>();
+    private nameToId = new Map<string, number>();
 
     constructor(private readonly client: Client) {}
 
@@ -16,10 +17,14 @@ export class PlayerManager {
 
     public updateCache(rawPlayers: RawPlayerData[]) {
         const activeIds = new Set<number>();
+        const activeUsers = new Set<string>();
 
         for (const rawData of rawPlayers) {
-            const userId = Number(rawData.Player.split(':')[1])
+            const userId = Number(rawData.Player.split(':')[1]);
+            const username = rawData.Player.split(':')[0]!;
             activeIds.add(userId);
+            activeUsers.add(username);
+            this.nameToId.set(username, userId);
             const cachedPlayer = this.cache.get(userId);
 
             if (cachedPlayer) {
@@ -34,6 +39,17 @@ export class PlayerManager {
             if (!activeIds.has(cachedId)) this.cache.delete(cachedId);
         }
 
+        for (const cachedUser of this.nameToId.keys()) {
+            if (!activeUsers.has(cachedUser)) this.nameToId.delete(cachedUser);
+        }
+
         return this.cache;
+    }
+
+    public getIdFromName(name: string) {
+        if (this.nameToId.has(name)) return this.nameToId.get(name);
+        this.fetchAll().then(() => {
+            return this.nameToId.get(name);
+        })
     }
 }

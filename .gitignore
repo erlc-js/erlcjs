@@ -10,3 +10,4 @@ pnpm-lock.yaml
 zig-pkg/
 .zig-cache/
 .zig-global-cache/
+.env
