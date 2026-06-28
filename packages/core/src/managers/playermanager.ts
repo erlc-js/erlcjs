@@ -10,6 +10,11 @@ export class PlayerManager {
     public async fetchAll(): Promise<Map<number, Player>> {
         const rawServer: RawServerData = await this.client.rest.request('GET', '/v2/server?Players=true');
         const rawPlayers: RawPlayerData[] = rawServer.Players ?? [];
+        
+        return this.updateCache(rawPlayers);
+    }
+
+    public updateCache(rawPlayers: RawPlayerData[]) {
         const activeIds = new Set<number>();
 
         for (const rawData of rawPlayers) {
