@@ -2,6 +2,9 @@ import { Server, createServer } from 'node:http';
 import { Client } from '../client/client.js';
 import { Player } from '../structures/player.js';
 
+/**
+ * @alpha
+ */
 export class WebhookServer {
     private server: Server;
 
