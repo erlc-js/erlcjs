@@ -108,4 +108,4 @@ await client.commands.execute(':heal jamie');
 ## Documentation
 
 To read the complete API Reference and detailed guides, view the documentation site:
-[ERLCjs Documentation Portal](https://noinkin.github.io/erlcapi/)
+[ERLCjs Documentation Portal](https://erlcjs.xyz)
