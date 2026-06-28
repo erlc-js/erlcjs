@@ -13,12 +13,20 @@ export * from './managers/commandmanager.js';
 export * from './managers/playermanager.js';
 export * from './managers/servermanager.js';
 export * from './managers/vehiclemanager.js';
+export * from './managers/commandlogmanager.js';
+export * from './managers/emergencycallmanager.js';
+export * from './managers/killlogmanager.js';
+export * from './managers/modcallmanager.js';
 
 // Structures
 export * from './structures/base.js';
 export * from './structures/player.js';
 export * from './structures/server.js';
 export * from './structures/vehicle.js';
+export * from './structures/commandlog.js';
+export * from './structures/emergencycall.js';
+export * from './structures/killlog.js';
+export * from './structures/modcall.js';
 
 // Types
 export * from './types/index.js';
