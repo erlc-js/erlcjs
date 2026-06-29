@@ -123,6 +123,38 @@ export class Player extends Base {
     }
 
     /**
+     * Makes the player wanted in-game.
+     * @returns A promise that resolves when the wanted command is sent.
+     */
+    public async wanted(): Promise<void> {
+        await this.client.commands.execute(`:wanted ${this.username}`);
+    }
+
+    /**
+     * Respawns the player in-game.
+     * @returns A promise that resolves when the respawn command is sent.
+     */
+    public async respawn(): Promise<void> {
+        await this.client.commands.execute(`:respawn ${this.username}`);
+    }
+
+    /**
+     * Loads the player in-game.
+     * @returns A promise that resolves when the load command is sent.
+     */
+    public async load(): Promise<void> {
+        await this.client.commands.execute(`:load ${this.username}`);
+    }
+
+    /**
+     * Refresh the player in-game.
+     * @returns A promise that resolves when the refresh command is sent.
+     */
+    public async refresh(): Promise<void> {
+        await this.client.commands.execute(`:refresh ${this.username}`);
+    }
+
+    /**
      * Helpers the player in-game.
      * @returns A promise that resolves when the helper command is sent.
      */
