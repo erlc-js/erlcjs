@@ -1,6 +1,7 @@
 import { Client, ERLCEvents } from '../client/client.js';
 import { EmergencyCall } from '../structures/emergencycall.js';
-import { type RawEmergencyCall, type RawServerData } from '../types/index.js';
+import { type RawEmergencyCall, type RawServerData, type RawWebhookEmergencyCall } from '../types/index.js';
+import { convertToPascalCase } from '../util/index.js';
 
 /**
  * Manager responsible for fetching, caching, and updating active EmergencyCall structures.
@@ -66,5 +67,39 @@ export class EmergencyCallManager {
         }
 
         return this.cache;
+    }
+
+    /**
+     * Adds a call to the emergency call cache with data from the webhook.
+     * Emits emergencyCallAdd events.
+     * @param callData - The raw emergency call payload from the webhook.
+     */
+    public addCall(callData: RawWebhookEmergencyCall) {
+        const callNum = callData.callNumber;
+        const cachedCall = this.cache.get(callNum);
+        
+        const pascalCallData = convertToPascalCase(callData) as RawEmergencyCall;
+
+        if (cachedCall) {
+            // Polling found first ignore.
+            return;
+        } else {
+            const newCall = new EmergencyCall(this.client, pascalCallData);
+            this.cache.set(newCall.callNumber, newCall);
+            this.client.emit(ERLCEvents.emergencyCallAdd, newCall);
+        }
+    }
+
+    /**
+     * Removes a call from the emergency call cache with data from the webhook.
+     * Emits emergencyCallRemove events.
+     * @param callData - The raw emergency call payload from the webhook.
+     */
+    public removeCall(callData: RawWebhookEmergencyCall) {
+        const callNum = callData.callNumber;
+        const exists = this.cache.has(callNum);
+        if (!exists) return;
+        this.client.emit(ERLCEvents.emergencyCallRemove, this.cache.get(callNum)!);
+        this.cache.delete(callNum);
     }
 }

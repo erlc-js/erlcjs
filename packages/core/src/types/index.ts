@@ -225,6 +225,45 @@ export interface RawEmergencyCall {
 }
 
 /**
+ * Raw data structure representing a webhook emergency call.
+ * @public
+ */
+export interface RawWebhookEmergencyCall {
+    /**
+     * The team name associated with the emergency call.
+     */
+    team: string;
+    /**
+     * The UserId of the player who made the call.
+     */
+    caller: number;
+    /**
+     * List of UserIds of responders currently assigned to this call.
+     */
+    players: number[];
+    /**
+     * Position coordinates [x, y] of the emergency call.
+     */
+    position: number[];
+    /**
+     * Unix timestamp of when the call was created.
+     */
+    startedAt: number;
+    /**
+     * The unique call number.
+     */
+    callNumber: number;
+    /**
+     * The description text of the call.
+     */
+    description: string;
+    /**
+     * Descriptors of the position where the call was made.
+     */
+    positionDescriptor: string;
+}
+
+/**
  * Raw data structure representing a vehicle.
  * @public
  */

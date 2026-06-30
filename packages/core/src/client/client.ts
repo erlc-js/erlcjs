@@ -59,6 +59,8 @@ export enum ERLCEvents {
     staffAdd = 'STAFF_ADD',
     /** Emitted when a staff member is removed */
     staffRemove = 'STAFF_REMOVE',
+    /** Emitted when a custom command is executed in-game */
+    customCommand = 'CUSTOM_COMMAND',
 }
 
 /**
@@ -101,8 +103,13 @@ export interface ClientEvents {
     /** Emitted when an emergency call is updated. */
     [ERLCEvents.emergencyCallUpdate]: [oldCall: EmergencyCall | null, newCall: EmergencyCall];
 
+    /** Emitted when a player is given a staff role */
     [ERLCEvents.staffAdd]: [staff: Staff, type: 'Admin' | 'Mod' | 'Helper'];
+    /** Emitted when a player is removed from a staff role */
     [ERLCEvents.staffRemove]: [staff: Staff, type: 'Admin' | 'Mod' | 'Helper'];
+
+    /** Emitted when a custom command is executed in-game */
+    [ERLCEvents.customCommand]: [command: string, argument: string];
 
     /** Emitted when an error is caught during polling or gateway operations. */
     error: [error: unknown];
