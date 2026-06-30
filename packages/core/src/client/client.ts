@@ -183,4 +183,27 @@ export class Client extends EventEmitter<ClientEvents> {
             }
         }, 5000);
     }
+
+    waitFor<K extends keyof ClientEvents>(
+        event: K,
+        timeoutMs: number = 0,
+    ): Promise<ClientEvents[K]> {
+        return new Promise((resolve, reject) => {
+            let timeout: NodeJS.Timeout | undefined;
+
+            const listener = (...args: ClientEvents[K]) => {
+                if (timeout) clearTimeout(timeout);
+                resolve(args);
+            };
+
+            this.once(event, listener as any);
+
+            if (timeoutMs > 0) {
+                timeout = setTimeout(() => {
+                    this.off(event, listener as any);
+                    reject(new Error(`Timeout waiting for event: "${event}" after ${timeoutMs}ms`));
+                }, timeoutMs);
+            }
+        });
+    }
 }
