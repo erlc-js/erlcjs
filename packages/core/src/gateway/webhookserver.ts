@@ -1,33 +1,73 @@
 import { Server, createServer } from 'node:http';
-import { Client } from '../client/client.js';
-import { Player } from '../structures/player.js';
+import { Client, ERLCEvents } from '../client/client.js';
 
 /**
  * Webhook Server for handling real-time gateway events pushed by ER:LC.
  * @alpha
  */
 export class WebhookServer {
-    private server: Server;
+    private readonly server: Server;
 
     /**
      * Creates an instance of WebhookServer.
      * @param client - The ERLCApi client.
      */
-    constructor(private client: Client) {
+    constructor(private readonly client: Client) {
         this.server = createServer((req, res) => {
             const configPath = this.client.options.webhook?.path || '/';
 
             if (req.method === 'POST' && req.url === configPath) {
-                let body = '';
-                req.on('data', (chunk) => (body += chunk));
-                req.on('end', () => {
+                let bodyChunks: Buffer[] = [];
+                req.on('data', (chunk) => bodyChunks.push(chunk));
+                
+                req.on('end', async () => {
+                    const rawBody = Buffer.concat(bodyChunks);
+                    
+                    const signatureHex = req.headers['x-signature-ed25519'] as string;
+                    const timestamp = req.headers['x-signature-timestamp'] as string;
+
+                    const publicKeyBase64 = "MCowBQYDK2VwAyEAjSICb9pp0kHizGQtdG8ySWsDChfGqi+gyFCttigBNOA="
+
+                    if (!signatureHex || !timestamp || !publicKeyBase64) {
+                        res.writeHead(401, { 'Content-Type': 'text/plain' });
+                        return res.end('Missing verification headers or public key config');
+                    }
+
                     try {
-                        const payload = JSON.parse(body);
+                        const timestampBuffer = Buffer.from(timestamp, 'utf-8');
+                        const messageBuffer = Buffer.concat([timestampBuffer, rawBody]);
+                        
+                        const signatureBuffer = Buffer.from(signatureHex, 'hex');
+                        const publicKeyBuffer = Buffer.from(publicKeyBase64, 'base64');
+
+                        const cryptoKey = await globalThis.crypto.subtle.importKey(
+                            'spki', 
+                            publicKeyBuffer,
+                            { name: 'Ed25519', namedCurve: 'Ed25519' },
+                            false,
+                            ['verify']
+                        );
+
+                        const isValid = await globalThis.crypto.subtle.verify(
+                            'Ed25519',
+                            cryptoKey,
+                            signatureBuffer,
+                            messageBuffer
+                        );
+
+                        if (!isValid) {
+                            res.writeHead(401, { 'Content-Type': 'text/plain' });
+                            return res.end('Invalid Signature');
+                        }
+
+                        const payload = JSON.parse(rawBody.toString('utf-8'));
                         this.handleGatewayEvent(payload);
+
                         res.writeHead(200, { 'Content-Type': 'application/json' });
                         res.end(JSON.stringify({ received: true }));
                     } catch (err) {
-                        res.writeHead(400).end('Malformed Payload');
+                        res.writeHead(400, { 'Content-Type': 'text/plain' });
+                        res.end('Malformed Payload or Verification Error');
                     }
                 });
             } else {
@@ -49,6 +89,15 @@ export class WebhookServer {
      * @param payload - Raw JSON payload received.
      */
     private handleGatewayEvent(payload: any) {
-        // TODO
+        const events = payload.events;
+        for (const event of events) {
+            if (event.event === 'EmergencyCallStarted') {
+                this.client.emergencyCalls.addCall(event.data);
+            } else if (event.event === 'EmergencyCallEnded') {
+                this.client.emergencyCalls.removeCall(event.data);
+            } else if (event.event === 'CustomCommand') {
+                this.client.emit(ERLCEvents.customCommand, event.data?.command, event.data?.argument);
+            }
+        }
     }
 }

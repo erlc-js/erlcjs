@@ -2,6 +2,10 @@ import { Client, ERLCEvents } from './index.js';
 
 const client = new Client({
     polling: true,
+    webhook: {
+        enabled: true,
+        port: 3000
+    },
     serverKey: process.env.API_KEY!,
 });
 
