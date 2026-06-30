@@ -1,7 +1,7 @@
-import { Client } from "../client/client.js";
-import { Base } from "./base.js";
-import type { RawModCall } from "../types/index.js";
-import { Player } from "./player.js";
+import { Client } from '../client/client.js';
+import { Base } from './base.js';
+import type { RawModCall } from '../types/index.js';
+import { Player } from './player.js';
 
 /**
  * Represents a request for moderation help (moderator call) in the ER:LC server.
@@ -36,7 +36,7 @@ export class ModCall extends Base {
      * The Roblox username of the moderator who responded, if any.
      */
     moderatorUsername?: string;
-    
+
     /**
      * Creates an instance of ModCall.
      * @param client - The ERLCApi client.
@@ -72,14 +72,15 @@ export class ModCall extends Base {
      * @returns The raw moderator call data.
      */
     public toJSON(): RawModCall {
-        if (this.moderatorId) return {
-            Caller: `${this.callerUsername}:${this.callerId}`,
-            Timestamp: this.timestamp,
-            Moderator: `${this.moderatorUsername}:${this.moderatorId}`,
-        }
+        if (this.moderatorId)
+            return {
+                Caller: `${this.callerUsername}:${this.callerId}`,
+                Timestamp: this.timestamp,
+                Moderator: `${this.moderatorUsername}:${this.moderatorId}`,
+            };
         return {
             Caller: `${this.callerUsername}:${this.callerId}`,
             Timestamp: this.timestamp,
-        }
+        };
     }
-}
+}

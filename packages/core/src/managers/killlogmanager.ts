@@ -24,11 +24,14 @@ export class KillLogManager {
      * @returns A promise resolving to a Map of KillLogs.
      */
     public async fetchAll(): Promise<Map<string, KillLog>> {
-        const rawServer: RawServerData = await this.client.rest.request('GET', '/v2/server?KillLogs=true');
+        const rawServer: RawServerData = await this.client.rest.request(
+            'GET',
+            '/v2/server?KillLogs=true',
+        );
         const rawKillLogs: RawKillLog[] = rawServer.KillLogs ?? [];
-        
+
         return this.updateCache(rawKillLogs);
-     }
+    }
 
     /**
      * Re-synchronizes the cache with the raw kill logs.
@@ -38,7 +41,7 @@ export class KillLogManager {
      */
     public updateCache(rawCommands: RawKillLog[]) {
         for (const rawData of rawCommands) {
-            const key = `${rawData.Killer}:${rawData.Killed}:${rawData.Timestamp}`
+            const key = `${rawData.Killer}:${rawData.Killed}:${rawData.Timestamp}`;
             const cachedPlayer = this.cache.get(key);
 
             if (!cachedPlayer) {
@@ -50,4 +53,4 @@ export class KillLogManager {
 
         return this.cache;
     }
-}
+}

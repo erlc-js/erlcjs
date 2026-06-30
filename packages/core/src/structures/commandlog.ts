@@ -1,7 +1,7 @@
-import { Client } from "../client/client.js";
-import { Base } from "./base.js";
-import type { RawCommandLog } from "../types/index.js";
-import { Player } from "./player.js";
+import { Client } from '../client/client.js';
+import { Base } from './base.js';
+import type { RawCommandLog } from '../types/index.js';
+import { Player } from './player.js';
 
 /**
  * Represents a logged command execution event.
@@ -28,7 +28,7 @@ export class CommandLog extends Base {
      * The full command string executed.
      */
     command!: string;
-    
+
     /**
      * Creates an instance of CommandLog.
      * @param client - The ERLCApi client.
@@ -62,7 +62,7 @@ export class CommandLog extends Base {
         return {
             Player: `${this.playerUsername}:${this.playerId}`,
             Timestamp: this.timestamp,
-            Command: this.command
-        }
+            Command: this.command,
+        };
     }
-}
+}

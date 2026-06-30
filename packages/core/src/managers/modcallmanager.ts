@@ -24,9 +24,12 @@ export class ModCallManager {
      * @returns A promise resolving to a Map of ModCalls.
      */
     public async fetchAll(): Promise<Map<string, ModCall>> {
-        const rawServer: RawServerData = await this.client.rest.request('GET', '/v2/server?ModCalls=true');
+        const rawServer: RawServerData = await this.client.rest.request(
+            'GET',
+            '/v2/server?ModCalls=true',
+        );
         const rawModCalls: RawModCall[] = rawServer.ModCalls ?? [];
-        
+
         return this.updateCache(rawModCalls);
     }
 
@@ -38,7 +41,7 @@ export class ModCallManager {
      */
     public updateCache(rawCommands: RawModCall[]) {
         for (const rawData of rawCommands) {
-            const key = `${rawData.Caller}:${rawData.Timestamp}`
+            const key = `${rawData.Caller}:${rawData.Timestamp}`;
             const cachedPlayer = this.cache.get(key);
 
             if (!cachedPlayer) {
@@ -50,4 +53,4 @@ export class ModCallManager {
 
         return this.cache;
     }
-}
+}

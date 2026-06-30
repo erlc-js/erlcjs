@@ -16,10 +16,10 @@ export class WebhookServer {
     constructor(private client: Client) {
         this.server = createServer((req, res) => {
             const configPath = this.client.options.webhook?.path || '/';
-            
+
             if (req.method === 'POST' && req.url === configPath) {
                 let body = '';
-                req.on('data', chunk => body += chunk);
+                req.on('data', (chunk) => (body += chunk));
                 req.on('end', () => {
                     try {
                         const payload = JSON.parse(body);
@@ -51,4 +51,4 @@ export class WebhookServer {
     private handleGatewayEvent(payload: any) {
         // TODO
     }
-}
+}

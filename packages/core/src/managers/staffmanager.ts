@@ -1,6 +1,6 @@
-import { Client, ERLCEvents } from "../client/client.js";
-import { Staff } from "../structures/staff.js";
-import type { RawServerData, RawStaffData, RawVehicle } from "../types/index.js";
+import { Client, ERLCEvents } from '../client/client.js';
+import { Staff } from '../structures/staff.js';
+import type { RawServerData, RawStaffData, RawVehicle } from '../types/index.js';
 
 /**
  * Manager responsible for fetching, caching, and updating Vehicle structures.
@@ -11,12 +11,12 @@ export class StaffManager {
      * Map cache of admins, keyed by their userId.
      */
     public admins = new Map<number, Staff>();
-    
+
     /**
      * Map cache of mods, keyed by their userId.
      */
     public mods = new Map<number, Staff>();
-    
+
     /**
      * Map cache of helpers, keyed by their userId.
      */
@@ -26,7 +26,7 @@ export class StaffManager {
      * Creates an instance of StaffManager.
      * @param client - The ERLCApi client.
      */
-    constructor(private readonly client: Client) {};
+    constructor(private readonly client: Client) {}
 
     /**
      * Fetches all staff members.
@@ -34,9 +34,12 @@ export class StaffManager {
      * @returns A promise resolving to a Map of active Vehicles.
      */
     public async fetchAll(): Promise<Map<string, Map<number, Staff>>> {
-        const rawServer: RawServerData = await this.client.rest.request('GET', '/v2/server?Staff=true');
+        const rawServer: RawServerData = await this.client.rest.request(
+            'GET',
+            '/v2/server?Staff=true',
+        );
         const rawVehicles: RawStaffData = rawServer.Staff!;
-        
+
         return this.updateCache(rawVehicles);
     }
 
@@ -51,12 +54,15 @@ export class StaffManager {
         this._updateCache(rawStaff.Mods, 'Mod');
         this._updateCache(rawStaff.Helpers, 'Helper');
 
-        return new Map<string, Map<number, Staff>>().set('Admins', this.admins).set('Mods', this.mods).set('Helpers', this.helpers);
+        return new Map<string, Map<number, Staff>>()
+            .set('Admins', this.admins)
+            .set('Mods', this.mods)
+            .set('Helpers', this.helpers);
     }
 
     private _updateCache(data: Record<string, string>, type: 'Admin' | 'Mod' | 'Helper') {
         const activeUserIds = new Set<number>();
-        const types = `${type}s`
+        const types = `${type}s`;
         let cache: Map<number, Staff>;
         if (type === 'Admin') cache = this.admins;
         else if (type === 'Mod') cache = this.mods;

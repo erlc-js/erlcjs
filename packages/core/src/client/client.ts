@@ -58,7 +58,7 @@ export enum ERLCEvents {
     /** Emitted when a staff member is added */
     staffAdd = 'STAFF_ADD',
     /** Emitted when a staff member is removed */
-    staffRemove = 'STAFF_REMOVE'
+    staffRemove = 'STAFF_REMOVE',
 }
 
 /**
@@ -72,28 +72,28 @@ export interface ClientEvents {
     [ERLCEvents.serverUpdate]: [oldServer: Server | null, newServer: Server];
     /** Emitted when server details are first loaded. */
     [ERLCEvents.serverCreate]: [server: Server];
-    
+
     /** Emitted when a player joins the server. */
     [ERLCEvents.playerJoin]: [player: Player];
     /** Emitted when a player's data updates. */
     [ERLCEvents.playerUpdate]: [oldPlayer: Player | null, newPlayer: Player];
     /** Emitted when a player leaves the server. */
     [ERLCEvents.playerLeave]: [player: Player];
-    
+
     /** Emitted when a vehicle is spawned. */
     [ERLCEvents.vehicleAdd]: [vehicle: Vehicle];
     /** Emitted when a vehicle is despawned. */
     [ERLCEvents.vehicleRemove]: [vehicle: Vehicle];
     /** Emitted when a vehicle's data updates. */
     [ERLCEvents.vehicleUpdate]: [oldVehicle: Vehicle | null, newVehicle: Vehicle];
-    
+
     /** Emitted when a server command is run. */
     [ERLCEvents.command]: [log: CommandLog];
     /** Emitted when a player requests moderator assistance. */
     [ERLCEvents.modCall]: [call: ModCall];
     /** Emitted when a player is killed. */
     [ERLCEvents.kill]: [kill: KillLog];
-    
+
     /** Emitted when an emergency call is created. */
     [ERLCEvents.emergencyCallAdd]: [call: EmergencyCall];
     /** Emitted when an emergency call is cleared. */
@@ -103,7 +103,7 @@ export interface ClientEvents {
 
     [ERLCEvents.staffAdd]: [staff: Staff, type: 'Admin' | 'Mod' | 'Helper'];
     [ERLCEvents.staffRemove]: [staff: Staff, type: 'Admin' | 'Mod' | 'Helper'];
-    
+
     /** Emitted when an error is caught during polling or gateway operations. */
     error: [error: unknown];
 }

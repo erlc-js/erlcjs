@@ -1,7 +1,7 @@
-import { Client } from "../client/client.js";
-import { Base } from "./base.js";
-import type { RawKillLog } from "../types/index.js";
-import { Player } from "./player.js";
+import { Client } from '../client/client.js';
+import { Base } from './base.js';
+import type { RawKillLog } from '../types/index.js';
+import { Player } from './player.js';
 
 /**
  * Represents a staff member.
@@ -24,7 +24,7 @@ export class Staff extends Base {
      * The player instance of the staff member if they are online.
      */
     player?: Player;
-    
+
     /**
      * Creates an instance of Staff.
      * @param client - The ERLCApi client.

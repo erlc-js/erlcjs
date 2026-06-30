@@ -1,5 +1,5 @@
-import { type ClientOptions } from "../types/index.js";
-import { InvalidServerKeyError } from "../errors/index.js";
+import { type ClientOptions } from '../types/index.js';
+import { InvalidServerKeyError } from '../errors/index.js';
 
 /**
  * Handles communication with the ER:LC HTTP API, managing rate limits and request queuing.
@@ -15,7 +15,7 @@ export class RestManager {
      * Creates an instance of RestManager.
      * @param options - The ClientOptions configuration.
      */
-    constructor(private options: ClientOptions) {};
+    constructor(private options: ClientOptions) {}
 
     /**
      * Enqueues and sends an HTTP request to the ER:LC API.
@@ -32,7 +32,7 @@ export class RestManager {
                 try {
                     if (Date.now() < this.rateLimitReset) {
                         const waitTime = this.rateLimitReset - Date.now();
-                        await new Promise(res => setTimeout(res, waitTime));
+                        await new Promise((res) => setTimeout(res, waitTime));
                     }
 
                     const response = await fetch(`${this.baseUrl}${endpoint}`, {
@@ -40,14 +40,16 @@ export class RestManager {
                         headers: {
                             'Server-Key': this.options.serverKey,
                             'Content-Type': 'application/json',
-                            ...(this.options.globalKey && { 'Authorization': `Bearer ${this.options.globalKey}` })
+                            ...(this.options.globalKey && {
+                                Authorization: `Bearer ${this.options.globalKey}`,
+                            }),
                         },
-                        body: body ? JSON.stringify(body) : undefined
+                        body: body ? JSON.stringify(body) : undefined,
                     });
 
                     const resetHeader = response.headers.get('x-ratelimit-reset');
                     if (resetHeader) {
-                        this.rateLimitReset = Date.now() + (parseInt(resetHeader) * 1000);
+                        this.rateLimitReset = Date.now() + parseInt(resetHeader) * 1000;
                     }
 
                     if (response.status === 403) {
@@ -55,12 +57,16 @@ export class RestManager {
                     }
 
                     if (response.status === 429) {
-                        this.queue.unshift(() => this.request(method, endpoint, body).then(resolve).catch(reject));
+                        this.queue.unshift(() =>
+                            this.request(method, endpoint, body).then(resolve).catch(reject),
+                        );
                         return;
                     }
 
                     if (!response.ok) {
-                        throw new Error(`[ERLC API Error] ${response.status}: ${response.statusText}`);
+                        throw new Error(
+                            `[ERLC API Error] ${response.status}: ${response.statusText}`,
+                        );
                     }
 
                     const data = await response.json();

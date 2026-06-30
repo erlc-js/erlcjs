@@ -1,6 +1,6 @@
-import { Client } from "../client/client.js";
-import { Base } from "./base.js";
-import type { RawServerData } from "../types/index.js";
+import { Client } from '../client/client.js';
+import { Base } from './base.js';
+import type { RawServerData } from '../types/index.js';
 
 /**
  * Represents the ER:LC game server and its current configuration/state.
@@ -78,7 +78,8 @@ export class Server extends Base {
      * @returns True if the properties are identical, false otherwise.
      */
     public compare(data: RawServerData): boolean {
-        return this.name === data.Name &&
+        return (
+            this.name === data.Name &&
             this.ownerId === data.OwnerId &&
             this.coOwnerIds === data.CoOwnerIds &&
             this.currentPlayers === data.CurrentPlayers &&
@@ -87,6 +88,7 @@ export class Server extends Base {
             this.accVerifiedReq === data.AccVerifiedReq &&
             this.teamBalance === data.TeamBalance &&
             this.queue === data.Queue
+        );
     }
 
     /**
@@ -104,6 +106,6 @@ export class Server extends Base {
             AccVerifiedReq: this.accVerifiedReq,
             TeamBalance: this.teamBalance,
             Queue: this.queue,
-        }
+        };
     }
-}
+}

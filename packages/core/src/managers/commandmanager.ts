@@ -1,4 +1,4 @@
-import { Client } from "../client/client.js";
+import { Client } from '../client/client.js';
 
 /**
  * Manager responsible for executing custom console commands in the ER:LC server.
@@ -9,7 +9,7 @@ export class CommandManager {
      * Creates an instance of CommandManager.
      * @param client - The ERLCApi client.
      */
-    constructor(private readonly client: Client) {};
+    constructor(private readonly client: Client) {}
 
     /**
      * Executes a server command via the ER:LC API.
@@ -17,8 +17,10 @@ export class CommandManager {
      * @returns A promise resolving to the API response string status.
      */
     public async execute(command: string): Promise<string> {
-        const res: string = await this.client.rest.request('POST', '/v2/server/command', { command });
+        const res: string = await this.client.rest.request('POST', '/v2/server/command', {
+            command,
+        });
 
         return res;
     }
-}
+}

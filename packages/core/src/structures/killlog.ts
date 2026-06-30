@@ -1,7 +1,7 @@
-import { Client } from "../client/client.js";
-import { Base } from "./base.js";
-import type { RawKillLog } from "../types/index.js";
-import { Player } from "./player.js";
+import { Client } from '../client/client.js';
+import { Base } from './base.js';
+import type { RawKillLog } from '../types/index.js';
+import { Player } from './player.js';
 
 /**
  * Represents a log of a player death event (kill).
@@ -36,7 +36,7 @@ export class KillLog extends Base {
      * Unix timestamp of when the kill occurred.
      */
     timestamp!: number;
-    
+
     /**
      * Creates an instance of KillLog.
      * @param client - The ERLCApi client.
@@ -74,6 +74,6 @@ export class KillLog extends Base {
             Killed: `${this.killedUsername}:${this.killedId}`,
             Killer: `${this.killerUsername}:${this.killerId}`,
             Timestamp: this.timestamp,
-        }
+        };
     }
-}
+}

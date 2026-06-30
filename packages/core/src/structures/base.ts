@@ -11,4 +11,3 @@ export class Base {
      */
     constructor(public readonly client: Client) {}
 }
-

@@ -1,7 +1,7 @@
-import { Client } from "../client/client.js";
-import { Base } from "./base.js";
-import type { RawEmergencyCall } from "../types/index.js";
-import { Player } from "./player.js";
+import { Client } from '../client/client.js';
+import { Base } from './base.js';
+import type { RawEmergencyCall } from '../types/index.js';
+import { Player } from './player.js';
 
 /**
  * Represents an active emergency call in the ER:LC server.
@@ -48,7 +48,7 @@ export class EmergencyCall extends Base {
      * Positional description of where the call was made.
      */
     positionDescriptor!: string;
-    
+
     /**
      * Creates an instance of EmergencyCall.
      * @param client - The ERLCApi client.
@@ -78,7 +78,7 @@ export class EmergencyCall extends Base {
         this.startedAt = data.StartedAt;
         this.callNumber = data.CallNumber;
         this.description = data.Description;
-        this.positionDescriptor = data.PositionDescriptor
+        this.positionDescriptor = data.PositionDescriptor;
         return this;
     }
 
@@ -96,6 +96,6 @@ export class EmergencyCall extends Base {
             CallNumber: this.callNumber,
             Description: this.description,
             PositionDescriptor: this.positionDescriptor,
-        }
+        };
     }
-}
+}

@@ -24,9 +24,12 @@ export class CommandLogManager {
      * @returns A promise resolving to a Map of CommandLogs.
      */
     public async fetchAll(): Promise<Map<string, CommandLog>> {
-        const rawServer: RawServerData = await this.client.rest.request('GET', '/v2/server?CommandLogs=true');
+        const rawServer: RawServerData = await this.client.rest.request(
+            'GET',
+            '/v2/server?CommandLogs=true',
+        );
         const rawCommands: RawCommandLog[] = rawServer.CommandLogs ?? [];
-        
+
         return this.updateCache(rawCommands);
     }
 
@@ -38,7 +41,7 @@ export class CommandLogManager {
      */
     public updateCache(rawCommands: RawCommandLog[]) {
         for (const rawData of rawCommands) {
-            const key = `${rawData.Player}:${rawData.Timestamp}`
+            const key = `${rawData.Player}:${rawData.Timestamp}`;
             const cachedPlayer = this.cache.get(key);
 
             if (!cachedPlayer) {
@@ -50,4 +53,4 @@ export class CommandLogManager {
 
         return this.cache;
     }
-}
+}

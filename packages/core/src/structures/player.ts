@@ -26,17 +26,17 @@ export class Player extends Base {
     /**
      * The current location coordinates and address of the player.
      */
-    public location!: { 
+    public location!: {
         /** The X coordinate in-game. */
-        x: number; 
+        x: number;
         /** The Y coordinate in-game. */
-        y: number; 
+        y: number;
         /** The postal code of the street. */
-        postalCode: string; 
+        postalCode: string;
         /** The name of the street. */
-        streetName: string; 
+        streetName: string;
         /** The building number. */
-        buildingNumber: string; 
+        buildingNumber: string;
     };
     /**
      * The player's server permission role.
@@ -68,11 +68,11 @@ export class Player extends Base {
         this.username = splitPlayer[0]!;
         this.team = data.Team;
         this.callsign = data.Callsign;
-        this.location = { 
-            x: data.Location.LocationX, 
-            y: data.Location.LocationY, 
-            postalCode: data.Location.PostalCode, 
-            streetName: data.Location.StreetName, 
+        this.location = {
+            x: data.Location.LocationX,
+            y: data.Location.LocationY,
+            postalCode: data.Location.PostalCode,
+            streetName: data.Location.StreetName,
             buildingNumber: data.Location.BuildingNumber,
         };
         this.permission = data.Permission ?? 'Normal';
@@ -85,7 +85,7 @@ export class Player extends Base {
      * @param reason - The reason for kicking the player. Defaults to "Kicked by API".
      * @returns A promise that resolves when the kick command is sent.
      */
-    public async kick(reason: string = "Kicked by API"): Promise<void> {
+    public async kick(reason: string = 'Kicked by API'): Promise<void> {
         await this.client.commands.execute(`:kick ${this.username} ${reason}`);
     }
 
@@ -94,7 +94,7 @@ export class Player extends Base {
      * @param reason - The reason for banning the player. Defaults to "Banned by API".
      * @returns A promise that resolves when the ban command is sent.
      */
-    public async ban(reason: string = "Banned by API"): Promise<void> {
+    public async ban(reason: string = 'Banned by API'): Promise<void> {
         await this.client.commands.execute(`:ban ${this.username} ${reason}`);
     }
 
@@ -241,7 +241,13 @@ export class Player extends Base {
             Team: this.team,
             Callsign: this.callsign!,
             WantedStars: this.wantedLevel,
-            Location: { LocationX: this.location.x, LocationY: this.location.y, PostalCode: this.location.postalCode, StreetName: this.location.streetName, BuildingNumber: this.location.buildingNumber }
-        }
+            Location: {
+                LocationX: this.location.x,
+                LocationY: this.location.y,
+                PostalCode: this.location.postalCode,
+                StreetName: this.location.streetName,
+                BuildingNumber: this.location.buildingNumber,
+            },
+        };
     }
 }

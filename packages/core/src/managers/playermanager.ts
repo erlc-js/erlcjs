@@ -25,9 +25,12 @@ export class PlayerManager {
      * @returns A promise resolving to a Map of active Players.
      */
     public async fetchAll(): Promise<Map<number, Player>> {
-        const rawServer: RawServerData = await this.client.rest.request('GET', '/v2/server?Players=true');
+        const rawServer: RawServerData = await this.client.rest.request(
+            'GET',
+            '/v2/server?Players=true',
+        );
         const rawPlayers: RawPlayerData[] = rawServer.Players ?? [];
-        
+
         return this.updateCache(rawPlayers);
     }
 
@@ -84,6 +87,6 @@ export class PlayerManager {
         if (this.nameToId.has(name)) return this.nameToId.get(name);
         this.fetchAll().then(() => {
             return this.nameToId.get(name);
-        })
+        });
     }
-}
+}

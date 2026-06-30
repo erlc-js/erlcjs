@@ -1,7 +1,7 @@
-import { Client } from "../client/client.js";
-import { Base } from "./base.js";
-import type { RawVehicle } from "../types/index.js";
-import { Player } from "./player.js";
+import { Client } from '../client/client.js';
+import { Base } from './base.js';
+import type { RawVehicle } from '../types/index.js';
+import { Player } from './player.js';
 
 /**
  * Represents a spawned vehicle in the ER:LC server.
@@ -40,7 +40,7 @@ export class Vehicle extends Base {
      * The user-friendly color name of the vehicle.
      */
     colorName!: string;
-    
+
     /**
      * Creates an instance of Vehicle.
      * @param client - The ERLCApi client.
@@ -58,7 +58,7 @@ export class Vehicle extends Base {
      */
     public _patch(data: RawVehicle): this {
         this.name = data.Name;
-        this.ownerUsername = data.Owner
+        this.ownerUsername = data.Owner;
         this.ownerId = this.client.players.getIdFromName(this.ownerUsername)!;
         this.owner = this.client.players.cache.get(this.ownerId)!;
         this.plate = data.Plate;
@@ -80,6 +80,6 @@ export class Vehicle extends Base {
             ColorHex: this.colorHex,
             Texture: this.texture,
             ColorName: this.colorName,
-        }
+        };
     }
-}
+}
