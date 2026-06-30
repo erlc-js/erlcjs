@@ -3,6 +3,7 @@ import { Client, ERLCEvents } from '../client/client.js';
 
 /**
  * Webhook Server for handling real-time gateway events pushed by ER:LC.
+ * @public
  */
 export class WebhookServer {
     private readonly server: Server;
@@ -18,14 +19,15 @@ export class WebhookServer {
             if (req.method === 'POST' && req.url === configPath) {
                 let bodyChunks: Buffer[] = [];
                 req.on('data', (chunk) => bodyChunks.push(chunk));
-                
+
                 req.on('end', async () => {
                     const rawBody = Buffer.concat(bodyChunks);
-                    
+
                     const signatureHex = req.headers['x-signature-ed25519'] as string;
                     const timestamp = req.headers['x-signature-timestamp'] as string;
 
-                    const publicKeyBase64 = "MCowBQYDK2VwAyEAjSICb9pp0kHizGQtdG8ySWsDChfGqi+gyFCttigBNOA="
+                    const publicKeyBase64 =
+                        'MCowBQYDK2VwAyEAjSICb9pp0kHizGQtdG8ySWsDChfGqi+gyFCttigBNOA=';
 
                     if (!signatureHex || !timestamp || !publicKeyBase64) {
                         res.writeHead(401, { 'Content-Type': 'text/plain' });
@@ -35,23 +37,23 @@ export class WebhookServer {
                     try {
                         const timestampBuffer = Buffer.from(timestamp, 'utf-8');
                         const messageBuffer = Buffer.concat([timestampBuffer, rawBody]);
-                        
+
                         const signatureBuffer = Buffer.from(signatureHex, 'hex');
                         const publicKeyBuffer = Buffer.from(publicKeyBase64, 'base64');
 
                         const cryptoKey = await globalThis.crypto.subtle.importKey(
-                            'spki', 
+                            'spki',
                             publicKeyBuffer,
                             { name: 'Ed25519', namedCurve: 'Ed25519' },
                             false,
-                            ['verify']
+                            ['verify'],
                         );
 
                         const isValid = await globalThis.crypto.subtle.verify(
                             'Ed25519',
                             cryptoKey,
                             signatureBuffer,
-                            messageBuffer
+                            messageBuffer,
                         );
 
                         if (!isValid) {
@@ -88,10 +90,8 @@ export class WebhookServer {
      * @param payload - Raw JSON payload received.
      */
     private handleGatewayEvent(payload: any) {
-        console.log(payload)
         const events = payload.events;
         for (const event of events) {
-            console.log(event)
             if (event.event === 'WebhookProbe') {
                 this.client.emit(ERLCEvents.webhookProbe);
             } else if (event.event === 'EmergencyCallStarted') {
@@ -99,7 +99,12 @@ export class WebhookServer {
             } else if (event.event === 'EmergencyCallEnded') {
                 this.client.emergencyCalls.removeCall(event.data);
             } else if (event.event === 'CustomCommand') {
-                this.client.emit(ERLCEvents.customCommand, event.data?.origin, event.data?.command, event.data?.argument);
+                this.client.emit(
+                    ERLCEvents.customCommand,
+                    event.data?.origin,
+                    event.data?.command,
+                    event.data?.argument,
+                );
             }
         }
     }

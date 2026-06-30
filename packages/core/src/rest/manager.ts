@@ -1,15 +1,27 @@
 import { type ClientOptions } from '../types/index.js';
 import { InvalidServerKeyError } from '../errors/index.js';
 
+interface BucketInfo {
+    limit: number;
+    remaining: number;
+    reset: number;
+}
+
 /**
  * Handles communication with the ER:LC HTTP API, managing rate limits and request queuing.
  * @public
  */
 export class RestManager {
-    private queue: Array<() => Promise<any>> = [];
+    private queue: Array<{
+        endpoint: string;
+        execute: () => Promise<any>;
+    }> = [];
+
     private processing = false;
-    private rateLimitReset = 0;
-    private baseUrl = 'https://api.erlc.gg';
+    private readonly baseUrl = 'https://api.erlc.gg';
+
+    private buckets = new Map<string, BucketInfo>();
+    private routeToBucket = new Map<string, string>();
 
     /**
      * Creates an instance of RestManager.
@@ -28,16 +40,8 @@ export class RestManager {
      */
     public async request(method: 'GET' | 'POST', endpoint: string, body?: any): Promise<any> {
         return new Promise((resolve, reject) => {
-            this.queue.push(async () => {
+            const executeTask = async () => {
                 try {
-                    if (Date.now() < this.rateLimitReset) {
-                        const waitTime = Math.min(
-                            Math.max(0, this.rateLimitReset - Date.now()), 
-                            2147483647
-                        );
-                        await new Promise((res) => setTimeout(res, waitTime));
-                    }
-
                     const response = await fetch(`${this.baseUrl}${endpoint}`, {
                         method,
                         headers: {
@@ -50,19 +54,14 @@ export class RestManager {
                         body: body ? JSON.stringify(body) : undefined,
                     });
 
-                    const resetHeader = response.headers.get('x-ratelimit-reset');
-                    if (resetHeader) {
-                        this.rateLimitReset = parseInt(resetHeader) * 1000;
-                    }
+                    this.updateRateLimits(endpoint, response.headers);
 
                     if (response.status === 403) {
                         throw new InvalidServerKeyError();
                     }
 
                     if (response.status === 429) {
-                        this.queue.unshift(() =>
-                            this.request(method, endpoint, body).then(resolve).catch(reject),
-                        );
+                        this.queue.unshift({ endpoint, execute: executeTask });
                         return;
                     }
 
@@ -77,10 +76,56 @@ export class RestManager {
                 } catch (error) {
                     reject(error);
                 }
-            });
+            };
 
+            this.queue.push({ endpoint, execute: executeTask });
             this.processQueue();
         });
+    }
+
+    /**
+     * Extracts headers and updates bucket-specific ratelimit.
+     */
+    private updateRateLimits(endpoint: string, headers: Headers) {
+        const bucketId = headers.get('x-ratelimit-bucket') || 'global';
+        const limit = parseInt(headers.get('x-ratelimit-limit') || '0', 10);
+        const remaining = parseInt(headers.get('x-ratelimit-remaining') || '0', 10);
+        const resetHeader = headers.get('x-ratelimit-reset');
+
+        if (resetHeader) {
+            const resetTime = parseInt(resetHeader, 10) * 1000;
+
+            this.routeToBucket.set(endpoint, bucketId);
+
+            this.buckets.set(bucketId, {
+                limit,
+                remaining,
+                reset: resetTime,
+            });
+        }
+    }
+
+    /**
+     * Gets wait time for a specific endpoint, returns 0 if not ratelimited.
+     */
+    private getWaitTime(endpoint: string): number {
+        const bucketId = this.routeToBucket.get(endpoint) || 'global';
+        const bucket = this.buckets.get(bucketId);
+
+        if (!bucket) return 0;
+
+        const now = Date.now();
+
+        if (now > bucket.reset) {
+            bucket.remaining = bucket.limit;
+            return 0;
+        }
+
+        if (bucket.remaining <= 0) {
+            return Math.min(Math.max(0, bucket.reset - now), 2147483647);
+        }
+
+        return 0;
     }
 
     /**
@@ -91,8 +136,24 @@ export class RestManager {
         this.processing = true;
 
         while (this.queue.length > 0) {
-            const executeTask = this.queue.shift();
-            if (executeTask) await executeTask();
+            const nextItem = this.queue[0];
+            if (!nextItem) continue;
+            const waitTime = this.getWaitTime(nextItem.endpoint);
+
+            if (waitTime > 0) {
+                await new Promise((res) => setTimeout(res, waitTime));
+                continue;
+            }
+
+            this.queue.shift();
+
+            const bucketId = this.routeToBucket.get(nextItem.endpoint) || 'global';
+            const bucket = this.buckets.get(bucketId);
+            if (bucket) {
+                bucket.remaining--;
+            }
+
+            nextItem.execute().catch(() => {});
         }
 
         this.processing = false;

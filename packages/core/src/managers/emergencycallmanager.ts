@@ -1,6 +1,10 @@
 import { Client, ERLCEvents } from '../client/client.js';
 import { EmergencyCall } from '../structures/emergencycall.js';
-import { type RawEmergencyCall, type RawServerData, type RawWebhookEmergencyCall } from '../types/index.js';
+import {
+    type RawEmergencyCall,
+    type RawServerData,
+    type RawWebhookEmergencyCall,
+} from '../types/index.js';
 import { convertToPascalCase } from '../util/index.js';
 
 /**
@@ -77,7 +81,7 @@ export class EmergencyCallManager {
     public addCall(callData: RawWebhookEmergencyCall) {
         const callNum = callData.callNumber;
         const cachedCall = this.cache.get(callNum);
-        
+
         const pascalCallData = convertToPascalCase(callData) as RawEmergencyCall;
 
         if (cachedCall) {

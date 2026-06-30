@@ -9,7 +9,7 @@ export function convertToPascalCase(obj: any): any {
     }
 
     if (Array.isArray(obj)) {
-        return obj.map(item => convertToPascalCase(item));
+        return obj.map((item) => convertToPascalCase(item));
     }
 
     const newObj: Record<string, any> = {};
@@ -17,7 +17,7 @@ export function convertToPascalCase(obj: any): any {
     for (const key in obj) {
         if (Object.prototype.hasOwnProperty.call(obj, key)) {
             const pascalKey = key.charAt(0).toUpperCase() + key.slice(1);
-            
+
             newObj[pascalKey] = convertToPascalCase(obj[key]);
         }
     }
