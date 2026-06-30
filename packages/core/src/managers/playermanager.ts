@@ -89,4 +89,28 @@ export class PlayerManager {
             return this.nameToId.get(name);
         });
     }
+
+    /**
+     * Unbans a player from their userId.
+     * @param userId - The userId to unban.
+     */
+    public async unban(userId: number | string) {
+        await this.client.commands.execute(`:unban ${userId}`);
+    }
+
+    /**
+     * Unmods a player from their userId.
+     * @param userId - The userId to unmod.
+     */
+    public async unmod(userId: number | string) {
+        await this.client.commands.execute(`:unmod ${userId}`);
+    }
+
+    /**
+     * Unadmins a player from their userId.
+     * @param userId - The userId to unadmin.
+     */
+    public async unadmin(userId: number | string) {
+        await this.client.commands.execute(`:unadmin ${userId}`);
+    }
 }
