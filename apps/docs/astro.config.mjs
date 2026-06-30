@@ -15,6 +15,7 @@ export default defineConfig({
 	integrations: [
 		starlight({
 			title: 'ERLCjs',
+            customCss: [ './src/styles/custom.css' ],
 			social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/noinkin/erlcapi' }],
 			sidebar: [
 				{
@@ -39,4 +40,3 @@ export default defineConfig({
 		}),
 	],
 });
- 
