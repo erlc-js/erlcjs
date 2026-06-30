@@ -101,7 +101,7 @@ export class WebhookServer {
             } else if (event.event === 'CustomCommand') {
                 this.client.emit(
                     ERLCEvents.customCommand,
-                    event.data?.origin,
+                    this.client.players.cache.get(Number(event.data?.origin)) ?? event.data?.origin,
                     event.data?.command,
                     event.data?.argument,
                 );
