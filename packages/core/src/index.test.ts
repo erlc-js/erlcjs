@@ -1,4 +1,4 @@
-import { Client, ERLCEvents, CivilianVehicles } from './index.js';
+import { Client, ERLCEvents, Vehicles } from './index.js';
 
 const client = new Client({
     polling: true,
@@ -10,7 +10,8 @@ const client = new Client({
 });
 
 client.on(ERLCEvents.vehicleAdd, (vehicle) => {
-    if (vehicle.name === CivilianVehicles.CHEVLON_COMMUTER_VAN_2006) {
+    console.log(vehicle);
+    if (vehicle.name === Vehicles.CHEVLON_COMMUTER_VAN_2006) {
         vehicle.owner.message('Restricted vehicle. Change.');
         setTimeout(() => {
             if (
