@@ -231,6 +231,46 @@ export class Player extends Base {
     }
 
     /**
+     * Gets all vehicles owned by this player.
+     * @returns A collection of vehicles owned by this player.
+     * @remarks This is a convenience getter that filters the vehicle cache for vehicles owned by this player.
+     * It does not fetch new data from the server, so it may not be up-to-date.
+     */
+    public get vehicles() {
+        return this.client.vehicles.cache.filter(v => v.owner.id === this.id);
+    }
+
+    /**
+     * Gets all command logs associated with this player.
+     * @returns A collection of command logs associated with this player.
+     * @remarks This is a convenience getter that filters the command log cache for logs associated with this player.
+     * It does not fetch new data from the server, so it may not be up-to-date.
+     */
+    public get commandLogs() {
+        return this.client.commandLogs.cache.filter(log => log.player.id === this.id);
+    }
+
+    /**
+     * Gets all kill logs where this player is the killer.
+     * @returns A collection of kill logs where this player is the killer.
+     * @remarks This is a convenience getter that filters the kill log cache for logs where this player is the killer.
+     * It does not fetch new data from the server, so it may not be up-to-date.
+     */
+    public get kills() {
+        return this.client.killLogs.cache.filter(log => log.killer.id === this.id);
+    }
+
+    /**
+     * Gets all kill logs where this player is the killed.
+     * @returns A collection of kill logs where this player is the killed.
+     * @remarks This is a convenience getter that filters the kill log cache for logs where this player is the killed.
+     * It does not fetch new data from the server, so it may not be up-to-date.
+     */
+    public get deaths() {
+        return this.client.killLogs.cache.filter(log => log.killed.id === this.id);
+    }
+
+    /**
      * Converts this Player instance back into raw data structure.
      * @returns The raw player data.
      */

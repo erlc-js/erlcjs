@@ -114,4 +114,20 @@ export class PlayerManager {
     public async unadmin(userId: number | string) {
         await this.client.commands.execute(`:unadmin ${userId}`);
     }
+
+    /**
+     * Gets a list of all players with a wanted level greater than 0.
+     * @returns An array of Player instances with a wanted level greater than 0.
+     */
+    public get wanted() {
+        return Array.from(this.cache.values()).filter(p => p.wantedLevel > 0);
+    }
+
+    /**
+     * Gets a list of all players with a permission level other than 'Normal'.
+     * @returns An array of Player instances with elevated permissions.
+     */
+    public get onlineStaff() {
+        return Array.from(this.cache.values()).filter(p => p.permission !== 'Normal');
+    }
 }
