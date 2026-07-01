@@ -31,6 +31,7 @@ export * from './structures/staff.js';
 
 // Types
 export * from './types/index.js';
+
 // Errors
 export * from './errors/index.js';
 
