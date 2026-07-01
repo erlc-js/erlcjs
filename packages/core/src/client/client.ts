@@ -25,6 +25,8 @@ import { StaffManager } from '../managers/staffmanager.js';
  * @public
  */
 export enum ERLCEvents {
+    /** Emitted when the first poll is complete and the client is ready. */
+    ready = 'READY',
     /** Emitted when a periodic server poll finishes. */
     poll = 'POLL',
     /** Emitted when server details are updated. */
@@ -70,6 +72,8 @@ export enum ERLCEvents {
  * @public
  */
 export interface ClientEvents {
+    /** Emitted when the first poll is complete and the client is ready. */
+    [ERLCEvents.ready]: [];
     /** Emitted when a periodic server poll finishes. */
     [ERLCEvents.poll]: [server: RawServerData];
     /** Emitted when server details are updated. */
@@ -173,27 +177,34 @@ export class Client extends EventEmitter<ClientEvents> {
         if (options.polling) {
             this.startPolling();
         }
+
+        this.emit(ERLCEvents.ready);
     }
 
     /**
      * Starts the periodic api-polling loop if enabled.
      */
-    private startPolling() {
+    private async startPolling() {
+        await this.poll();
         setInterval(async () => {
-            try {
-                const server = await this.server.fetch();
-                this.emit(ERLCEvents.poll, server);
-                if (server.Players) this.players.updateCache(server.Players);
-                if (server.Vehicles) this.vehicles.updateCache(server.Vehicles);
-                if (server.CommandLogs) this.commandLogs.updateCache(server.CommandLogs);
-                if (server.EmergencyCalls) this.emergencyCalls.updateCache(server.EmergencyCalls);
-                if (server.KillLogs) this.killLogs.updateCache(server.KillLogs);
-                if (server.ModCalls) this.modCalls.updateCache(server.ModCalls);
-                if (server.Staff) this.staff.updateCache(server.Staff);
-            } catch (err) {
-                this.emit('error', err);
-            }
+            await this.poll();
         }, 5000);
+    }
+
+    private async poll() {
+        try {
+            const server = await this.server.fetch();
+            this.emit(ERLCEvents.poll, server);
+            if (server.Players) this.players.updateCache(server.Players);
+            if (server.Vehicles) this.vehicles.updateCache(server.Vehicles);
+            if (server.CommandLogs) this.commandLogs.updateCache(server.CommandLogs);
+            if (server.EmergencyCalls) this.emergencyCalls.updateCache(server.EmergencyCalls);
+            if (server.KillLogs) this.killLogs.updateCache(server.KillLogs);
+            if (server.ModCalls) this.modCalls.updateCache(server.ModCalls);
+            if (server.Staff) this.staff.updateCache(server.Staff);
+        } catch (err) {
+            this.emit('error', err);
+        }
     }
 
     waitFor<K extends keyof ClientEvents>(
