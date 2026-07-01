@@ -40,9 +40,14 @@ export class RestManager {
      */
     public async request(method: 'GET' | 'POST', endpoint: string, body?: any): Promise<any> {
         return new Promise((resolve, reject) => {
+            let attempts = 0;
+            const maxRetries = 3;
+
             const executeTask = async () => {
+                let response: Response;
+                
                 try {
-                    const response = await fetch(`${this.baseUrl}${endpoint}`, {
+                    response = await fetch(`${this.baseUrl}${endpoint}`, {
                         method,
                         headers: {
                             'Server-Key': this.options.serverKey,
@@ -53,7 +58,17 @@ export class RestManager {
                         },
                         body: body ? JSON.stringify(body) : undefined,
                     });
+                } catch(networkError) {
+                    if (attempts < maxRetries) {
+                        attempts++;
+                        const delay = Math.pow(2, attempts) * 1000;
+                        await new Promise((res) => setTimeout(res, delay));
+                        return executeTask();
+                    }
+                    return reject(new Error(`Network error: ${networkError}`));
+                }
 
+                try {
                     this.updateRateLimits(endpoint, response.headers);
 
                     if (response.status === 403) {
@@ -63,6 +78,16 @@ export class RestManager {
                     if (response.status === 429) {
                         this.queue.unshift({ endpoint, execute: executeTask });
                         return;
+                    }
+
+                    if (response.status >= 500 && response.status < 600) {
+                        if (attempts < maxRetries) {
+                            attempts++;
+                            const delay = Math.pow(2, attempts) * 1000;
+                            await new Promise((res) => setTimeout(res, delay));
+                            return executeTask();
+                        }
+                        return reject(new Error(`Server error: ${response.status} ${response.statusText}`));
                     }
 
                     if (!response.ok) {
