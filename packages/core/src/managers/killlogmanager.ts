@@ -1,4 +1,5 @@
 import { Client, ERLCEvents } from '../client/client.js';
+import { Collection } from '../index.js';
 import { KillLog } from '../structures/killlog.js';
 import { type RawKillLog, type RawServerData } from '../types/index.js';
 
@@ -8,9 +9,9 @@ import { type RawKillLog, type RawServerData } from '../types/index.js';
  */
 export class KillLogManager {
     /**
-     * Map cache of logged kills, keyed by a composite `Killer:Killed:Timestamp` key.
+     * Collection cache of logged kills, keyed by a composite `Killer:Killed:Timestamp` key.
      */
-    public cache = new Map<string, KillLog>();
+    public cache = new Collection<string, KillLog>();
 
     /**
      * Creates an instance of KillLogManager.
@@ -21,9 +22,9 @@ export class KillLogManager {
     /**
      * Fetches all kill logs from the game server.
      * Updates the kill log cache.
-     * @returns A promise resolving to a Map of KillLogs.
+     * @returns A promise resolving to a Collection of KillLogs.
      */
-    public async fetchAll(): Promise<Map<string, KillLog>> {
+    public async fetchAll(): Promise<Collection<string, KillLog>> {
         const rawServer: RawServerData = await this.client.rest.request(
             'GET',
             '/v2/server?KillLogs=true',
@@ -37,7 +38,7 @@ export class KillLogManager {
      * Re-synchronizes the cache with the raw kill logs.
      * Emits a kill event for new logs.
      * @param rawCommands - Raw kill logs payload.
-     * @returns The updated KillLog cache Map.
+     * @returns The updated KillLog cache Collection.
      */
     public updateCache(rawCommands: RawKillLog[]) {
         for (const rawData of rawCommands) {
