@@ -112,4 +112,9 @@ export class WebhookServer {
             }
         }
     }
+
+    /** Closes the webhook server. */
+    public close() {
+        this.server.close();
+    }
 }
