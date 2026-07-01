@@ -99,11 +99,15 @@ export class WebhookServer {
             } else if (event.event === 'EmergencyCallEnded') {
                 this.client.emergencyCalls.removeCall(event.data);
             } else if (event.event === 'CustomCommand') {
+                let command = event.data?.command?.trim();
+                if (command.startsWith(';')) command = command.slice(1);
+                if (!command) continue;
+                const args = event.data?.argument ? event.data.argument.trim().split(' ') : [];
                 this.client.emit(
                     ERLCEvents.customCommand,
                     this.client.players.cache.get(Number(event.data?.origin)) ?? event.data?.origin,
-                    event.data?.command,
-                    event.data?.argument,
+                    command,
+                    args,
                 );
             }
         }

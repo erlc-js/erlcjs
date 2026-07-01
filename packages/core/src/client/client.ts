@@ -115,7 +115,7 @@ export interface ClientEvents {
     [ERLCEvents.staffRemove]: [staff: Staff, type: 'Admin' | 'Mod' | 'Helper'];
 
     /** Emitted when a custom command is executed in-game. */
-    [ERLCEvents.customCommand]: [player: Player | string, command: string, argument: string];
+    [ERLCEvents.customCommand]: [player: Player | string, command: string, args: string[]];
 
     /** Emitted when a player enters the webhook in-game. */
     [ERLCEvents.webhookProbe]: [];
