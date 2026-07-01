@@ -29,8 +29,8 @@ export class Player extends Base {
     public location!: {
         /** The X coordinate in-game. */
         x: number;
-        /** The Y coordinate in-game. */
-        y: number;
+        /** The Z coordinate in-game. */
+        z: number;
         /** The postal code of the street. */
         postalCode: string;
         /** The name of the street. */
@@ -70,7 +70,7 @@ export class Player extends Base {
         this.callsign = data.Callsign;
         this.location = {
             x: data.Location.LocationX,
-            y: data.Location.LocationY,
+            z: data.Location.LocationZ,
             postalCode: data.Location.PostalCode,
             streetName: data.Location.StreetName,
             buildingNumber: data.Location.BuildingNumber,
@@ -243,7 +243,7 @@ export class Player extends Base {
             WantedStars: this.wantedLevel,
             Location: {
                 LocationX: this.location.x,
-                LocationY: this.location.y,
+                LocationZ: this.location.z,
                 PostalCode: this.location.postalCode,
                 StreetName: this.location.streetName,
                 BuildingNumber: this.location.buildingNumber,

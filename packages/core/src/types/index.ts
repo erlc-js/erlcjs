@@ -70,7 +70,7 @@ export interface RawPlayerData {
         /**
          * The Y coordinate of the player in the game.
          */
-        LocationY: number;
+        LocationZ: number;
         /**
          * The postal code of the player's location.
          */
