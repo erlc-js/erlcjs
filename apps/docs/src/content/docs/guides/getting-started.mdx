@@ -1,11 +1,11 @@
 ---
 title: Getting Started
-description: Learn how to install, configure, and run your first ERLCjs project.
+description: Learn how to install, configure, and run your first erlc.js project.
 ---
 
 import { Steps, Tabs, TabItem } from '@astrojs/starlight/components';
 
-Welcome to the **ERLCjs** getting started guide! ERLCjs is a developer-friendly library designed to help you interact with the Roblox Emergency Response: Liberty County private server API.
+Welcome to the **erlc.js** getting started guide! erlc.js is a developer-friendly library designed to help you interact with the Roblox Emergency Response: Liberty County private server API.
 
 This guide will walk you through setting up your project, obtaining API keys, installing the library, and running your first server script.
 
@@ -17,7 +17,7 @@ Follow these steps to get your first script running in minutes.
 
 1.  ### Obtain Your ER:LC Server Key
 
-    To use ERLCjs, you must have an API Server Key generated from your ER:LC private server settings.
+    To use erlc.js, you must have an API Server Key generated from your ER:LC private server settings.
     *   Open Roblox and join your ER:LC Private Server.
     *   Open the server settings panel (requires Owner or co-owner permissions).
     *   Navigate to **Server API** or developer settings.
@@ -33,7 +33,7 @@ Follow these steps to get your first script running in minutes.
     ```
     It is recommend to configure your `package.json` to use ES modules by adding `"type": "module"`.
 
-3.  ### Install ERLCjs
+3.  ### Install erlc.js
 
     Install the core package using your preferred package manager:
     <Tabs>
@@ -62,7 +62,7 @@ Follow these steps to get your first script running in minutes.
             ```javascript
             import { Client, ERLCEvents } from '@erlcjs/core';
 
-            // Initialize the ERLCjs Client
+            // Initialize the erlc.js Client
             const client = new Client({
                 serverKey: 'YOUR_SERVER_API_KEY', // Replace with your copied key
                 polling: true // Enable periodic polling
@@ -79,14 +79,14 @@ Follow these steps to get your first script running in minutes.
                 console.error('An API error occurred:', err);
             });
 
-            console.log('ERLCjs bot is running...');
+            console.log('erlc.js bot is running...');
             ```
         </TabItem>
         <TabItem label="cjs">
             ```javascript
             const { Client, ERLCEvents } = require('@erlcjs/core');
 
-            // Initialize the ERLCjs Client
+            // Initialize the erlc.js Client
             const client = new Client({
                 serverKey: 'YOUR_SERVER_API_KEY', // Replace with your copied key
                 polling: true // Enable periodic polling
@@ -103,7 +103,7 @@ Follow these steps to get your first script running in minutes.
                 console.error('An API error occurred:', err);
             });
 
-            console.log('ERLCjs bot is running...');
+            console.log('erlc.js bot is running...');
             ```
         </TabItem>
     </Tabs>
@@ -120,7 +120,7 @@ Follow these steps to get your first script running in minutes.
 
 ## Next Steps
 
-Now that you have your first script running, check out the other guides to unlock ERLCjs's full potential:
+Now that you have your first script running, check out the other guides to unlock erlc.js's full potential:
 *   [Client Configuration](/guides/client) - Learn about Polling vs Gateway Webhooks.
 *   [Managing Players](/guides/players) - Kick, kill, or send private messages to online players.
 *   [Server & Commands](/guides/server-commands) - Fetch server stats and execute console commands.

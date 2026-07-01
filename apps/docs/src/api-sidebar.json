@@ -11,6 +11,10 @@
         "slug": "api/core/base"
       },
       {
+        "label": "CivilianVehicles enum",
+        "slug": "api/core/civilianvehicles"
+      },
+      {
         "label": "Client",
         "slug": "api/core/client"
       },
@@ -35,6 +39,14 @@
         "slug": "api/core/commandmanager"
       },
       {
+        "label": "convertToPascalCase() function",
+        "slug": "api/core/converttopascalcase"
+      },
+      {
+        "label": "DepartmentOfTransportationVehicles enum",
+        "slug": "api/core/departmentoftransportationvehicles"
+      },
+      {
         "label": "EmergencyCall",
         "slug": "api/core/emergencycall"
       },
@@ -47,8 +59,16 @@
         "slug": "api/core/erlcevents"
       },
       {
+        "label": "FireRescueVehicles enum",
+        "slug": "api/core/firerescuevehicles"
+      },
+      {
         "label": "InvalidServerKeyError",
         "slug": "api/core/invalidserverkeyerror"
+      },
+      {
+        "label": "JobVehicles enum",
+        "slug": "api/core/jobvehicles"
       },
       {
         "label": "KillLog",
@@ -57,6 +77,10 @@
       {
         "label": "KillLogManager",
         "slug": "api/core/killlogmanager"
+      },
+      {
+        "label": "LawEnforcementVehicles enum",
+        "slug": "api/core/lawenforcementvehicles"
       },
       {
         "label": "ModCall",
@@ -109,6 +133,10 @@
       {
         "label": "RawVehicle",
         "slug": "api/core/rawvehicle"
+      },
+      {
+        "label": "RawWebhookEmergencyCall",
+        "slug": "api/core/rawwebhookemergencycall"
       },
       {
         "label": "RestManager",

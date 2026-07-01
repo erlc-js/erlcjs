@@ -272,6 +272,1787 @@
           "implementsTokenRanges": []
         },
         {
+          "kind": "Enum",
+          "canonicalReference": "@erlcjs/core!CivilianVehicles:enum",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "declare enum CivilianVehicles "
+            }
+          ],
+          "fileUrlPath": "dist/index.d.ts",
+          "releaseTag": "Public",
+          "name": "CivilianVehicles",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!CivilianVehicles._4_WHEELER:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "_4_WHEELER = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"4-Wheeler\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "_4_WHEELER"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!CivilianVehicles.ARROW_PHOENIX_NATIONALS_1977:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "ARROW_PHOENIX_NATIONALS_1977 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Arrow Phoenix Nationals 1977\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "ARROW_PHOENIX_NATIONALS_1977"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!CivilianVehicles.AVERON_ANODIC_2024:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "AVERON_ANODIC_2024 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Averon Anodic 2024\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "AVERON_ANODIC_2024"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!CivilianVehicles.AVERON_Q8_2022:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "AVERON_Q8_2022 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Averon Q8 2022\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "AVERON_Q8_2022"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!CivilianVehicles.AVERON_R8_2017:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "AVERON_R8_2017 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Averon R8 2017\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "AVERON_R8_2017"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!CivilianVehicles.AVERON_RS3_2020:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "AVERON_RS3_2020 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Averon RS3 2020\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "AVERON_RS3_2020"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!CivilianVehicles.AVERON_S5_2010:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "AVERON_S5_2010 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Averon S5 2010\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "AVERON_S5_2010"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!CivilianVehicles.BKM_MUNICH_2020:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "BKM_MUNICH_2020 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"BKM Munich 2020\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "BKM_MUNICH_2020"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!CivilianVehicles.BKM_RISEN_ROADSTER_2020:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "BKM_RISEN_ROADSTER_2020 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"BKM Risen Roadster 2020\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "BKM_RISEN_ROADSTER_2020"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!CivilianVehicles.BULLHORN_BH15_2009:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "BULLHORN_BH15_2009 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Bullhorn BH15 2009\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "BULLHORN_BH15_2009"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!CivilianVehicles.BULLHORN_DETERMINATOR_2008:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "BULLHORN_DETERMINATOR_2008 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Bullhorn Determinator 2008\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "BULLHORN_DETERMINATOR_2008"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!CivilianVehicles.BULLHORN_DETERMINATOR_SFP_BLACKJACK_WIDEBODY_2022:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "BULLHORN_DETERMINATOR_SFP_BLACKJACK_WIDEBODY_2022 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Bullhorn Determinator SFP Blackjack Widebody 2022\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "BULLHORN_DETERMINATOR_SFP_BLACKJACK_WIDEBODY_2022"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!CivilianVehicles.BULLHORN_DETERMINATOR_SFP_FURY_2022:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "BULLHORN_DETERMINATOR_SFP_FURY_2022 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Bullhorn Determinator SFP Fury 2022\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "BULLHORN_DETERMINATOR_SFP_FURY_2022"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!CivilianVehicles.BULLHORN_FOREMAN_1988:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "BULLHORN_FOREMAN_1988 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Bullhorn Foreman 1988\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "BULLHORN_FOREMAN_1988"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!CivilianVehicles.BULLHORN_PRANCER_1969:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "BULLHORN_PRANCER_1969 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Bullhorn Prancer 1969\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "BULLHORN_PRANCER_1969"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!CivilianVehicles.BULLHORN_PRANCER_2011:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "BULLHORN_PRANCER_2011 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Bullhorn Prancer 2011\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "BULLHORN_PRANCER_2011"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!CivilianVehicles.BULLHORN_PRANCER_2015:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "BULLHORN_PRANCER_2015 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Bullhorn Prancer 2015\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "BULLHORN_PRANCER_2015"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!CivilianVehicles.BULLHORN_PRANCER_WIDEBODY_2020:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "BULLHORN_PRANCER_WIDEBODY_2020 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Bullhorn Prancer Widebody 2020\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "BULLHORN_PRANCER_WIDEBODY_2020"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!CivilianVehicles.BULLHORN_PUEBLO_2018:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "BULLHORN_PUEBLO_2018 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Bullhorn Pueblo 2018\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "BULLHORN_PUEBLO_2018"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!CivilianVehicles.CELESTIAL_TRUCKATRON_2024:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "CELESTIAL_TRUCKATRON_2024 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Celestial Truckatron 2024\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "CELESTIAL_TRUCKATRON_2024"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!CivilianVehicles.CELESTIAL_TYPE_6_2023:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "CELESTIAL_TYPE_6_2023 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Celestial Type-6 2023\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "CELESTIAL_TYPE_6_2023"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!CivilianVehicles.CHEVLON_AMIGO_LZR_2011:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "CHEVLON_AMIGO_LZR_2011 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Chevlon Amigo LZR 2011\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "CHEVLON_AMIGO_LZR_2011"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!CivilianVehicles.CHEVLON_AMIGO_LZR_2016:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "CHEVLON_AMIGO_LZR_2016 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Chevlon Amigo LZR 2016\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "CHEVLON_AMIGO_LZR_2016"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!CivilianVehicles.CHEVLON_AMIGO_SPORT_2016:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "CHEVLON_AMIGO_SPORT_2016 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Chevlon Amigo Sport 2016\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "CHEVLON_AMIGO_SPORT_2016"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!CivilianVehicles.CHEVLON_ANTELOPE_1994:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "CHEVLON_ANTELOPE_1994 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Chevlon Antelope 1994\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "CHEVLON_ANTELOPE_1994"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!CivilianVehicles.CHEVLON_CAMION_2002:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "CHEVLON_CAMION_2002 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Chevlon Camion 2002\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "CHEVLON_CAMION_2002"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!CivilianVehicles.CHEVLON_CAMION_2008:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "CHEVLON_CAMION_2008 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Chevlon Camion 2008\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "CHEVLON_CAMION_2008"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!CivilianVehicles.CHEVLON_CAMION_2018:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "CHEVLON_CAMION_2018 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Chevlon Camion 2018\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "CHEVLON_CAMION_2018"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!CivilianVehicles.CHEVLON_CAMION_2021:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "CHEVLON_CAMION_2021 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Chevlon Camion 2021\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "CHEVLON_CAMION_2021"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!CivilianVehicles.CHEVLON_CAPTAIN_2009:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "CHEVLON_CAPTAIN_2009 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Chevlon Captain 2009\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "CHEVLON_CAPTAIN_2009"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!CivilianVehicles.CHEVLON_COMMUTER_VAN_2006:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "CHEVLON_COMMUTER_VAN_2006 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Chevlon Commuter Van 2006\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "CHEVLON_COMMUTER_VAN_2006"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!CivilianVehicles.CHEVLON_CORBETA_1M_EDITION_2014:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "CHEVLON_CORBETA_1M_EDITION_2014 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Chevlon Corbeta 1M Edition 2014\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "CHEVLON_CORBETA_1M_EDITION_2014"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!CivilianVehicles.CHEVLON_CORBETA_8_2023:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "CHEVLON_CORBETA_8_2023 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Chevlon Corbeta 8 2023\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "CHEVLON_CORBETA_8_2023"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!CivilianVehicles.CHEVLON_CORBETA_C2_1967:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "CHEVLON_CORBETA_C2_1967 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Chevlon Corbeta C2 1967\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "CHEVLON_CORBETA_C2_1967"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!CivilianVehicles.CHEVLON_CORBETA_TZ_2014:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "CHEVLON_CORBETA_TZ_2014 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Chevlon Corbeta TZ 2014\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "CHEVLON_CORBETA_TZ_2014"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!CivilianVehicles.CHEVLON_CORBETA_X08_2014:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "CHEVLON_CORBETA_X08_2014 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Chevlon Corbeta X08 2014\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "CHEVLON_CORBETA_X08_2014"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!CivilianVehicles.CHEVLON_INFERNO_1981:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "CHEVLON_INFERNO_1981 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Chevlon Inferno 1981\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "CHEVLON_INFERNO_1981"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!CivilianVehicles.CHEVLON_L_15_1981:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "CHEVLON_L_15_1981 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Chevlon L/15 1981\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "CHEVLON_L_15_1981"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!CivilianVehicles.CHEVLON_L_35_EXTENDED_1981:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "CHEVLON_L_35_EXTENDED_1981 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Chevlon L/35 Extended 1981\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "CHEVLON_L_35_EXTENDED_1981"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!CivilianVehicles.CHEVLON_LANDSLIDE_2007:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "CHEVLON_LANDSLIDE_2007 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Chevlon Landslide 2007\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "CHEVLON_LANDSLIDE_2007"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!CivilianVehicles.CHEVLON_PLATORO_2019:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "CHEVLON_PLATORO_2019 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Chevlon Platoro 2019\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "CHEVLON_PLATORO_2019"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!CivilianVehicles.CHEVLON_REVVER_2005:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "CHEVLON_REVVER_2005 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Chevlon Revver 2005\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "CHEVLON_REVVER_2005"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!CivilianVehicles.CHRYSLUS_CHAMPION_2005:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "CHRYSLUS_CHAMPION_2005 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Chryslus Champion 2005\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "CHRYSLUS_CHAMPION_2005"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!CivilianVehicles.ELYSION_SLICK_2014:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "ELYSION_SLICK_2014 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Elysion Slick 2014\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "ELYSION_SLICK_2014"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!CivilianVehicles.FALCON_ADVANCE_100_HOLIDAY_EDITION_1956:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "FALCON_ADVANCE_100_HOLIDAY_EDITION_1956 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Falcon Advance 100 Holiday Edition 1956\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "FALCON_ADVANCE_100_HOLIDAY_EDITION_1956"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!CivilianVehicles.FALCON_COUPE_1934:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "FALCON_COUPE_1934 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Falcon Coupe 1934\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "FALCON_COUPE_1934"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!CivilianVehicles.FALCON_COUPE_HOTROD_1934:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "FALCON_COUPE_HOTROD_1934 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Falcon Coupe Hotrod 1934\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "FALCON_COUPE_HOTROD_1934"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!CivilianVehicles.FALCON_ESTALLION_2024:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "FALCON_ESTALLION_2024 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Falcon eStallion 2024\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "FALCON_ESTALLION_2024"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!CivilianVehicles.FALCON_HERITAGE_2021:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "FALCON_HERITAGE_2021 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Falcon Heritage 2021\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "FALCON_HERITAGE_2021"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!CivilianVehicles.FALCON_RAMPAGE_BEAST_2021:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "FALCON_RAMPAGE_BEAST_2021 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Falcon Rampage Beast 2021\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "FALCON_RAMPAGE_BEAST_2021"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!CivilianVehicles.FALCON_RAMPAGE_BIGFOOT_2_DOOR_2021:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "FALCON_RAMPAGE_BIGFOOT_2_DOOR_2021 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Falcon Rampage Bigfoot 2-Door 2021\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "FALCON_RAMPAGE_BIGFOOT_2_DOOR_2021"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!CivilianVehicles.FALCON_SCAVENGER_2016:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "FALCON_SCAVENGER_2016 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Falcon Scavenger 2016\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "FALCON_SCAVENGER_2016"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!CivilianVehicles.FALCON_STALLION_350_1969:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "FALCON_STALLION_350_1969 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Falcon Stallion 350 1969\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "FALCON_STALLION_350_1969"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!CivilianVehicles.FALCON_STALLION_350_2015:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "FALCON_STALLION_350_2015 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Falcon Stallion 350 2015\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "FALCON_STALLION_350_2015"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!CivilianVehicles.FALCON_TRAVELLER_2003:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "FALCON_TRAVELLER_2003 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Falcon Traveller 2003\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "FALCON_TRAVELLER_2003"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!CivilianVehicles.FERDINAND_JALAPENO_TURBO_2022:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "FERDINAND_JALAPENO_TURBO_2022 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Ferdinand Jalapeno Turbo 2022\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "FERDINAND_JALAPENO_TURBO_2022"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!CivilianVehicles.KOVAC_HELADERA_2023:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "KOVAC_HELADERA_2023 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Kovac Heladera 2023\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "KOVAC_HELADERA_2023"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!CivilianVehicles.LAWN_MOWER:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "LAWN_MOWER = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Lawn Mower\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "LAWN_MOWER"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!CivilianVehicles.LELAND_BIRCHWOOD_HEARSE_1995:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "LELAND_BIRCHWOOD_HEARSE_1995 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Leland Birchwood Hearse 1995\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "LELAND_BIRCHWOOD_HEARSE_1995"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!CivilianVehicles.LELAND_LTS_2010:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "LELAND_LTS_2010 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Leland LTS 2010\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "LELAND_LTS_2010"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!CivilianVehicles.LELAND_LTS5_V_BLACKWING_2023:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "LELAND_LTS5_V_BLACKWING_2023 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Leland LTS5-V Blackwing 2023\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "LELAND_LTS5_V_BLACKWING_2023"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!CivilianVehicles.LELAND_VAULT_2020:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "LELAND_VAULT_2020 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Leland Vault 2020\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "LELAND_VAULT_2020"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!CivilianVehicles.NAVARA_BOUNDARY_2022:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "NAVARA_BOUNDARY_2022 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Navara Boundary 2022\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "NAVARA_BOUNDARY_2022"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!CivilianVehicles.NAVARA_HORIZON_2013:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "NAVARA_HORIZON_2013 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Navara Horizon 2013\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "NAVARA_HORIZON_2013"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!CivilianVehicles.NAVARA_IMPERIUM_2020:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "NAVARA_IMPERIUM_2020 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Navara Imperium 2020\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "NAVARA_IMPERIUM_2020"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!CivilianVehicles.OVERLAND_APACHE_1995:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "OVERLAND_APACHE_1995 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Overland Apache 1995\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "OVERLAND_APACHE_1995"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!CivilianVehicles.OVERLAND_APACHE_2011:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "OVERLAND_APACHE_2011 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Overland Apache 2011\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "OVERLAND_APACHE_2011"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!CivilianVehicles.OVERLAND_APACHE_SFP_2020:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "OVERLAND_APACHE_SFP_2020 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Overland Apache SFP 2020\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "OVERLAND_APACHE_SFP_2020"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!CivilianVehicles.OVERLAND_BUCKAROO_2018:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "OVERLAND_BUCKAROO_2018 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Overland Buckaroo 2018\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "OVERLAND_BUCKAROO_2018"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!CivilianVehicles.PEA_CAR_2025:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "PEA_CAR_2025 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Pea Car 2025\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "PEA_CAR_2025"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!CivilianVehicles.SENTINEL_PLATINUM_1968:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "SENTINEL_PLATINUM_1968 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Sentinel Platinum 1968\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "SENTINEL_PLATINUM_1968"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!CivilianVehicles.STRUGATTI_ETTORE_2020:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "STRUGATTI_ETTORE_2020 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Strugatti Ettore 2020\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "STRUGATTI_ETTORE_2020"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!CivilianVehicles.STUTTGART_EXECUTIVE_2021:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "STUTTGART_EXECUTIVE_2021 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Stuttgart Executive 2021\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "STUTTGART_EXECUTIVE_2021"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!CivilianVehicles.STUTTGART_LANDSCHAFT_2022:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "STUTTGART_LANDSCHAFT_2022 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Stuttgart Landschaft 2022\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "STUTTGART_LANDSCHAFT_2022"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!CivilianVehicles.STUTTGART_VIERTURIG_2021:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "STUTTGART_VIERTURIG_2021 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Stuttgart Vierturig 2021\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "STUTTGART_VIERTURIG_2021"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!CivilianVehicles.SURREY_650S_2016:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "SURREY_650S_2016 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Surrey 650S 2016\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "SURREY_650S_2016"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!CivilianVehicles.TAKEO_EXPERIENCE_2021:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "TAKEO_EXPERIENCE_2021 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Takeo Experience 2021\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "TAKEO_EXPERIENCE_2021"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!CivilianVehicles.TERRAIN_TRAVELLER_2022:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "TERRAIN_TRAVELLER_2022 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Terrain Traveller 2022\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "TERRAIN_TRAVELLER_2022"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!CivilianVehicles.VELLFIRE_EVERTT_1995:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "VELLFIRE_EVERTT_1995 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Vellfire Evertt 1995\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "VELLFIRE_EVERTT_1995"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!CivilianVehicles.VELLFIRE_PIONEER_2019:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "VELLFIRE_PIONEER_2019 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Vellfire Pioneer 2019\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "VELLFIRE_PIONEER_2019"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!CivilianVehicles.VELLFIRE_PRAIRIE_2022:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "VELLFIRE_PRAIRIE_2022 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Vellfire Prairie 2022\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "VELLFIRE_PRAIRIE_2022"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!CivilianVehicles.VELLFIRE_PRIMA_2009:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "VELLFIRE_PRIMA_2009 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Vellfire Prima 2009\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "VELLFIRE_PRIMA_2009"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!CivilianVehicles.VELLFIRE_RIPTIDE_2020:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "VELLFIRE_RIPTIDE_2020 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Vellfire Riptide 2020\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "VELLFIRE_RIPTIDE_2020"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!CivilianVehicles.VELLFIRE_RUNABOUT_1984:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "VELLFIRE_RUNABOUT_1984 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Vellfire Runabout 1984\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "VELLFIRE_RUNABOUT_1984"
+            }
+          ]
+        },
+        {
           "kind": "Class",
           "canonicalReference": "@erlcjs/core!Client:class",
           "docComment": "/**\n * The main client for interacting with the ER:LC API and gateway.\n *\n * @public\n */\n",
@@ -682,6 +2463,110 @@
               "isStatic": false,
               "isProtected": false,
               "isAbstract": false
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@erlcjs/core!Client#waitFor:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "waitFor<K extends "
+                },
+                {
+                  "kind": "Content",
+                  "text": "keyof "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ClientEvents",
+                  "canonicalReference": "@erlcjs/core!ClientEvents:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">(event: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "K"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", timeoutMs?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Promise",
+                  "canonicalReference": "!Promise:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ClientEvents",
+                  "canonicalReference": "@erlcjs/core!ClientEvents:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "[K]>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "typeParameters": [
+                {
+                  "typeParameterName": "K",
+                  "constraintTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 3
+                  },
+                  "defaultTypeTokenRange": {
+                    "startIndex": 0,
+                    "endIndex": 0
+                  }
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 8,
+                "endIndex": 12
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "event",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 4,
+                    "endIndex": 5
+                  },
+                  "isOptional": false
+                },
+                {
+                  "parameterName": "timeoutMs",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 6,
+                    "endIndex": 7
+                  },
+                  "isOptional": true
+                }
+              ],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "waitFor"
             }
           ],
           "extendsTokenRange": {
@@ -745,6 +2630,51 @@
               "isOptional": false,
               "releaseTag": "Public",
               "name": "COMMAND",
+              "propertyTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 6
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@erlcjs/core!ClientEvents#CUSTOM_COMMAND:member",
+              "docComment": "/**\n * Emitted when a custom command is executed in-game.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "["
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ERLCEvents.customCommand",
+                  "canonicalReference": "@erlcjs/core!ERLCEvents.customCommand:member"
+                },
+                {
+                  "kind": "Content",
+                  "text": "]: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "[player: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Player",
+                  "canonicalReference": "@erlcjs/core!Player:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": " | string, command: string, argument: string]"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "CUSTOM_COMMAND",
               "propertyTypeTokenRange": {
                 "startIndex": 3,
                 "endIndex": 6
@@ -1302,7 +3232,7 @@
             {
               "kind": "PropertySignature",
               "canonicalReference": "@erlcjs/core!ClientEvents#STAFF_ADD:member",
-              "docComment": "",
+              "docComment": "/**\n * Emitted when a player is given a staff role.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -1347,7 +3277,7 @@
             {
               "kind": "PropertySignature",
               "canonicalReference": "@erlcjs/core!ClientEvents#STAFF_REMOVE:member",
-              "docComment": "",
+              "docComment": "/**\n * Emitted when a player is removed from a staff role.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -1531,6 +3461,42 @@
               "propertyTypeTokenRange": {
                 "startIndex": 3,
                 "endIndex": 8
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@erlcjs/core!ClientEvents#WEBHOOK_PROBE:member",
+              "docComment": "/**\n * Emitted when a player enters the webhook in-game.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "["
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ERLCEvents.webhookProbe",
+                  "canonicalReference": "@erlcjs/core!ERLCEvents.webhookProbe:member"
+                },
+                {
+                  "kind": "Content",
+                  "text": "]: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "[]"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "WEBHOOK_PROBE",
+              "propertyTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
               }
             }
           ],
@@ -2299,6 +4265,341 @@
           "implementsTokenRanges": []
         },
         {
+          "kind": "Function",
+          "canonicalReference": "@erlcjs/core!convertToPascalCase:function(1)",
+          "docComment": "/**\n * Recursively converts all object keys in a JSON payload from camelCase to PascalCase.\n *\n * @param obj - The raw JSON payload or array.\n *\n * @returns The converted object with PascalCase keys.\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "declare function convertToPascalCase(obj: "
+            },
+            {
+              "kind": "Content",
+              "text": "any"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Content",
+              "text": "any"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "fileUrlPath": "dist/index.d.ts",
+          "returnTypeTokenRange": {
+            "startIndex": 3,
+            "endIndex": 4
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [
+            {
+              "parameterName": "obj",
+              "parameterTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isOptional": false
+            }
+          ],
+          "name": "convertToPascalCase"
+        },
+        {
+          "kind": "Enum",
+          "canonicalReference": "@erlcjs/core!DepartmentOfTransportationVehicles:enum",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "declare enum DepartmentOfTransportationVehicles "
+            }
+          ],
+          "fileUrlPath": "dist/index.d.ts",
+          "releaseTag": "Public",
+          "name": "DepartmentOfTransportationVehicles",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!DepartmentOfTransportationVehicles.AIKAWA_STREET_SWEEPER_2010:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "AIKAWA_STREET_SWEEPER_2010 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Aikawa Street Sweeper 2010\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "AIKAWA_STREET_SWEEPER_2010"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!DepartmentOfTransportationVehicles.CHEVLON_L_35_FLATBED_TOW_TRUCK_1981:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "CHEVLON_L_35_FLATBED_TOW_TRUCK_1981 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Chevlon L/35 Flatbed Tow Truck 1981\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "CHEVLON_L_35_FLATBED_TOW_TRUCK_1981"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!DepartmentOfTransportationVehicles.EXPLORER_FLATBED_TOW_TRUCK_2015:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "EXPLORER_FLATBED_TOW_TRUCK_2015 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Explorer Flatbed Tow Truck 2015\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "EXPLORER_FLATBED_TOW_TRUCK_2015"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!DepartmentOfTransportationVehicles.EXPLORER_SALT_TRUCK_2015:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "EXPLORER_SALT_TRUCK_2015 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Explorer Salt Truck 2015\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "EXPLORER_SALT_TRUCK_2015"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!DepartmentOfTransportationVehicles.EXPLORER_TRANSPORT_TRUCK_2015:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "EXPLORER_TRANSPORT_TRUCK_2015 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Explorer Transport Truck 2015\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "EXPLORER_TRANSPORT_TRUCK_2015"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!DepartmentOfTransportationVehicles.FALCON_ADVANCE_350_2020:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "FALCON_ADVANCE_350_2020 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Falcon Advance 350 2020\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "FALCON_ADVANCE_350_2020"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!DepartmentOfTransportationVehicles.FALCON_ADVANCE_450_2020:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "FALCON_ADVANCE_450_2020 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Falcon Advance 450 2020\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "FALCON_ADVANCE_450_2020"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!DepartmentOfTransportationVehicles.FALCON_ADVANCE_450_BUCKET_TRUCK_2020:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "FALCON_ADVANCE_450_BUCKET_TRUCK_2020 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Falcon Advance 450 Bucket Truck 2020\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "FALCON_ADVANCE_450_BUCKET_TRUCK_2020"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!DepartmentOfTransportationVehicles.FALCON_ADVANCE_450_ROADSIDE_ASSIST_2020:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "FALCON_ADVANCE_450_ROADSIDE_ASSIST_2020 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Falcon Advance 450 Roadside Assist 2020\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "FALCON_ADVANCE_450_ROADSIDE_ASSIST_2020"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!DepartmentOfTransportationVehicles.FALCON_ADVANCE_450_TOW_TRUCK_2020:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "FALCON_ADVANCE_450_TOW_TRUCK_2020 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Falcon Advance 450 Tow Truck 2020\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "FALCON_ADVANCE_450_TOW_TRUCK_2020"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!DepartmentOfTransportationVehicles.FALCON_GLOBAL_450_UTILITY_2018:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "FALCON_GLOBAL_450_UTILITY_2018 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Falcon Global 450 Utility 2018\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "FALCON_GLOBAL_450_UTILITY_2018"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!DepartmentOfTransportationVehicles.VELLFIRE_EVERTT_CREW_CAB_1995:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "VELLFIRE_EVERTT_CREW_CAB_1995 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Vellfire Evertt Crew Cab 1995\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "VELLFIRE_EVERTT_CREW_CAB_1995"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!DepartmentOfTransportationVehicles.VINNIMADE_HEAVY_WRECKER_2013:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "VINNIMADE_HEAVY_WRECKER_2013 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Vinnimade Heavy Wrecker 2013\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "VINNIMADE_HEAVY_WRECKER_2013"
+            }
+          ]
+        },
+        {
           "kind": "Class",
           "canonicalReference": "@erlcjs/core!EmergencyCall:class",
           "docComment": "/**\n * Represents an active emergency call in the ER:LC server.\n *\n * @public\n */\n",
@@ -2817,6 +5118,55 @@
               ]
             },
             {
+              "kind": "Method",
+              "canonicalReference": "@erlcjs/core!EmergencyCallManager#addCall:member(1)",
+              "docComment": "/**\n * Adds a call to the emergency call cache with data from the webhook. Emits emergencyCallAdd events.\n *\n * @param callData - The raw emergency call payload from the webhook.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "addCall(callData: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "RawWebhookEmergencyCall",
+                  "canonicalReference": "@erlcjs/core!RawWebhookEmergencyCall:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "callData",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "addCall"
+            },
+            {
               "kind": "Property",
               "canonicalReference": "@erlcjs/core!EmergencyCallManager#cache:member",
               "docComment": "/**\n * Map cache of active emergency calls, keyed by call number.\n */\n",
@@ -2913,6 +5263,55 @@
               "isOptional": false,
               "isAbstract": false,
               "name": "fetchAll"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@erlcjs/core!EmergencyCallManager#removeCall:member(1)",
+              "docComment": "/**\n * Removes a call from the emergency call cache with data from the webhook. Emits emergencyCallRemove events.\n *\n * @param callData - The raw emergency call payload from the webhook.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "removeCall(callData: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "RawWebhookEmergencyCall",
+                  "canonicalReference": "@erlcjs/core!RawWebhookEmergencyCall:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "callData",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "removeCall"
             },
             {
               "kind": "Method",
@@ -3019,6 +5418,27 @@
               },
               "releaseTag": "Public",
               "name": "command"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!ERLCEvents.customCommand:member",
+              "docComment": "/**\n * Emitted when a custom command is executed in-game\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "customCommand = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"CUSTOM_COMMAND\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "customCommand"
             },
             {
               "kind": "EnumMember",
@@ -3355,6 +5775,464 @@
               },
               "releaseTag": "Public",
               "name": "vehicleUpdate"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!ERLCEvents.webhookProbe:member",
+              "docComment": "/**\n * Emitted when a user enters the webhook in-game\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "webhookProbe = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"WEBHOOK_PROBE\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "webhookProbe"
+            }
+          ]
+        },
+        {
+          "kind": "Enum",
+          "canonicalReference": "@erlcjs/core!FireRescueVehicles:enum",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "declare enum FireRescueVehicles "
+            }
+          ],
+          "fileUrlPath": "dist/index.d.ts",
+          "releaseTag": "Public",
+          "name": "FireRescueVehicles",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!FireRescueVehicles._4_WHEELER_RCFR:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "_4_WHEELER_RCFR = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"4 Wheeler (RCFR)\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "_4_WHEELER_RCFR"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!FireRescueVehicles.BRUSH_FALCON_ADVANCE_2020:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "BRUSH_FALCON_ADVANCE_2020 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Brush Falcon Advance+ 2020\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "BRUSH_FALCON_ADVANCE_2020"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!FireRescueVehicles.BULLHORN_PUEBLO_PURSUIT_2022:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "BULLHORN_PUEBLO_PURSUIT_2022 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Bullhorn Pueblo Pursuit 2022\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "BULLHORN_PUEBLO_PURSUIT_2022"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!FireRescueVehicles.CANYON_DESCENDER_RCFR:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "CANYON_DESCENDER_RCFR = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Canyon Descender (RCFR)\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "CANYON_DESCENDER_RCFR"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!FireRescueVehicles.CHEVLON_L15_BRUSH_TRUCK_1981:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "CHEVLON_L15_BRUSH_TRUCK_1981 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Chevlon L15 Brush Truck 1981\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "CHEVLON_L15_BRUSH_TRUCK_1981"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!FireRescueVehicles.FALCON_ADVANCE_350_2020:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "FALCON_ADVANCE_350_2020 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Falcon Advance 350 2020\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "FALCON_ADVANCE_350_2020"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!FireRescueVehicles.FALCON_ADVANCE_450_AMBULANCE:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "FALCON_ADVANCE_450_AMBULANCE = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Falcon Advance 450 Ambulance\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "FALCON_ADVANCE_450_AMBULANCE"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!FireRescueVehicles.FALCON_ADVANCE_600_PUMPER_1956:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "FALCON_ADVANCE_600_PUMPER_1956 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Falcon Advance 600 Pumper 1956\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "FALCON_ADVANCE_600_PUMPER_1956"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!FireRescueVehicles.FD_CHEVLON_CAMION:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "FD_CHEVLON_CAMION = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"FD Chevlon Camion\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "FD_CHEVLON_CAMION"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!FireRescueVehicles.FD_MOBILE_COMMAND_CENTER:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "FD_MOBILE_COMMAND_CENTER = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"FD Mobile Command Center\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "FD_MOBILE_COMMAND_CENTER"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!FireRescueVehicles.FIRE_ENGINE:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "FIRE_ENGINE = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Fire Engine\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "FIRE_ENGINE"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!FireRescueVehicles.HEAVY_RESCUE:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "HEAVY_RESCUE = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Heavy Rescue\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "HEAVY_RESCUE"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!FireRescueVehicles.HEAVY_TANKER:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "HEAVY_TANKER = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Heavy Tanker\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "HEAVY_TANKER"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!FireRescueVehicles.INTERNATIONAL_AMBULANCE:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "INTERNATIONAL_AMBULANCE = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"International Ambulance\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "INTERNATIONAL_AMBULANCE"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!FireRescueVehicles.LADDER_TRUCK:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "LADDER_TRUCK = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Ladder Truck\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "LADDER_TRUCK"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!FireRescueVehicles.MEDICAL_BUS:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "MEDICAL_BUS = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Medical Bus\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "MEDICAL_BUS"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!FireRescueVehicles.PARAMEDIC_SUV:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "PARAMEDIC_SUV = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Paramedic SUV\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "PARAMEDIC_SUV"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!FireRescueVehicles.REDLINE_FIRE_ENGINE:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "REDLINE_FIRE_ENGINE = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Redline Fire Engine\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "REDLINE_FIRE_ENGINE"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!FireRescueVehicles.SPECIAL_OPERATIONS_UNIT:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "SPECIAL_OPERATIONS_UNIT = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Special Operations Unit\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "SPECIAL_OPERATIONS_UNIT"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!FireRescueVehicles.SQUAD_FALCON_ADVANCE_2020:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "SQUAD_FALCON_ADVANCE_2020 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Squad Falcon Advance+ 2020\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "SQUAD_FALCON_ADVANCE_2020"
             }
           ]
         },
@@ -3421,6 +6299,401 @@
             "endIndex": 2
           },
           "implementsTokenRanges": []
+        },
+        {
+          "kind": "Enum",
+          "canonicalReference": "@erlcjs/core!JobVehicles:enum",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "declare enum JobVehicles "
+            }
+          ],
+          "fileUrlPath": "dist/index.d.ts",
+          "releaseTag": "Public",
+          "name": "JobVehicles",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!JobVehicles.BANK_TRUCK:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "BANK_TRUCK = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Bank Truck\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "BANK_TRUCK"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!JobVehicles.CHEVLON_NEWS_VAN_2006:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "CHEVLON_NEWS_VAN_2006 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Chevlon News Van 2006\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "CHEVLON_NEWS_VAN_2006"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!JobVehicles.DUMP_TRUCK:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "DUMP_TRUCK = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Dump Truck\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "DUMP_TRUCK"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!JobVehicles.FALCON_SCAVENGER_SECURITY_2013:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "FALCON_SCAVENGER_SECURITY_2013 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Falcon Scavenger Security 2013\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "FALCON_SCAVENGER_SECURITY_2013"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!JobVehicles.FALCON_SCAVENGER_TAXI_2020:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "FALCON_SCAVENGER_TAXI_2020 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Falcon Scavenger Taxi 2020\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "FALCON_SCAVENGER_TAXI_2020"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!JobVehicles.FARM_TRACTOR_5100M:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "FARM_TRACTOR_5100M = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Farm Tractor 5100M\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "FARM_TRACTOR_5100M"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!JobVehicles.FORKLIFT:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "FORKLIFT = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Forklift\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "FORKLIFT"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!JobVehicles.FRONT_LOADER_GARBAGE_TRUCK:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "FRONT_LOADER_GARBAGE_TRUCK = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Front-Loader Garbage Truck\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "FRONT_LOADER_GARBAGE_TRUCK"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!JobVehicles.FRONT_LOADER_TRACTOR:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "FRONT_LOADER_TRACTOR = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Front Loader Tractor\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "FRONT_LOADER_TRACTOR"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!JobVehicles.FUEL_TANKER:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "FUEL_TANKER = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Fuel Tanker\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "FUEL_TANKER"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!JobVehicles.GARBAGE_TRUCK:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "GARBAGE_TRUCK = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Garbage Truck\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "GARBAGE_TRUCK"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!JobVehicles.LA_MESA_FOOD_TRUCK:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "LA_MESA_FOOD_TRUCK = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"La Mesa Food Truck\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "LA_MESA_FOOD_TRUCK"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!JobVehicles.LELAND_LIMO_2018:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "LELAND_LIMO_2018 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Leland Limo 2018\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "LELAND_LIMO_2018"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!JobVehicles.MAIL_TRUCK:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "MAIL_TRUCK = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Mail Truck\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "MAIL_TRUCK"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!JobVehicles.MAIL_VAN:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "MAIL_VAN = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Mail Van\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "MAIL_VAN"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!JobVehicles.METRO_TRANSIT_BUS:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "METRO_TRANSIT_BUS = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Metro Transit Bus\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "METRO_TRANSIT_BUS"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!JobVehicles.SHUTTLE_BUS:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "SHUTTLE_BUS = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Shuttle Bus\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "SHUTTLE_BUS"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!JobVehicles.THREE_GUYS_FOOD_TRUCK:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "THREE_GUYS_FOOD_TRUCK = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Three Guys Food Truck\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "THREE_GUYS_FOOD_TRUCK"
+            }
+          ]
         },
         {
           "kind": "Class",
@@ -4013,6 +7286,716 @@
             }
           ],
           "implementsTokenRanges": []
+        },
+        {
+          "kind": "Enum",
+          "canonicalReference": "@erlcjs/core!LawEnforcementVehicles:enum",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "declare enum LawEnforcementVehicles "
+            }
+          ],
+          "fileUrlPath": "dist/index.d.ts",
+          "releaseTag": "Public",
+          "name": "LawEnforcementVehicles",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!LawEnforcementVehicles._4_WHEELER:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "_4_WHEELER = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"4-Wheeler\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "_4_WHEELER"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!LawEnforcementVehicles.AVERON_Q8_2022_LAW_ENFORCEMENT:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "AVERON_Q8_2022_LAW_ENFORCEMENT = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Averon Q8 2022 (Law Enforcement)\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "AVERON_Q8_2022_LAW_ENFORCEMENT"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!LawEnforcementVehicles.BKM_MUNICH_2020_LAW_ENFORCEMENT:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "BKM_MUNICH_2020_LAW_ENFORCEMENT = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"BKM Munich 2020 (Law Enforcement)\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "BKM_MUNICH_2020_LAW_ENFORCEMENT"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!LawEnforcementVehicles.BULLHORN_BH15_SSV_2009:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "BULLHORN_BH15_SSV_2009 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Bullhorn BH15 SSV 2009\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "BULLHORN_BH15_SSV_2009"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!LawEnforcementVehicles.BULLHORN_DETERMINATOR_SFP_FURY_2022_LAW_ENFORCEMENT:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "BULLHORN_DETERMINATOR_SFP_FURY_2022_LAW_ENFORCEMENT = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Bullhorn Determinator SFP Fury 2022 (Law Enforcement)\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "BULLHORN_DETERMINATOR_SFP_FURY_2022_LAW_ENFORCEMENT"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!LawEnforcementVehicles.BULLHORN_FOREMAN_1988:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "BULLHORN_FOREMAN_1988 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Bullhorn Foreman 1988\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "BULLHORN_FOREMAN_1988"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!LawEnforcementVehicles.BULLHORN_PRANCER_PURSUIT_2011:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "BULLHORN_PRANCER_PURSUIT_2011 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Bullhorn Prancer Pursuit 2011\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "BULLHORN_PRANCER_PURSUIT_2011"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!LawEnforcementVehicles.BULLHORN_PRANCER_PURSUIT_2015:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "BULLHORN_PRANCER_PURSUIT_2015 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Bullhorn Prancer Pursuit 2015\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "BULLHORN_PRANCER_PURSUIT_2015"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!LawEnforcementVehicles.BULLHORN_PRANCER_PURSUIT_WIDEBODY_2020:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "BULLHORN_PRANCER_PURSUIT_WIDEBODY_2020 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Bullhorn Prancer Pursuit Widebody 2020\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "BULLHORN_PRANCER_PURSUIT_WIDEBODY_2020"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!LawEnforcementVehicles.BULLHORN_PUEBLO_PURSUIT_2018:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "BULLHORN_PUEBLO_PURSUIT_2018 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Bullhorn Pueblo Pursuit 2018\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "BULLHORN_PUEBLO_PURSUIT_2018"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!LawEnforcementVehicles.CANYON_DESCENDER_LAW_ENFORCEMENT:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "CANYON_DESCENDER_LAW_ENFORCEMENT = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Canyon Descender (Law Enforcement)\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "CANYON_DESCENDER_LAW_ENFORCEMENT"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!LawEnforcementVehicles.CELESTIAL_TRUCKATRON_2024:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "CELESTIAL_TRUCKATRON_2024 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Celestial Truckatron 2024\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "CELESTIAL_TRUCKATRON_2024"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!LawEnforcementVehicles.CHEVLON_AMIGO_LZR_2011_LAW_ENFORCEMENT:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "CHEVLON_AMIGO_LZR_2011_LAW_ENFORCEMENT = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Chevlon Amigo LZR 2011 (Law Enforcement)\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "CHEVLON_AMIGO_LZR_2011_LAW_ENFORCEMENT"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!LawEnforcementVehicles.CHEVLON_CAMION_PPV_2000:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "CHEVLON_CAMION_PPV_2000 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Chevlon Camion PPV 2000\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "CHEVLON_CAMION_PPV_2000"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!LawEnforcementVehicles.CHEVLON_CAMION_PPV_2008:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "CHEVLON_CAMION_PPV_2008 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Chevlon Camion PPV 2008\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "CHEVLON_CAMION_PPV_2008"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!LawEnforcementVehicles.CHEVLON_CAMION_PPV_2018:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "CHEVLON_CAMION_PPV_2018 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Chevlon Camion PPV 2018\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "CHEVLON_CAMION_PPV_2018"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!LawEnforcementVehicles.CHEVLON_CAMION_PPV_2021:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "CHEVLON_CAMION_PPV_2021 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Chevlon Camion PPV 2021\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "CHEVLON_CAMION_PPV_2021"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!LawEnforcementVehicles.CHEVLON_CAPTAIN_ANTELOPE_PPV_1994:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "CHEVLON_CAPTAIN_ANTELOPE_PPV_1994 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Chevlon Captain Antelope PPV 1994\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "CHEVLON_CAPTAIN_ANTELOPE_PPV_1994"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!LawEnforcementVehicles.CHEVLON_CAPTAIN_PPV_2006:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "CHEVLON_CAPTAIN_PPV_2006 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Chevlon Captain PPV 2006\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "CHEVLON_CAPTAIN_PPV_2006"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!LawEnforcementVehicles.CHEVLON_COMMUTER_VAN_2006_LAW_ENFORCEMENT:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "CHEVLON_COMMUTER_VAN_2006_LAW_ENFORCEMENT = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Chevlon Commuter Van 2006 (Law Enforcement)\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "CHEVLON_COMMUTER_VAN_2006_LAW_ENFORCEMENT"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!LawEnforcementVehicles.CHEVLON_CORBETA_TZ_2014_LAW_ENFORCEMENT:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "CHEVLON_CORBETA_TZ_2014_LAW_ENFORCEMENT = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Chevlon Corbeta TZ 2014 (Law Enforcement)\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "CHEVLON_CORBETA_TZ_2014_LAW_ENFORCEMENT"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!LawEnforcementVehicles.CHEVLON_INFERNO_1981:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "CHEVLON_INFERNO_1981 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Chevlon Inferno 1981\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "CHEVLON_INFERNO_1981"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!LawEnforcementVehicles.CHEVLON_PLATORO_PPV_2019:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "CHEVLON_PLATORO_PPV_2019 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Chevlon Platoro PPV 2019\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "CHEVLON_PLATORO_PPV_2019"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!LawEnforcementVehicles.EMERGENCY_SERVICES_FALCON_ADVANCE_2020:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "EMERGENCY_SERVICES_FALCON_ADVANCE_2020 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Emergency Services Falcon Advance+ 2020\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "EMERGENCY_SERVICES_FALCON_ADVANCE_2020"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!LawEnforcementVehicles.FALCON_GLOBAL_350_2013:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "FALCON_GLOBAL_350_2013 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Falcon Global 350 2013\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "FALCON_GLOBAL_350_2013"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!LawEnforcementVehicles.FALCON_INTERCEPTOR_UTILITY_2019:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "FALCON_INTERCEPTOR_UTILITY_2019 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Falcon Interceptor Utility 2019\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "FALCON_INTERCEPTOR_UTILITY_2019"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!LawEnforcementVehicles.FALCON_RAMPAGE_PPV_2021:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "FALCON_RAMPAGE_PPV_2021 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Falcon Rampage PPV 2021\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "FALCON_RAMPAGE_PPV_2021"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!LawEnforcementVehicles.FALCON_STALLION_350_2015_LAW_ENFORCEMENT:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "FALCON_STALLION_350_2015_LAW_ENFORCEMENT = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Falcon Stallion 350 2015 (Law Enforcement)\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "FALCON_STALLION_350_2015_LAW_ENFORCEMENT"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!LawEnforcementVehicles.FALCON_TRAVELLER_2002:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "FALCON_TRAVELLER_2002 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Falcon Traveller 2002\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "FALCON_TRAVELLER_2002"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!LawEnforcementVehicles.MOBILE_COMMAND_2005:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "MOBILE_COMMAND_2005 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Mobile Command 2005\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "MOBILE_COMMAND_2005"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!LawEnforcementVehicles.PRISON_TRANSPORT_BUS:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "PRISON_TRANSPORT_BUS = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Prison Transport Bus\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "PRISON_TRANSPORT_BUS"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!LawEnforcementVehicles.STUTTGART_RUNNER_2020:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "STUTTGART_RUNNER_2020 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Stuttgart Runner 2020\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "STUTTGART_RUNNER_2020"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!LawEnforcementVehicles.SWAT_TRUCK_2011:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "SWAT_TRUCK_2011 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"SWAT Truck 2011\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "SWAT_TRUCK_2011"
+            }
+          ]
         },
         {
           "kind": "Class",
@@ -5077,6 +9060,42 @@
               "name": "kill"
             },
             {
+              "kind": "Method",
+              "canonicalReference": "@erlcjs/core!Player#load:member(1)",
+              "docComment": "/**\n * Loads the player in-game.\n *\n * @returns A promise that resolves when the load command is sent.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "load(): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Promise",
+                  "canonicalReference": "!Promise:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<void>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "load"
+            },
+            {
               "kind": "Property",
               "canonicalReference": "@erlcjs/core!Player#location:member",
               "docComment": "/**\n * The current location coordinates and address of the player.\n */\n",
@@ -5277,6 +9296,78 @@
               "isOptional": false,
               "isAbstract": false,
               "name": "pm"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@erlcjs/core!Player#refresh:member(1)",
+              "docComment": "/**\n * Refresh the player in-game.\n *\n * @returns A promise that resolves when the refresh command is sent.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "refresh(): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Promise",
+                  "canonicalReference": "!Promise:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<void>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "refresh"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@erlcjs/core!Player#respawn:member(1)",
+              "docComment": "/**\n * Respawns the player in-game.\n *\n * @returns A promise that resolves when the respawn command is sent.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "respawn(): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Promise",
+                  "canonicalReference": "!Promise:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<void>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "respawn"
             },
             {
               "kind": "Property",
@@ -5537,6 +9628,42 @@
               "isAbstract": false
             },
             {
+              "kind": "Method",
+              "canonicalReference": "@erlcjs/core!Player#wanted:member(1)",
+              "docComment": "/**\n * Makes the player wanted in-game.\n *\n * @returns A promise that resolves when the wanted command is sent.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "wanted(): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Promise",
+                  "canonicalReference": "!Promise:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<void>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "wanted"
+            },
+            {
               "kind": "Property",
               "canonicalReference": "@erlcjs/core!Player#wantedLevel:member",
               "docComment": "/**\n * The player's current wanted star level.\n */\n",
@@ -5767,6 +9894,165 @@
               "isOptional": false,
               "isAbstract": false,
               "name": "getIdFromName"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@erlcjs/core!PlayerManager#unadmin:member(1)",
+              "docComment": "/**\n * Unadmins a player from their userId.\n *\n * @param userId - The userId to unadmin.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "unadmin(userId: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number | string"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Promise",
+                  "canonicalReference": "!Promise:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<void>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 5
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "userId",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "unadmin"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@erlcjs/core!PlayerManager#unban:member(1)",
+              "docComment": "/**\n * Unbans a player from their userId.\n *\n * @param userId - The userId to unban.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "unban(userId: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number | string"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Promise",
+                  "canonicalReference": "!Promise:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<void>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 5
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "userId",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "unban"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@erlcjs/core!PlayerManager#unmod:member(1)",
+              "docComment": "/**\n * Unmods a player from their userId.\n *\n * @param userId - The userId to unmod.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "unmod(userId: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number | string"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Promise",
+                  "canonicalReference": "!Promise:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<void>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 5
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "userId",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "unmod"
             },
             {
               "kind": "Method",
@@ -7447,6 +11733,240 @@
               "isOptional": true,
               "releaseTag": "Public",
               "name": "Texture",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            }
+          ],
+          "extendsTokenRanges": []
+        },
+        {
+          "kind": "Interface",
+          "canonicalReference": "@erlcjs/core!RawWebhookEmergencyCall:interface",
+          "docComment": "/**\n * Raw data structure representing a webhook emergency call.\n *\n * @public\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "interface RawWebhookEmergencyCall "
+            }
+          ],
+          "fileUrlPath": "dist/index.d.ts",
+          "releaseTag": "Public",
+          "name": "RawWebhookEmergencyCall",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@erlcjs/core!RawWebhookEmergencyCall#caller:member",
+              "docComment": "/**\n * The UserId of the player who made the call.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "caller: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "caller",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@erlcjs/core!RawWebhookEmergencyCall#callNumber:member",
+              "docComment": "/**\n * The unique call number.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "callNumber: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "callNumber",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@erlcjs/core!RawWebhookEmergencyCall#description:member",
+              "docComment": "/**\n * The description text of the call.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "description: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "description",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@erlcjs/core!RawWebhookEmergencyCall#players:member",
+              "docComment": "/**\n * List of UserIds of responders currently assigned to this call.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "players: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number[]"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "players",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@erlcjs/core!RawWebhookEmergencyCall#position:member",
+              "docComment": "/**\n * Position coordinates [x, y] of the emergency call.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "position: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number[]"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "position",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@erlcjs/core!RawWebhookEmergencyCall#positionDescriptor:member",
+              "docComment": "/**\n * Descriptors of the position where the call was made.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "positionDescriptor: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "positionDescriptor",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@erlcjs/core!RawWebhookEmergencyCall#startedAt:member",
+              "docComment": "/**\n * Unix timestamp of when the call was created.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "startedAt: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "startedAt",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@erlcjs/core!RawWebhookEmergencyCall#team:member",
+              "docComment": "/**\n * The team name associated with the emergency call.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "team: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "team",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
@@ -9427,7 +13947,7 @@
         {
           "kind": "Class",
           "canonicalReference": "@erlcjs/core!WebhookServer:class",
-          "docComment": "/**\n * Webhook Server for handling real-time gateway events pushed by ER:LC.\n *\n * @alpha\n */\n",
+          "docComment": "/**\n * Webhook Server for handling real-time gateway events pushed by ER:LC.\n *\n * @public\n */\n",
           "excerptTokens": [
             {
               "kind": "Content",
@@ -9435,7 +13955,7 @@
             }
           ],
           "fileUrlPath": "dist/index.d.ts",
-          "releaseTag": "Alpha",
+          "releaseTag": "Public",
           "isAbstract": false,
           "name": "WebhookServer",
           "preserveMemberOrder": false,
@@ -9459,7 +13979,7 @@
                   "text": ");"
                 }
               ],
-              "releaseTag": "Alpha",
+              "releaseTag": "Public",
               "isProtected": false,
               "overloadIndex": 1,
               "parameters": [
@@ -9472,6 +13992,37 @@
                   "isOptional": false
                 }
               ]
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@erlcjs/core!WebhookServer#listen:member(1)",
+              "docComment": "/**\n * Starts listening for incoming webhook events.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "listen(): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "listen"
             }
           ],
           "implementsTokenRanges": []
