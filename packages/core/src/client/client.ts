@@ -151,6 +151,8 @@ export class Client extends EventEmitter<ClientEvents> {
     public staff: StaffManager;
     /** Webhook Gateway server instance, if enabled. */
     private readonly gateway?: WebhookServer;
+    /** The interval for the periodic API polling loop. */
+    private pollingInterval?: NodeJS.Timeout;
 
     /**
      * Creates an instance of Client.
@@ -186,7 +188,7 @@ export class Client extends EventEmitter<ClientEvents> {
      */
     private async startPolling() {
         await this.poll();
-        setInterval(async () => {
+        this.pollingInterval = setInterval(async () => {
             await this.poll();
         }, 5000);
     }
@@ -207,7 +209,13 @@ export class Client extends EventEmitter<ClientEvents> {
         }
     }
 
-    waitFor<K extends keyof ClientEvents>(
+    /**
+     * Waits for a specific event to be emitted.
+     * @param event The event to wait for.
+     * @param timeoutMs The maximum time to wait in milliseconds.
+     * @returns A promise resolving to the event arguments.
+     */
+    public async waitFor<K extends keyof ClientEvents>(
         event: K,
         timeoutMs: number = 0,
     ): Promise<ClientEvents[K]> {
@@ -228,5 +236,17 @@ export class Client extends EventEmitter<ClientEvents> {
                 }, timeoutMs);
             }
         });
+    }
+
+    /**
+     * Destroys the client, cleaning up resources and stopping any ongoing operations.
+     */
+    public destroy() {
+        if (this.pollingInterval) {
+            clearInterval(this.pollingInterval);
+        }
+        if (this.gateway) {
+            this.gateway.close();
+        }
     }
 }
