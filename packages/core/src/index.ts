@@ -31,9 +31,11 @@ export * from './structures/staff.js';
 
 // Types
 export * from './types/index.js';
-
 // Errors
 export * from './errors/index.js';
 
 // Util
 export * from './util/index.js';
+
+// Enums
+export * from './enums/vehicles.js';
