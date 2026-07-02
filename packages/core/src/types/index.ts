@@ -10,9 +10,13 @@ export interface ClientOptions {
      */
     serverKey: string;
     /**
-     * Optional global key for wider API access.
+     * Optional global key for your application.
      */
     globalKey?: string;
+    /**
+     * Optional global app ID for your application.
+     */
+    globalAppId?: string | number;
     /**
      * Webhook configuration details.
      */

@@ -7,7 +7,11 @@ const client = new Client({
         port: 3000,
     },
     serverKey: process.env.API_KEY!,
+    globalKey: process.env.GLOBAL_KEY!,
+    globalAppId: process.env.APP_ID!,
 });
+
+console.log(client.authorizationLink);
 
 client.on(ERLCEvents.vehicleAdd, (vehicle) => {
     if (vehicle.name === Vehicles.CHEVLON_COMMUTER_VAN_2006) {
