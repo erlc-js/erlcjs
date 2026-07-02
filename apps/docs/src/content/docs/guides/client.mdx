@@ -24,7 +24,8 @@ const client = new Client({
 | Field | Type | Description |
 | :--- | :--- | :--- |
 | `serverKey` | `string` | **Required.** The Server API key retrieved from your private server settings. |
-| `globalKey` | `string` | *Optional.* A global token used for additional administrative endpoints if applicable. |
+| `globalKey` | `string` | *Optional.* A global key generated for your application. |
+| `globalAppId` | `string | number` | **Optional.** The global app ID generated for your application. Used to create authorization links.
 | `polling` | `boolean` | *Optional.* If `true`, the client requests server data updates every 5 seconds. |
 | `webhook` | `object` | *Optional.* Configuration details for Webhook Gateway mode. |
 

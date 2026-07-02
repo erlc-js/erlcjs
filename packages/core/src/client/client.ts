@@ -129,6 +129,10 @@ export interface ClientEvents {
  * @public
  */
 export class Client extends EventEmitter<ClientEvents> {
+    /** Internal Server ID. */
+    public serverId: string;
+    /** Global App ID. */
+    public globalAppId?: string | number;
     /** REST Manager for sending manual requests to the ER:LC API. */
     public rest: RestManager;
     /** Manager for fetching and caching general server configuration. */
@@ -172,6 +176,8 @@ export class Client extends EventEmitter<ClientEvents> {
         this.killLogs = new KillLogManager(this);
         this.modCalls = new ModCallManager(this);
         this.staff = new StaffManager(this);
+        this.serverId = String(options.serverKey.split('-')[1]);
+        this.globalAppId = options.globalAppId;
 
         if (options.webhook?.enabled) {
             this.gateway = new WebhookServer(this);
@@ -252,6 +258,10 @@ export class Client extends EventEmitter<ClientEvents> {
         }
     }
 
+    /**
+     * Registers an in-game custom command.
+     * @param command - The command to register.
+     */
     public registerCommand(command: InGameCommand) {
         if (this.inGameCommands.has(command.name)) {
             throw new Error(`Command with name "${command.name}" is already registered.`);
@@ -262,6 +272,14 @@ export class Client extends EventEmitter<ClientEvents> {
         }
         if (this.inGameCommands.size === 0) this.handleCustomCommands();
         this.inGameCommands.set(command.name, command);
+    }
+
+    /**
+     * Creates an authorization link for this server to allow post requests.
+     */
+    public get authorizationLink() {
+        if (!this.globalAppId) throw new Error('No Global App ID.')
+        return `https://api.erlc.gg/server-owners/server/${this.serverId}/authorize/${this.globalAppId}`
     }
 
     private handleCustomCommands() {
