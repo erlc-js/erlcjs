@@ -19,4 +19,20 @@ export enum MapType {
      * Snow Map with Postals
      */
     snow_postals = 'snow_postals.png',
+    /**
+     * Spring Map
+     */
+    spring = 'spring_blank.png',
+    /**
+     * Spring Map with Postals
+     */
+    spring_postals = 'spring_postals.png',
+    /**
+     * Summer Map
+     */
+    summer = 'summer_blank.png',
+    /**
+     * Summer Map with Postals
+     */
+    summer_postals = 'summer_postals.png',
 }
