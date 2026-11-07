@@ -218,12 +218,15 @@ export async function drawMap(options: MapOptions) {
         const totalHeight = d + tailH;
 
         for (const call of emergencyCallsArr) {
+            const [x, y] = call.position ?? [];
+            if (typeof x !== 'number' || typeof y !== 'number') continue;
+
             const color = getTeamColor(call.team);
             const emSVG = createEmergencyCallSVG(size, color);
             composites.push({
                 input: Buffer.from(emSVG),
-                left: Math.round(call.position![0]! - d / 2),
-                top: Math.round(call.position![1]! - totalHeight),
+                left: Math.round(x - d / 2),
+                top: Math.round(y - totalHeight),
             });
         }
     }

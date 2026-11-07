@@ -1,6 +1,6 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import sharp from 'sharp';
-import { Client } from '@erlcjs/core';
+import { Client, EmergencyCall } from '@erlcjs/core';
 import { drawMap } from './canvas.js';
 
 afterEach(() => {
@@ -49,6 +49,32 @@ describe('drawMap', () => {
 
         expect(Buffer.isBuffer(result)).toBe(true);
         expect(result.length).toBeGreaterThan(0);
+        client.destroy();
+    });
+
+    it('skips emergency calls without a usable position', async () => {
+        const client = new Client({ servers: ['PRC-111111111-key'] });
+        const server = client.servers.get('111111111')!;
+        const call = new EmergencyCall(server, {
+            Team: 'Fire',
+            Caller: 1,
+            Players: [],
+            Position: undefined as any,
+            StartedAt: 0,
+            CallNumber: 1,
+            Description: 'Test',
+            PositionDescriptor: 'Test',
+        });
+
+        const base = await sharp({
+            create: { width: 200, height: 200, channels: 4, background: '#ffffff' },
+        })
+            .png()
+            .toBuffer();
+
+        const result = await drawMap({ emergencyCalls: [call], map: base });
+
+        expect(Buffer.isBuffer(result)).toBe(true);
         client.destroy();
     });
 });
