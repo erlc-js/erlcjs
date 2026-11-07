@@ -7,6 +7,17 @@ function makeServer() {
     return client.servers.get('111111111')!;
 }
 
+function rawPlayer(name: string, id: number): any {
+    return {
+        Player: `${name}:${id}`,
+        Permission: 'Normal',
+        Team: 'Civilian',
+        Callsign: '',
+        Location: { LocationX: 0, LocationZ: 0, PostalCode: '0', StreetName: '', BuildingNumber: '' },
+        WantedStars: 0,
+    };
+}
+
 describe('StaffManager', () => {
     it('emits staffAdd and staffRemove, keeping staff grouped by role', () => {
         const server = makeServer();
@@ -28,5 +39,24 @@ describe('StaffManager', () => {
         expect(server.staff.mods.size).toBe(1);
 
         client.destroy();
+    });
+
+    it('refreshes online state and usernames for cached staff members', () => {
+        const server = makeServer();
+        server.staff.updateCache({ Admins: { '1': 'Alex' }, Mods: {}, Helpers: {} });
+        const staff = server.staff.admins.get(1)!;
+        expect(staff.online).toBe(false);
+
+        server.players.updateCache([rawPlayer('Alex', 1)]);
+        server.staff.updateCache({ Admins: { '1': 'Alexandra' }, Mods: {}, Helpers: {} });
+        expect(staff.username).toBe('Alexandra');
+        expect(staff.online).toBe(true);
+        expect(staff.player?.id).toBe(1);
+
+        server.players.clear();
+        server.staff.updateCache({ Admins: { '1': 'Alexandra' }, Mods: {}, Helpers: {} });
+        expect(staff.online).toBe(false);
+        expect(staff.player).toBeUndefined();
+        server.client.destroy();
     });
 });

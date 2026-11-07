@@ -40,9 +40,9 @@ export class StaffManager {
             'GET',
             '/v2/server?Staff=true',
         );
-        const rawVehicles: RawStaffData = rawServer.Staff!;
+        const rawStaff: RawStaffData = rawServer.Staff ?? { Admins: {}, Mods: {}, Helpers: {} };
 
-        return this.updateCache(rawVehicles);
+        return this.updateCache(rawStaff);
     }
 
     /**
@@ -73,7 +73,10 @@ export class StaffManager {
             activeUserIds.add(Number(userId));
             const cachedUser = cache.get(Number(userId));
 
-            if (cachedUser) continue;
+            if (cachedUser) {
+                cachedUser._patch(userId, username);
+                continue;
+            }
             const newStaff = new Staff(this.server, userId, username);
             cache.set(Number(userId), newStaff);
             this.server.client.emit(ERLCEvents.staffAdd, newStaff, type);
