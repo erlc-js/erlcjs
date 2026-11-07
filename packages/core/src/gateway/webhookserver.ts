@@ -4,6 +4,9 @@ import { ERLCEvents } from '../client/events.js';
 import type { Server } from '../client/server.js';
 import { ServerNotConfiguredError } from '../errors/index.js';
 
+/** Maximum accepted webhook body size in bytes. */
+const MAX_BODY_BYTES = 1024 * 1024;
+
 /**
  * Splits an argument string into tokens, respecting single and double quoted segments.
  * @param input - The raw argument string from a webhook custom command event.
@@ -55,9 +58,25 @@ export class WebhookServer {
 
             if (req.method === 'POST' && req.url === configPath) {
                 let bodyChunks: Buffer[] = [];
-                req.on('data', (chunk) => bodyChunks.push(chunk));
+                let bodySize = 0;
+                let bodyTooLarge = false;
+                req.on('data', (chunk) => {
+                    if (bodyTooLarge) return;
+                    bodySize += chunk.length;
+                    if (bodySize > MAX_BODY_BYTES) {
+                        bodyTooLarge = true;
+                        bodyChunks = [];
+                        return;
+                    }
+                    bodyChunks.push(chunk);
+                });
 
                 req.on('end', async () => {
+                    if (bodyTooLarge) {
+                        res.writeHead(413, { 'Content-Type': 'text/plain' });
+                        return res.end('Payload Too Large');
+                    }
+
                     const rawBody = Buffer.concat(bodyChunks);
 
                     const signatureHex = req.headers['x-signature-ed25519'] as string;
@@ -119,13 +138,14 @@ export class WebhookServer {
                 res.writeHead(404).end();
             }
         });
+        this.server.on('error', (err) => this.client._emitError(err));
     }
 
     /**
      * Starts listening for incoming webhook events.
      */
     public listen() {
-        const port = this.client.options.webhook?.port || 3000;
+        const port = this.client.options.webhook?.port ?? 3000;
         this.server.listen(port, () => {});
     }
 
