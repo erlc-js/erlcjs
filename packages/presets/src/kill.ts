@@ -22,9 +22,11 @@ export function RDM(action: (log: KillLog) => void, allowlist: Allowlist = [], m
     return (log: KillLog) => {
         let currentAllowlist = allowlist as (number | PlayerPermission)[];
         if (typeof allowlist === 'function') currentAllowlist = allowlist();
-        if (currentAllowlist.includes(log.killerId) || currentAllowlist.includes(log.killer.permission as any)) return;
+        const killer = log.killer;
+        if (!killer) return;
+        if (currentAllowlist.includes(log.killerId) || currentAllowlist.includes(killer.permission as any)) return;
         const time = Date.now() / 1000 - timespan;
-        const kills = log.killer.kills;
+        const kills = killer.kills;
         const filterKills = kills.filter(k => k.timestamp >= time);
         if (filterKills.length >= minKills) action(log);
     }

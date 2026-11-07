@@ -3,7 +3,7 @@ import { Client, Player, Vehicle, CommandLog, KillLog, ServerInfo } from '@erlcj
 import { welcomePlayer, banKickRejoin } from './player.js';
 import { banVehicles, banLiveries, VehiclePunishments } from './vehicle.js';
 import { RDM } from './kill.js';
-import { banCommand } from './command.js';
+import { banCommand, CommandPunishments } from './command.js';
 import { autoHint, autoCommand } from './auto.js';
 
 function makeServer() {
@@ -155,6 +155,21 @@ describe('RDM', () => {
         expect(action).toHaveBeenCalledTimes(1);
         server.client.destroy();
     });
+
+    it('does not throw when the killer is not cached', () => {
+        const server = makeServer();
+        const log = new KillLog(server, {
+            Killer: 'Ghost:99',
+            Killed: 'Victim:2',
+            Timestamp: Math.floor(Date.now() / 1000),
+        });
+
+        const action = vi.fn();
+        expect(() => RDM(action)(log)).not.toThrow();
+        expect(action).not.toHaveBeenCalled();
+
+        server.client.destroy();
+    });
 });
 
 describe('banCommand', () => {
@@ -166,6 +181,18 @@ describe('banCommand', () => {
         let kicked = false;
         banCommand([':admin'], () => { kicked = true; })(log);
         expect(kicked).toBe(true);
+        server.client.destroy();
+    });
+
+    it('does not throw when the command sender is not cached', () => {
+        const server = makeServer();
+        const log = new CommandLog(server, { Player: 'Ghost:99', Timestamp: 123, Command: ':admin x' });
+        const action = vi.fn();
+
+        expect(() => banCommand([':admin'], action, true, ['Server Owner'])(log)).not.toThrow();
+        expect(action).not.toHaveBeenCalled();
+        expect(() => CommandPunishments.kick()(log)).not.toThrow();
+
         server.client.destroy();
     });
 });

@@ -26,6 +26,7 @@ export function banCommand(commands: string | string[], action: (log: CommandLog
         if (currentAllowlist && currentAllowlist.length > 0) {
             for (const allow of currentAllowlist) {
                 if (typeof allow === 'string') {
+                    if (!log.player) return;
                     if (log.player.permission === allow) return;
                 } else {
                     if (log.playerId === allow) return;
@@ -54,8 +55,10 @@ export class CommandPunishments {
      */
     public static removePermissions(): (log: CommandLog) => void {
         return (log: CommandLog) => {
-            if (log.player.permission === 'Server Administrator') log.player.unadmin();
-            if (log.player.permission === 'Server Moderator') log.player.unmod();
+            const player = log.player;
+            if (!player) return;
+            if (player.permission === 'Server Administrator') player.unadmin();
+            if (player.permission === 'Server Moderator') player.unmod();
         }
     }
 
@@ -65,8 +68,10 @@ export class CommandPunishments {
      */
     public static kick(): (log: CommandLog) => void {
         return (log: CommandLog) => {
+            const player = log.player;
+            if (!player) return;
             this.removePermissions()(log);
-            log.player.kick();
+            player.kick();
         }
     }
 
@@ -76,8 +81,10 @@ export class CommandPunishments {
      */
     public static ban(): (log: CommandLog) => void {
         return (log: CommandLog) => {
+            const player = log.player;
+            if (!player) return;
             this.removePermissions()(log);
-            log.player.ban();
+            player.ban();
         }
     }
 }
