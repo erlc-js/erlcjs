@@ -29,6 +29,42 @@ npm install @erlcjs/core
 pnpm add @erlcjs/core
 ```
 
+## CLI and MCP
+
+`@erlcjs/core` ships the `erlcjs` CLI and a bundled documentation MCP server.
+
+```sh
+erlcjs version
+erlcjs mcp
+```
+
+`version` prints the installed package version. `mcp` starts a stdio MCP server with the official erlc.js documentation baked into the package. It works offline and exposes:
+
+- `search_docs` to find guides and API pages by topic, symbol, event, or error name
+- `get_doc` to read a full Markdown page
+- `list_docs` to browse the docs by section
+- `erlcjs://docs` and `erlcjs://docs/<slug>` resources
+- an `answer-from-docs` prompt for agent workflows
+
+Add the server to an MCP client:
+
+```json
+{
+  "mcpServers": {
+    "erlcjs": {
+      "command": "erlcjs",
+      "args": ["mcp"]
+    }
+  }
+}
+```
+
+If the package is not installed globally, use:
+
+```sh
+npx -y @erlcjs/core mcp
+```
+
 ## Quick Start
 
 ```typescript

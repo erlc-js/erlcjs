@@ -59,6 +59,7 @@ export default defineConfig({
             { title: 'Map', url: '/docs/guides/map/getting-started/' },
             { title: 'Presets', url: '/docs/guides/presets/getting-started/' },
             { title: 'Migrating from v1', url: '/docs/guides/migrating-from-v1/' },
+            { title: 'MCP server', url: '/docs/guides/mcp/' },
           ],
         },
         {

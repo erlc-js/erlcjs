@@ -204,6 +204,32 @@ client.on(
 
 Guides and the generated API reference live at [erlcjs.xyz](https://erlcjs.xyz).
 
+## Docs MCP server
+
+`@erlcjs/core` ships an official documentation MCP server, so any MCP-capable agent
+can search and read the erlc.js docs directly.
+
+```sh
+erlcjs version
+erlcjs mcp
+```
+
+Add it to an MCP client:
+
+```json
+{
+  "mcpServers": {
+    "erlcjs": {
+      "command": "erlcjs",
+      "args": ["mcp"]
+    }
+  }
+}
+```
+
+The docs are bundled with the package and work offline. See the
+[core README](packages/core/README.md#cli-and-mcp) for the available tools and resources.
+
 ## Status
 
 erlc.js is actively developed. The v2 API is the current release line; see

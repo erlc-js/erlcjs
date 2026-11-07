@@ -1,2 +1,4 @@
 # Auto detect text files and perform LF normalization
 * text=auto
+
+packages/core/src/cli/generated.ts linguist-generated=true
