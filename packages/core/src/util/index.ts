@@ -4,6 +4,8 @@
  * @returns The converted object with PascalCase keys.
  * @public
  */
+const BLOCKED_KEYS = new Set(['__proto__', 'constructor', 'prototype']);
+
 export function convertToPascalCase(obj: any): any {
     if (typeof obj !== 'object' || obj === null) {
         return obj;
@@ -16,7 +18,7 @@ export function convertToPascalCase(obj: any): any {
     const newObj: Record<string, any> = {};
 
     for (const key in obj) {
-        if (Object.prototype.hasOwnProperty.call(obj, key)) {
+        if (Object.prototype.hasOwnProperty.call(obj, key) && !BLOCKED_KEYS.has(key.toLowerCase())) {
             const pascalKey = key.charAt(0).toUpperCase() + key.slice(1);
 
             newObj[pascalKey] = convertToPascalCase(obj[key]);
