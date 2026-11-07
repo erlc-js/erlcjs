@@ -31,7 +31,12 @@ export function welcomePlayer(message?: string): (player: Player) => void {
 export function banKickRejoin(timespan: number = 1800): (player: Player) => void {
     return (player: Player) => {
         const timestamp = Date.now() / 1000 - timespan
-        const kicks = player.server.commandLogs.cache.filter(v => v.timestamp > timestamp && (v.command.startsWith(`:kick ${player.username}`) || v.command.startsWith(`:kick ${player.id}`)));
+        const targets = [player.username, String(player.id)];
+        const kicks = player.server.commandLogs.cache.filter((log) => {
+            if (log.timestamp <= timestamp) return false;
+            const command = log.command.trim();
+            return targets.some((target) => command === `:kick ${target}` || command.startsWith(`:kick ${target} `));
+        });
         if (kicks.size >= 1) {
             void player
                 .ban(`Rejoin within ${timespan} seconds of a kick.`)

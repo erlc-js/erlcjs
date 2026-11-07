@@ -88,6 +88,19 @@ describe('banKickRejoin', () => {
         expect(ban).not.toHaveBeenCalled();
         server.client.destroy();
     });
+
+    it('does not treat a kick of a similarly named player as a match', () => {
+        const server = makeServer();
+        server.commandLogs.updateCache([
+            { Player: 'Alex:1', Timestamp: Math.floor(Date.now() / 1000), Command: ':kick Alex by API' },
+        ]);
+
+        const player = new Player(server, rawPlayer('Alexander', 2));
+        const ban = vi.spyOn(player, 'ban').mockResolvedValue(undefined);
+        banKickRejoin(1800)(player);
+        expect(ban).not.toHaveBeenCalled();
+        server.client.destroy();
+    });
 });
 
 describe('banVehicles', () => {
