@@ -9,7 +9,7 @@ import type { Server } from "@erlcjs/core";
  */
 export function autoHint(server: Server, message: string, interval: number = 120000) {
     return setInterval(() => {
-        server.commands.execute(`:h ${message}`)
+        void server.commands.execute(`:h ${message}`).catch((err) => server.client._emitError(err));
     }, interval)
 }
 
@@ -22,7 +22,7 @@ export function autoHint(server: Server, message: string, interval: number = 120
  */
 export function autoAnnouncement(server: Server, message: string, interval: number = 120000) {
     return setInterval(() => {
-        server.commands.execute(`:m ${message}`)
+        void server.commands.execute(`:m ${message}`).catch((err) => server.client._emitError(err));
     }, interval)
 }
 
@@ -35,6 +35,6 @@ export function autoAnnouncement(server: Server, message: string, interval: numb
  */
 export function autoCommand(server: Server, command: string, interval: number = 120000) {
     return setInterval(() => {
-        server.commands.execute(command)
+        void server.commands.execute(command).catch((err) => server.client._emitError(err));
     }, interval)
 }

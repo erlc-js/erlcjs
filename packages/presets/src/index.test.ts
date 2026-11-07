@@ -51,6 +51,18 @@ describe('welcomePlayer', () => {
         await vi.waitFor(() => expect(custom).toHaveBeenCalledWith('Hey!'));
         server.client.destroy();
     });
+
+    it('reports message failures instead of throwing', async () => {
+        const server = makeServer();
+        const player = new Player(server, rawPlayer('Alex', 1));
+        const err = new Error('nope');
+        vi.spyOn(player, 'message').mockRejectedValue(err);
+        const emit = vi.spyOn(server.client, '_emitError').mockImplementation(() => {});
+
+        welcomePlayer()(player);
+        await vi.waitFor(() => expect(emit).toHaveBeenCalledWith(err));
+        server.client.destroy();
+    });
 });
 
 describe('banKickRejoin', () => {
@@ -216,6 +228,20 @@ describe('auto helpers', () => {
         const interval = autoCommand(server, ':m hi', 1000);
         vi.advanceTimersByTime(2000);
         expect(execute).toHaveBeenCalledWith(':m hi');
+        clearInterval(interval);
+        server.client.destroy();
+    });
+
+    it('reports command failures instead of throwing', async () => {
+        vi.useFakeTimers();
+        const server = makeServer();
+        const err = new Error('nope');
+        vi.spyOn(server.commands, 'execute').mockRejectedValue(err);
+        const emit = vi.spyOn(server.client, '_emitError').mockImplementation(() => {});
+
+        const interval = autoHint(server, 'Welcome!', 1000);
+        vi.advanceTimersByTime(1000);
+        await vi.waitFor(() => expect(emit).toHaveBeenCalledWith(err));
         clearInterval(interval);
         server.client.destroy();
     });

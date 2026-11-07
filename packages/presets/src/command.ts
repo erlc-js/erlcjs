@@ -57,8 +57,12 @@ export class CommandPunishments {
         return (log: CommandLog) => {
             const player = log.player;
             if (!player) return;
-            if (player.permission === 'Server Administrator') player.unadmin();
-            if (player.permission === 'Server Moderator') player.unmod();
+            if (player.permission === 'Server Administrator') {
+                void player.unadmin().catch((err) => player.client._emitError(err));
+            }
+            if (player.permission === 'Server Moderator') {
+                void player.unmod().catch((err) => player.client._emitError(err));
+            }
         }
     }
 
@@ -71,7 +75,7 @@ export class CommandPunishments {
             const player = log.player;
             if (!player) return;
             this.removePermissions()(log);
-            player.kick();
+            void player.kick().catch((err) => player.client._emitError(err));
         }
     }
 
@@ -84,7 +88,7 @@ export class CommandPunishments {
             const player = log.player;
             if (!player) return;
             this.removePermissions()(log);
-            player.ban();
+            void player.ban().catch((err) => player.client._emitError(err));
         }
     }
 }

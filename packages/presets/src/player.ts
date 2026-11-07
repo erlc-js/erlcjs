@@ -12,7 +12,9 @@ import { Player } from "@erlcjs/core";
  */
 export function welcomePlayer(message?: string): (player: Player) => void {
     return (player: Player) => {
-        player.message(message ?? `Welcome to ${player.server.info?.name}!`);
+        void player
+            .message(message ?? `Welcome to ${player.server.info?.name}!`)
+            .catch((err) => player.client._emitError(err));
     }
 }
 
@@ -30,6 +32,10 @@ export function banKickRejoin(timespan: number = 1800): (player: Player) => void
     return (player: Player) => {
         const timestamp = Date.now() / 1000 - timespan
         const kicks = player.server.commandLogs.cache.filter(v => v.timestamp > timestamp && (v.command.startsWith(`:kick ${player.username}`) || v.command.startsWith(`:kick ${player.id}`)));
-        if (kicks.size >= 1) player.ban(`Rejoin within ${timespan} seconds of a kick.`)
+        if (kicks.size >= 1) {
+            void player
+                .ban(`Rejoin within ${timespan} seconds of a kick.`)
+                .catch((err) => player.client._emitError(err));
+        }
     }
 }
