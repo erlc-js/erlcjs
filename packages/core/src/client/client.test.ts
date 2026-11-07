@@ -136,4 +136,47 @@ describe('Client', () => {
         expect(received).toEqual([err]);
         client.destroy();
     });
+
+    it('routes synchronous and asynchronous custom command failures to error listeners', async () => {
+        const client = new Client({ servers: ['PRC-111111111-key'] });
+        const server = client.servers.get('111111111')!;
+        const errors: string[] = [];
+        client.on('error', (err) => errors.push((err as Error).message));
+
+        client.registerCommand({
+            name: 'sync',
+            execute: () => {
+                throw new Error('sync failure');
+            },
+        });
+        client.registerCommand({
+            name: 'async',
+            execute: async () => {
+                throw new Error('async failure');
+            },
+        });
+
+        const player = new Player(server, rawPlayer('Alex', 1));
+        client.emit(ERLCEvents.customCommand, player, 'sync', []);
+        client.emit(ERLCEvents.customCommand, player, 'async', []);
+        await new Promise((resolve) => setTimeout(resolve, 0));
+
+        expect(errors).toEqual(['sync failure', 'async failure']);
+        client.destroy();
+    });
+
+    it('does not crash on asynchronous custom command failures without an error listener', async () => {
+        const client = new Client({ servers: ['PRC-111111111-key'] });
+        client.registerCommand({
+            name: 'fail',
+            execute: async () => {
+                throw new Error('boom');
+            },
+        });
+
+        const player = new Player(client.servers.get('111111111')!, rawPlayer('Alex', 1));
+        expect(() => client.emit(ERLCEvents.customCommand, player, 'fail', [])).not.toThrow();
+        await new Promise((resolve) => setTimeout(resolve, 0));
+        client.destroy();
+    });
 });

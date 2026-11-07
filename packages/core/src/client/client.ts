@@ -239,9 +239,9 @@ export class Client extends EventEmitter<ClientEvents> {
             if (!command) return;
             try {
                 if (command.permission?.length && command.permission.length > 0 && !command.permission.includes(player.permission)) return;
-                command.execute({ player: player, args });
+                void Promise.resolve(command.execute({ player, args })).catch((err) => this._emitError(err));
             } catch (err) {
-                this.emit('error', err);
+                this._emitError(err);
             }
         });
     }

@@ -427,5 +427,5 @@ export interface InGameCommand {
      * The execution of the command.
      * @param context - An object of the player and args given to the execute function.
      */
-    execute: (context: { player: Player; args: string[] }) => void;
+    execute: (context: { player: Player; args: string[] }) => void | Promise<void>;
 }
