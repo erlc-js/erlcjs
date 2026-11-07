@@ -28,8 +28,7 @@
     "lint": "eslint src/**/*.ts",
     "extract": "api-extractor run --local",
     "test": "vitest run",
-    "test:real": "pnpm tsx --env-file-if-exists=../../.env src/index.integration.ts",
-    "bench": "pnpm tsx src/index.bench.ts"
+    "test:real": "pnpm tsx --env-file-if-exists=../../.env src/index.integration.ts"
   },
   "publishConfig": {
     "access": "public"
