@@ -279,7 +279,7 @@ export class Player extends Base {
             Player: `${this.username}:${this.id}`,
             Permission: this.permission,
             Team: this.team,
-            Callsign: this.callsign!,
+            Callsign: this.callsign ?? '',
             WantedStars: this.wantedLevel,
             Location: {
                 LocationX: this.location.x,

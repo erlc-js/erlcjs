@@ -41,4 +41,12 @@ describe('Player', () => {
 
         server.client.destroy();
     });
+
+    it('serializes a missing callsign as an empty string', () => {
+        const server = makeServer();
+        const player = new Player(server, { ...rawPlayer('Alex', 1), Callsign: undefined } as any);
+
+        expect(player.toJSON().Callsign).toBe('');
+        server.client.destroy();
+    });
 });
