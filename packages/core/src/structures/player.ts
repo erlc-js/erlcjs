@@ -208,7 +208,7 @@ export class Player extends Base {
      * @returns A promise that resolves when the teleport command is sent.
      */
     public async tp(player: Player | number): Promise<void> {
-        const playerId = player instanceof Player ? player.id : player;
+        const playerId = typeof player === 'number' ? player : player.id;
         await this.server.commands.execute(`:tp ${this.username} ${playerId}`);
     }
 

@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import { Client } from '../client/client.js';
 import { Player } from './player.js';
 
@@ -47,6 +47,20 @@ describe('Player', () => {
         const player = new Player(server, { ...rawPlayer('Alex', 1), Callsign: undefined } as any);
 
         expect(player.toJSON().Callsign).toBe('');
+        server.client.destroy();
+    });
+
+    it('teleports using the target player id', async () => {
+        const server = makeServer();
+        const alex = new Player(server, rawPlayer('Alex', 1));
+        const bob = new Player(server, rawPlayer('Bob', 2));
+        const execute = vi.spyOn(server.commands, 'execute').mockResolvedValue('ok');
+
+        await alex.tp(bob);
+        await alex.tp(3);
+
+        expect(execute).toHaveBeenNthCalledWith(1, ':tp Alex 2');
+        expect(execute).toHaveBeenNthCalledWith(2, ':tp Alex 3');
         server.client.destroy();
     });
 });
