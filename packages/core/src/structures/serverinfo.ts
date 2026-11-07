@@ -62,7 +62,7 @@ export class ServerInfo extends Base {
     public _patch(data: RawServerData): this {
         this.name = data.Name;
         this.ownerId = data.OwnerId;
-        this.coOwnerIds = data.CoOwnerIds;
+        this.coOwnerIds = data.CoOwnerIds ?? [];
         this.currentPlayers = data.CurrentPlayers;
         this.maxPlayers = data.MaxPlayers;
         this.joinKey = data.JoinKey;
@@ -81,13 +81,13 @@ export class ServerInfo extends Base {
         return (
             this.name === data.Name &&
             this.ownerId === data.OwnerId &&
-            JSON.stringify(this.coOwnerIds) === JSON.stringify(data.CoOwnerIds) &&
+            JSON.stringify(this.coOwnerIds) === JSON.stringify(data.CoOwnerIds ?? []) &&
             this.currentPlayers === data.CurrentPlayers &&
             this.maxPlayers === data.MaxPlayers &&
             this.joinKey === data.JoinKey &&
             this.accVerifiedReq === data.AccVerifiedReq &&
             this.teamBalance === data.TeamBalance &&
-            JSON.stringify(this.queue) === JSON.stringify(data.Queue)
+            JSON.stringify(this.queue) === JSON.stringify(data.Queue ?? [])
         );
     }
 
