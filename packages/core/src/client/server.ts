@@ -118,7 +118,12 @@ export class Server {
      */
     public async fetch(): Promise<RawServerData> {
         const rawServerData: RawServerData = await this.rest.request('GET', FULL_POLL_QUERY);
+        if (this.offline) {
+            this.offline = false;
+            this.client.emit(ERLCEvents.serverOnline, this);
+        }
         this.applyPollData(rawServerData);
+        this.consecutiveFailures = 0;
         return rawServerData;
     }
 
