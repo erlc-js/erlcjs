@@ -37,7 +37,7 @@ pnpm build    # tsup build for every package
 ```
 
 The `test` scripts in `packages/core` and `packages/presets` run with Vitest. Some
-integration scripts (such as `packages/map/src/index.test.ts` and
+integration scripts (such as `packages/map/src/index.integration.ts` and
 `packages/core/src/index.integration.ts`) expect `API_KEY`, `GLOBAL_KEY`, and `APP_ID`
 in a root `.env` file and talk to a real server.
 

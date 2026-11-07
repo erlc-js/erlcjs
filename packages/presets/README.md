@@ -5,89 +5,108 @@
 [![TypeScript](https://img.shields.io/badge/TypeScript-Ready-blue?style=flat-square)](https://www.typescriptlang.org/)
 [![license](https://img.shields.io/npm/l/@erlcjs/presets?style=flat-square)](https://github.com/erlc-js/erlcjs/blob/main/LICENSE)
 
-`@erlcjs/presets` provides a collection of pre-built moderation, punishment, and utility presets for use with `@erlcjs/core`. These presets streamline common server management tasks like vehicle banning, livery restrictions, and player command automation.
-
-## Features
-
-*   **Vehicle Banning**: Easily restrict specific vehicles with customizable punishment actions.
-*   **Livery Restrictions**: Control which liveries are allowed on your server.
-*   **Punishment Actions**: Pre-configured warn-then-kick, and other moderation workflows.
-*   **Player Commands**: Built-in presets for common player management commands.
-*   **TypeScript Native**: Fully typed for a great developer experience.
+`@erlcjs/presets` provides reusable moderation, punishment, and utility callbacks for `@erlcjs/core`.
 
 ## Prerequisites
 
-- Node.js V16.0.0 or higher or Bun V1.0.0 or higher.
-- `@erlcjs/core` installed and configured.
+- Node.js 20 or newer
+- `@erlcjs/core` installed and configured
 
 ## Installation
 
-Install `@erlcjs/presets` in your project:
-
-```bash
-npm install @erlcjs/presets
+```sh
+npm install @erlcjs/presets @erlcjs/core
 # or
-pnpm add @erlcjs/presets
-# or
-yarn add @erlcjs/presets
+pnpm add @erlcjs/presets @erlcjs/core
 ```
 
-## Quick Start
-
-### Vehicle Banning
-
-Prevent players from using specific vehicles with automatic punishment:
+## Vehicle Restrictions
 
 ```typescript
-import { Client, ERLCEvents, Vehicles } from '@erlcjs/core';
+import { Client, ERLCEvents, PlayerPermission, Vehicles } from '@erlcjs/core';
 import { banVehicles, VehiclePunishments } from '@erlcjs/presets';
 
-const client = new Client({ /* ... */ });
+const client = new Client({
+    servers: ['YOUR_SERVER_API_KEY'],
+    polling: { enabled: true },
+});
 
-// Ban the Bugatti Veyron for normal players
 client.on(
-  ERLCEvents.vehicleAdd,
-  banVehicles(
-    [Vehicles.BUGATTI_VEYRON],
-    VehiclePunishments.warnThenKick(10, true, 'This vehicle is restricted.'),
-    [PlayerPermission.Mod, PlayerPermission.Administrator] // Allowlist
-  )
+    ERLCEvents.vehicleAdd,
+    banVehicles(
+        [Vehicles.CHEVLON_COMMUTER_VAN_2006],
+        VehiclePunishments.warnThenKick(10, true, 'This vehicle is restricted.'),
+        [PlayerPermission.Mod, PlayerPermission.Administrator],
+    ),
 );
 ```
 
-### Livery Restrictions
-
-Restrict specific liveries with customizable punishments:
+## Livery Restrictions
 
 ```typescript
-import { Client, ERLCEvents, PlayerPermission } from '@erlcjs/core';
+import { PlayerPermission } from '@erlcjs/core';
 import { banLiveries, LiveryPunishments } from '@erlcjs/presets';
 
-const client = new Client({ /* ... */ });
-
-// Ban the 'Staff' livery except for staff members
 client.on(
-  ERLCEvents.vehicleAdd,
-  banLiveries(
-    ['Staff'],
-    LiveryPunishments.warnThenKick(15, true, 'This livery is restricted.'),
-    [PlayerPermission.Mod, PlayerPermission.Administrator, PlayerPermission.Owner]
-  )
+    ERLCEvents.vehicleAdd,
+    banLiveries(
+        ['Staff'],
+        LiveryPunishments.warnThenKick(15, true, 'This livery is restricted.'),
+        [PlayerPermission.Mod, PlayerPermission.Administrator, PlayerPermission.Owner],
+    ),
 );
+```
+
+Livery restrictions can also target a specific vehicle model:
+
+```typescript
+banLiveries([{ livery: 'Staff', vehicle: Vehicles.CHEVLON_COMMUTER_VAN_2006 }], action);
+```
+
+## Command Restrictions
+
+```typescript
+import { banCommand, CommandPunishments } from '@erlcjs/presets';
+
+client.on(
+    ERLCEvents.command,
+    banCommand([':admin', ':mod'], CommandPunishments.removePermissions(), true, [
+        PlayerPermission.Owner,
+    ]),
+);
+```
+
+## Kill and Player Presets
+
+```typescript
+import { welcomePlayer, banKickRejoin, RDM } from '@erlcjs/presets';
+
+client.on(ERLCEvents.playerJoin, welcomePlayer());
+client.on(ERLCEvents.playerJoin, banKickRejoin(1800));
+client.on(ERLCEvents.kill, RDM((log) => log.killer?.kick('RDM'), [], 4, 30));
+```
+
+## Automated Messages
+
+```typescript
+import { autoHint, autoAnnouncement, autoCommand } from '@erlcjs/presets';
+
+const hint = autoHint(server, 'Follow the server rules!');
+const announcement = autoAnnouncement(server, 'Server restart in 5 minutes.');
+const command = autoCommand(server, ':heal all');
+
+// Stop them with clearInterval(hint), etc.
 ```
 
 ## Available Presets
 
-### Vehicle Management
-
-- **`banVehicles()`**: Ban specific vehicles with optional player allowlist
-- **`VehiclePunishments.warnThenKick()`**: Warn then kick players using banned vehicles
-
-### Livery Management
-
-- **`banLiveries()`**: Ban specific liveries with optional player allowlist
-- **`LiveryPunishments.warnThenKick()`**: Warn then kick players using banned liveries
+- `banVehicles`, `VehiclePunishments`
+- `banLiveries`, `LiveryPunishments`
+- `banCommand`, `CommandPunishments`
+- `welcomePlayer`, `banKickRejoin`
+- `RDM`
+- `autoHint`, `autoAnnouncement`, `autoCommand`
 
 ## License
 
-This project is licensed under the Apache License 2.0 - see the [LICENSE](../../LICENSE) file for details.
+[Apache-2.0](../../LICENSE) © erlc-js contributors

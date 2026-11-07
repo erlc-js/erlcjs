@@ -1,148 +1,118 @@
 # @erlcjs/core
 
-  [![npm version](https://img.shields.io/npm/v/@erlcjs/core?style=flat-square)](https://www.npmjs.com/package/@erlcjs/core)
-  [![npm downloads](https://img.shields.io/npm/dm/@erlcjs/core?style=flat-square)](https://www.npmjs.com/package/@erlcjs/core)
-  [![bundle size](https://img.shields.io/bundlephobia/min/@erlcjs/core?style=flat-square)](https://bundlephobia.com/package/@erlcjs/core)
-  [![TypeScript](https://img.shields.io/badge/TypeScript-Ready-blue?style=flat-square)](https://www.typescriptlang.org/)
-  [![license](https://img.shields.io/npm/l/@erlcjs/core?style=flat-square)](https://github.com/erlc-js/erlcjs/blob/main/LICENSE)
+[![npm version](https://img.shields.io/npm/v/@erlcjs/core?style=flat-square)](https://www.npmjs.com/package/@erlcjs/core)
+[![npm downloads](https://img.shields.io/npm/dm/@erlcjs/core?style=flat-square)](https://www.npmjs.com/package/@erlcjs/core)
+[![TypeScript](https://img.shields.io/badge/TypeScript-Ready-blue?style=flat-square)](https://www.typescriptlang.org/)
+[![license](https://img.shields.io/npm/l/@erlcjs/core?style=flat-square)](https://github.com/erlc-js/erlcjs/blob/main/LICENSE)
 
-`@erlcjs/core` is a lightweight, fully-featured, and strongly-typed API wrapper for Roblox's **Emergency Response: Liberty County (ER:LC)** private servers. It handles the low-level API mechanics, caching, and rate limiting so you can focus on building server integrations, moderation tools, and dashboards.
+`@erlcjs/core` is a fully-typed TypeScript wrapper for Roblox's **Emergency Response: Liberty County (ER:LC)** private server API. It manages polling, webhooks, rate limits, and per-server caches so you can build moderation tools, dashboards, and bots.
 
 ## Features
 
-*   **TypeScript Native**: Written completely in TypeScript with comprehensive declarations.
-*   **Automatic Rate Limiting**: Built-in REST client queues API commands and handles rate limit resets.
-*   **Real-time Event Emitters**: Track game updates using high-frequency Polling or Webhook Gateway modes.
-*   **Entity Cache**: Caches player states, spawned vehicles, active emergency calls, kill logs, and mod calls automatically.
-*   **Console Commands**: Easily trigger commands like `:kick`, `:kill`, `:pm` directly through JS/TS methods.
+- **Multi-server client** — manage one or many ER:LC servers from a single process.
+- **Polling and webhooks** — poll for full state or use the signed webhook gateway.
+- **Typed events** — every event callback is fully typed.
+- **Automatic caching** — players, vehicles, staff, calls, and logs are cached as structures.
+- **Player helpers** — kick, ban, jail, heal, message, teleport, and more.
+- **Custom commands** — register in-game `;commands` with permissions and aliases.
 
 ## Prerequisites
-- Node.js V16.0.0 or higher or Bun V1.0.0 or higher.
-- A valid ER:LC Private Server API Key.
+
+- Node.js 20 or newer
+- A valid ER:LC private server API key
 
 ## Installation
 
-Install `@erlcjs/core` in your project:
-
-```bash
+```sh
 npm install @erlcjs/core
 # or
 pnpm add @erlcjs/core
-# or
-yarn add @erlcjs/core
 ```
 
 ## Quick Start
 
-### Polling Mode
-
-Polling is the simplest way to get started. It queries the ER:LC HTTP API every 5 seconds to fetch server changes.
-
 ```typescript
 import { Client, ERLCEvents } from '@erlcjs/core';
 
 const client = new Client({
-  serverKey: 'YOUR_ERLC_SERVER_API_KEY',
-  polling: true
+    servers: ['YOUR_SERVER_API_KEY'],
+    polling: { enabled: true },
 });
 
 client.on(ERLCEvents.playerJoin, (player) => {
-  console.log(`Player joined: ${player.username} (ID: ${player.id})`);
-  
-  // Send a welcome message in-game
-  player.message('Welcome to our server!');
+    player.message(`Welcome to ${player.server.info?.name}!`);
 });
 
-client.on(ERLCEvents.kill, (killLog) => {
-  console.log(`${killLog.killerUsername} killed ${killLog.killedUsername}`);
-});
-
-client.on(ERLCEvents.emergencyCallAdd, (call) => {
-  console.log(`Emergency Call #${call.callNumber}: ${call.description}`);
-});
+client.on('error', console.error);
 ```
 
-### Webhook Gateway Mode (Alpha)
-
-Set up a local server to receive real-time webhook events pushed directly by ER:LC.
+Each server key belongs to one private server. Access its managers and caches through the server:
 
 ```typescript
-import { Client, ERLCEvents } from '@erlcjs/core';
+const server = client.servers.get('YOUR_SERVER_ID')!;
 
+server.players.cache.get(userId);
+await server.commands.execute(':pm jamie hello');
+await server.commands.execute(':h Server restart in 5 minutes');
+```
+
+## Players
+
+```typescript
+const player = server.players.cache.get(userId);
+
+await player?.message('Please follow the rules.');
+await player?.kick('Breaking the rules');
+await player?.ban('Repeated offences');
+```
+
+Players also expose `jail`, `heal`, `kill`, `wanted`, `respawn`, `load`, `refresh`, `helper`, `mod`, `admin`, `tp`, and their un-prefixed counterparts.
+
+## Webhook Gateway
+
+```typescript
 const client = new Client({
-  serverKey: 'YOUR_ERLC_SERVER_API_KEY',
-  globalKey: 'YOUR_PUBLIC_APP_GLOBAL_KEY',
-  globalAppId: 'YOUR_PUBLIC_APP_ID', 
-  webhook: {
-    enabled: true,
-    port: 3000,
-    path: '/events-webhook'
-  }
-});
-
-client.on(ERLCEvents.playerJoin, (player) => {
-  console.log(`${player.username} joined via gateway webhook!`);
+    servers: ['YOUR_SERVER_API_KEY'],
+    polling: { enabled: true },
+    webhook: {
+        enabled: true,
+        port: 3000,
+        path: '/webhook',
+    },
 });
 ```
 
-## Core Structure Methods
+Webhooks are verified with ER:LC's Ed25519 signature and a timestamp tolerance. They deliver emergency-call and custom-command events; keep polling enabled for the rest.
 
-The wrapper resolves entities into structures representing in-game components.
+## Custom Commands
 
-### Players
-Retrieve cached players, or issue immediate actions:
 ```typescript
-const player = client.players.cache.get(1234567); // get by UserId
+import { PlayerPermission } from '@erlcjs/core';
 
-// Kick a player
-await player.kick('Violating server rules');
-
-// Kill a player
-await player.kill();
-
-// Message a player
-await player.message('Please review the rules');
+server.registerCommand({
+    name: 'ping',
+    aliases: ['p'],
+    permission: [PlayerPermission.Mod],
+    execute: ({ player }) => {
+        player.message('pong');
+    },
+});
 ```
 
-### Vehicles
-Retrieve vehicle details:
-```typescript
-const vehicle = client.vehicles.cache.get('PLATE_ABC_123');
-console.log(`Vehicle model: ${vehicle.name}, Owner: ${vehicle.ownerUsername}`);
-```
+Players can then run `;ping` or `;p` in-game. Custom commands are delivered through the webhook gateway.
 
-### Executing Commands
-Issue custom commands directly:
-```typescript
-await client.commands.execute(':heal user');
-```
+## Authorization Link
 
-### Custom Commands
-Registering custom commands:
-```typescript
-client.registerCommand({
-    name: 'example',
-    aliases: [ 'ping' ],
-    execute: async ({ player, args }) => {
-        await player.message(`Pong! Args: ${args.join(' ')}`)
-    }
-})
-```
-Now when the user messages `;ping test` in-game, it will respond with `Pong! Args: test`.
+For public applications, generate a link that lets server owners authorize your app:
 
-### Getting Your Authorization Link
-For public apps where authorizing the IP manually is not ideal:
 ```typescript
-console.log(client.authorizationLink);
+console.log(server.authorizationLink);
 ```
 
 ## Documentation
 
-To read the complete API Reference and detailed guides, view the documentation site:
-[erlc.js Documentation Portal](https://erlcjs.xyz)
-
-## Contributing
-Contributions are welcome! Please open an issue or submit a pull request on GitHub.
+Full guides and the API reference are available at [erlcjs.xyz](https://erlcjs.xyz).
 
 ## License
-Distributed under the Apache-2.0 License. See `LICENSE` for more information.
+
+[Apache-2.0](../../LICENSE) © erlc-js contributors
