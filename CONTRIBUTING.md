@@ -12,7 +12,7 @@ erlc.js is a monorepo built with pnpm workspaces and Turborepo.
 | `@erlcjs/core` | `packages/core` | API client, REST handling, polling, webhooks, caches |
 | `@erlcjs/map` | `packages/map` | PNG map rendering built on `sharp` |
 | `@erlcjs/presets` | `packages/presets` | Ready-made moderation and utility presets |
-| Docs | `apps/docs` | Astro Starlight documentation site |
+| Docs | `apps/docs` | Krate documentation site |
 
 ### Prerequisites
 
@@ -44,8 +44,8 @@ in a root `.env` file and talk to a real server.
 ### Working on the docs
 
 ```sh
-pnpm docs:dev      # build packages, generate the API reference, run Astro
-pnpm docs:generate # regenerate API markdown only
+pnpm docs:dev      # start the Krate docs server (generates the API reference on first run)
+pnpm docs:generate # regenerate the API reference without starting the server
 ```
 
 ## Project Layout

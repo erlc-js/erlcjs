@@ -3106,7 +3106,7 @@
             {
               "kind": "Property",
               "canonicalReference": "@erlcjs/core!CommandLogManager#cache:member",
-              "docComment": "/**\n * Collection cache of logged commands, keyed by a composite `Player:Timestamp` key.\n */\n",
+              "docComment": "/**\n * Collection cache of logged commands, keyed by a composite `Player:Timestamp:Command` key.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
