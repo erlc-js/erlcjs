@@ -97,9 +97,7 @@ The tag version is authoritative. The workflow syncs every published package to
 that version before building and publishing. Changesets are still useful for
 planning and changelog context, but the tag drives the release.
 
-The release workflow requires an `NPM_TOKEN` repository secret. The first
-release uses the v1 main tip that was merged into `dev` before v2 as its
-changelog boundary, so v1 history is excluded even though no v1 tag exists.
+The release workflow requires an `NPM_TOKEN` repository secret.
 
 The GitHub Pages build is published at
 `https://erlc-js.github.io/erlcjs/`.
