@@ -162,6 +162,24 @@ describe('banLiveries', () => {
         expect(action).toHaveBeenCalledWith(vehicle);
         server.client.destroy();
     });
+
+    it('supports livery restrictions that apply to all vehicles', () => {
+        const server = makeServer();
+        server.players.updateCache([rawPlayer('Alex', 7)]);
+        const vehicle = new Vehicle(server, {
+            Name: 'Chevlon Captain 1992',
+            Owner: 'Alex',
+            Plate: 'ABC123',
+            ColorHex: '#fff',
+            ColorName: 'White',
+            Texture: 'Staff',
+        } as any);
+
+        const action = vi.fn();
+        banLiveries([{ livery: 'Staff' }], action)(vehicle);
+        expect(action).toHaveBeenCalledWith(vehicle);
+        server.client.destroy();
+    });
 });
 
 describe('RDM', () => {

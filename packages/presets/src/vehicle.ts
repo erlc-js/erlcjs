@@ -50,7 +50,7 @@ export function banLiveries(liveries: (Livery | string)[], action: (vehicle: Veh
                     action(vehicle);
                 }
             } else if (livery.livery === vehicle.texture) {
-                if (livery.vehicle === vehicle.name || !livery.vehicle) {
+                if (!livery.vehicle || livery.vehicle === vehicle.name) {
                     action(vehicle);
                 }
             }
