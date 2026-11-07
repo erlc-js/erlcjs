@@ -142,6 +142,29 @@ describe('banVehicles', () => {
 
         server.client.destroy();
     });
+
+    it('stops quietly when waiting for the next poll times out', async () => {
+        vi.useFakeTimers();
+        const server = makeServer();
+        server.players.updateCache([rawPlayer('Alex', 7)]);
+        const owner = server.players.cache.get(7)!;
+        vi.spyOn(owner, 'message').mockResolvedValue(undefined);
+        vi.spyOn(server, 'waitFor').mockRejectedValue(new Error('timeout'));
+
+        const vehicle = new Vehicle(server, {
+            Name: 'Chevlon Captain 1992',
+            Owner: 'Alex',
+            Plate: 'ABC123',
+            ColorHex: '#fff',
+            ColorName: 'White',
+        } as any);
+        server.vehicles.cache.set(vehicle.plate, vehicle);
+
+        VehiclePunishments.warnThenKick(10)(vehicle);
+        await vi.advanceTimersByTimeAsync(10000);
+
+        server.client.destroy();
+    });
 });
 
 describe('banLiveries', () => {

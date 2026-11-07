@@ -90,7 +90,11 @@ export class VehiclePunishments {
             if (!owner) return;
             void owner.message(message ?? 'The vehicle you are using is restricted. Please change it.').catch((err) => owner.client._emitError(err));
             setTimeout(async () => {
-                await vehicle.server.waitFor(ERLCEvents.poll, 5000);
+                try {
+                    await vehicle.server.waitFor(ERLCEvents.poll, 5000);
+                } catch {
+                    return;
+                }
                 if (
                     vehicle.server.vehicles.cache.get(vehicle.plate)?.ownerId !== vehicle.ownerId ||
                     vehicle.server.vehicles.cache.get(vehicle.plate)?.name !== vehicle.name
@@ -99,7 +103,11 @@ export class VehiclePunishments {
                 if (warning) {
                     void owner.message(`Change the vehicle in ${delay} seconds or you will be kicked.`).catch((err) => owner.client._emitError(err));
                     setTimeout(async () => {
-                        await vehicle.server.waitFor(ERLCEvents.poll, 5000);
+                        try {
+                            await vehicle.server.waitFor(ERLCEvents.poll, 5000);
+                        } catch {
+                            return;
+                        }
                         if (
                             vehicle.server.vehicles.cache.get(vehicle.plate)?.ownerId !== vehicle.ownerId ||
                             vehicle.server.vehicles.cache.get(vehicle.plate)?.name !== vehicle.name
@@ -150,7 +158,11 @@ export class LiveryPunishments {
             if (!owner) return;
             void owner.message(message ?? 'The livery you are using is restricted. Please change it.').catch((err) => owner.client._emitError(err));
             setTimeout(async () => {
-                await vehicle.server.waitFor(ERLCEvents.poll, 5000);
+                try {
+                    await vehicle.server.waitFor(ERLCEvents.poll, 5000);
+                } catch {
+                    return;
+                }
                 if (
                     vehicle.server.vehicles.cache.get(vehicle.plate)?.ownerId !== vehicle.ownerId ||
                     vehicle.server.vehicles.cache.get(vehicle.plate)?.name !== vehicle.name
@@ -159,7 +171,11 @@ export class LiveryPunishments {
                 if (warning) {
                     void owner.message(`Change the livery in ${delay} seconds or you will be kicked.`).catch((err) => owner.client._emitError(err));
                     setTimeout(async () => {
-                        await vehicle.server.waitFor(ERLCEvents.poll, 5000);
+                        try {
+                            await vehicle.server.waitFor(ERLCEvents.poll, 5000);
+                        } catch {
+                            return;
+                        }
                         if (
                             vehicle.server.vehicles.cache.get(vehicle.plate)?.ownerId !== vehicle.ownerId ||
                             vehicle.server.vehicles.cache.get(vehicle.plate)?.name !== vehicle.name
