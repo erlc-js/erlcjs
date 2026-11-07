@@ -1,7 +1,7 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { Client, Player, Vehicle, CommandLog, KillLog, ServerInfo } from '@erlcjs/core';
 import { welcomePlayer, banKickRejoin } from './player.js';
-import { banVehicles, banLiveries } from './vehicle.js';
+import { banVehicles, banLiveries, VehiclePunishments } from './vehicle.js';
 import { RDM } from './kill.js';
 import { banCommand } from './command.js';
 import { autoHint, autoCommand } from './auto.js';
@@ -97,6 +97,24 @@ describe('banVehicles', () => {
         const allowed = vi.fn();
         banVehicles(['Chevlon Captain 1992'], allowed, [7])(vehicle);
         expect(allowed).not.toHaveBeenCalled();
+        server.client.destroy();
+    });
+
+    it('does not throw when the vehicle owner is not cached', () => {
+        const server = makeServer();
+        const vehicle = new Vehicle(server, {
+            Name: 'Chevlon Captain 1992',
+            Owner: 'Ghost',
+            Plate: 'ABC123',
+            ColorHex: '#fff',
+            ColorName: 'White',
+        } as any);
+
+        const action = vi.fn();
+        expect(() => banVehicles(['Chevlon Captain 1992'], action)(vehicle)).not.toThrow();
+        expect(action).toHaveBeenCalledWith(vehicle);
+        expect(() => VehiclePunishments.warnThenKick()(vehicle)).not.toThrow();
+
         server.client.destroy();
     });
 });

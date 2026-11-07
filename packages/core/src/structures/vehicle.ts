@@ -23,7 +23,7 @@ export class Vehicle extends Base {
     /**
      * The Player instance representing the owner, if they are currently online.
      */
-    owner!: Player;
+    owner?: Player;
     /**
      * The license plate text of the vehicle.
      */
@@ -60,7 +60,7 @@ export class Vehicle extends Base {
         this.name = data.Name;
         this.ownerUsername = data.Owner;
         this.ownerId = this.server.players.getIdFromName(this.ownerUsername) ?? 0;
-        this.owner = this.server.players.cache.get(this.ownerId)!;
+        this.owner = this.server.players.cache.get(this.ownerId);
         this.plate = data.Plate;
         this.texture = data.Texture;
         this.colorHex = data.ColorHex;
