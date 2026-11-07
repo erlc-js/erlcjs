@@ -32,8 +32,9 @@ pnpm build
 
 ```sh
 pnpm lint     # eslint + tsdoc across packages
-pnpm test     # vitest suites (core and presets)
+pnpm test     # all Vitest suites, including CLI and MCP end-to-end tests
 pnpm build    # tsup build for every package
+pnpm docs:build # packages, API reference, and the Krate docs site
 ```
 
 The `test` scripts in `packages/core` and `packages/presets` run with Vitest. Some
@@ -78,6 +79,30 @@ apps/
 - Use a descriptive title and reference related issues.
 - Update the docs or TSDoc when user-facing behavior changes.
 - Verify CI passes before asking for review.
+
+## Releasing
+
+Releases are tag-triggered. Pushing a semver tag runs the full CI suite, syncs
+every published package to the tag version, publishes `@erlcjs/core`,
+`@erlcjs/map`, and `@erlcjs/presets` to npm, generates release notes with
+`devs-des1re/releaselog` without AI humanizing, and deploys the docs to GitHub
+Pages.
+
+```sh
+git tag v2.0.0
+git push origin v2.0.0
+```
+
+The tag version is authoritative. The workflow syncs every published package to
+that version before building and publishing. Changesets are still useful for
+planning and changelog context, but the tag drives the release.
+
+The release workflow requires an `NPM_TOKEN` repository secret. The first
+release uses the v1 main tip that was merged into `dev` before v2 as its
+changelog boundary, so v1 history is excluded even though no v1 tag exists.
+
+The GitHub Pages build is published at
+`https://erlc-js.github.io/erlcjs/`.
 
 ## Coding Conventions
 

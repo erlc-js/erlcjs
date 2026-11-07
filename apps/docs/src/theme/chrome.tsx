@@ -42,6 +42,17 @@ export function normalizeDocsPath(value: string): string {
   if (!path.startsWith('/')) path = `/docs/${path}`;
   if (path.endsWith('/index.html')) path = path.slice(0, -11);
   if (path.endsWith('/index')) path = path.slice(0, -6);
+
+  // Krate prefixes sidebar URLs with the configured basePath (for example
+  // /erlcjs/docs/... on GitHub Pages). Strip it so active states compare
+  // against the base-path-free docs route.
+  const docsIndex = path.indexOf('/docs/');
+  if (docsIndex > 0) {
+    path = path.slice(docsIndex);
+  } else if (path.endsWith('/docs')) {
+    path = '/docs/';
+  }
+
   path = trimTrailingSlashes(path);
   return `${path}/`;
 }

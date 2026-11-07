@@ -1,0 +1,112 @@
+name: CI
+
+on:
+    pull_request:
+    push:
+        branches:
+            - main
+            - dev
+    workflow_call:
+
+concurrency:
+    group: ci-${{ github.workflow }}-${{ github.ref }}
+    cancel-in-progress: true
+
+permissions:
+    contents: read
+
+jobs:
+    test:
+        name: Test
+        runs-on: ubuntu-latest
+        timeout-minutes: 30
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+
+            - name: Enable pnpm
+              uses: pnpm/action-setup@v4
+              with:
+                  version: 10.27.0
+                  run_install: false
+
+            - name: Set up Node
+              uses: actions/setup-node@v4
+              with:
+                  node-version: '22'
+
+            - name: Install dependencies
+              run: pnpm install --no-frozen-lockfile
+
+            - name: Build packages
+              run: pnpm build
+
+            - name: Generate API reference
+              run: pnpm docs:generate
+
+            - name: Rebuild core with generated API docs
+              run: pnpm --filter @erlcjs/core build
+
+            - name: Lint
+              run: pnpm lint
+
+            - name: Run all tests
+              run: pnpm test
+
+            - name: Verify built MCP CLI
+              run: pnpm --filter @erlcjs/core test:dist
+
+            - name: Type-check docs site
+              run: pnpm --filter apps-docs typecheck
+
+            - name: Build docs site
+              run: pnpm --filter apps-docs build
+
+            - name: Check docs quality
+              run: pnpm --filter apps-docs exec krate check
+
+            - name: Build docs site for GitHub Pages
+              env:
+                  KRATE_BASE_PATH: /erlcjs
+                  KRATE_SITE_URL: https://erlc-js.github.io/erlcjs
+              run: pnpm --filter apps-docs build
+
+            - name: Prefix GitHub Pages URLs
+              run: node apps/docs/scripts/prefix-pages.mjs /erlcjs
+
+            - name: Check GitHub Pages URLs
+              run: node apps/docs/scripts/check-pages-urls.mjs /erlcjs
+
+    compatibility:
+        name: Node 20 compatibility
+        runs-on: ubuntu-latest
+        timeout-minutes: 20
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+
+            - name: Enable pnpm
+              uses: pnpm/action-setup@v4
+              with:
+                  version: 10.27.0
+                  run_install: false
+
+            - name: Set up Node
+              uses: actions/setup-node@v4
+              with:
+                  node-version: "20"
+
+            - name: Install dependencies
+              run: pnpm install --no-frozen-lockfile
+
+            - name: Build packages
+              run: pnpm build
+
+            - name: Generate API reference
+              run: pnpm docs:generate
+
+            - name: Rebuild core with generated API docs
+              run: pnpm --filter @erlcjs/core build
+
+            - name: Run all tests
+              run: pnpm test

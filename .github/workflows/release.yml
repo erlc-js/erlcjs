@@ -1,55 +1,206 @@
 name: Release
 
 on:
-  release:
-    types: [published]
+    push:
+        tags:
+            - 'v*'
 
 permissions:
-  contents: write
+    contents: write
+    pages: write
+    id-token: write
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.event.release.tag_name }}
-  cancel-in-progress: false
+    group: release-${{ github.ref }}
+    cancel-in-progress: false
 
 jobs:
-  publish:
-    name: Publish changed packages
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          ref: ${{ github.event.release.tag_name }}
+    ci:
+        name: Verify
+        uses: ./.github/workflows/ci.yml
 
-      - name: Install pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          version: 10.27.0
-
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 22
-          cache: pnpm
-          registry-url: https://registry.npmjs.org/
-
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
-
-      - name: Build
-        run: pnpm build
-
-      - name: Configure git
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-
-      - name: Publish
-        run: pnpm changeset publish
+    publish:
+        name: Publish packages
+        needs: ci
+        runs-on: ubuntu-latest
+        timeout-minutes: 45
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            npm_config_frozen_lockfile: 'false'
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+              with:
+                  fetch-depth: 0
+                  fetch-tags: true
 
-      - name: Push tags
-        if: always()
-        run: git push origin --tags
+            - name: Enable pnpm
+              uses: pnpm/action-setup@v4
+              with:
+                  version: 10.27.0
+                  run_install: false
+
+            - name: Set up Node
+              uses: actions/setup-node@v4
+              with:
+                  node-version: '22'
+                  registry-url: https://registry.npmjs.org
+
+            - name: Determine release version
+              id: release
+              shell: bash
+              run: |
+                  set -euo pipefail
+                  VERSION="${GITHUB_REF_NAME#v}"
+
+                  if [[ ! "$VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+(-[0-9A-Za-z.-]+)?$ ]]; then
+                    echo "::error::Tag ${GITHUB_REF_NAME} is not a valid semver tag"
+                    exit 1
+                  fi
+
+                  if [[ "$VERSION" == *-* ]]; then
+                    PRERELEASE="${VERSION#*-}"
+                    DIST_TAG="${PRERELEASE%%.*}"
+                    DIST_TAG="${DIST_TAG:-beta}"
+                    IS_PRERELEASE=true
+                  else
+                    DIST_TAG=latest
+                    IS_PRERELEASE=false
+                  fi
+
+                  echo "version=${VERSION}" >> "$GITHUB_OUTPUT"
+                  echo "dist_tag=${DIST_TAG}" >> "$GITHUB_OUTPUT"
+                  echo "prerelease=${IS_PRERELEASE}" >> "$GITHUB_OUTPUT"
+
+            - name: Resolve previous release boundary
+              id: base
+              shell: bash
+              run: |
+                  set -euo pipefail
+                  PREVIOUS="$(git describe --tags --match 'v*' --abbrev=0 "${GITHUB_REF_NAME}^" 2>/dev/null || true)"
+
+                  if [ -z "$PREVIOUS" ]; then
+                    # First release only. v1.4.1 was 60ba5d6, but v1 continued on
+                    # main. acb23dc is the main tip merged into dev before v2, so
+                    # using it excludes all v1 history from the first v2 changelog.
+                    PREVIOUS="acb23dcab78c1e3aca13e282b0571c5c6a0f2d72"
+                    echo "No earlier release tag found; using the pre-v2 history boundary."
+                  fi
+
+                  echo "previous_tag=${PREVIOUS}" >> "$GITHUB_OUTPUT"
+
+            - name: Sync package versions
+              run: node scripts/set-version.mjs "${{ steps.release.outputs.version }}"
+
+            - name: Install dependencies
+              run: pnpm install --no-frozen-lockfile
+
+            - name: Build packages
+              run: pnpm build
+
+            - name: Generate API reference
+              run: pnpm docs:generate
+
+            - name: Rebuild core with generated API docs
+              run: pnpm --filter @erlcjs/core build
+
+            - name: Publish packages to npm
+              shell: bash
+              env:
+                  NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+              run: |
+                  set -euo pipefail
+                  VERSION="${{ steps.release.outputs.version }}"
+                  DIST_TAG="${{ steps.release.outputs.dist_tag }}"
+
+                  for name in core map presets; do
+                    PACKAGE="@erlcjs/${name}"
+
+                    if npm view "${PACKAGE}@${VERSION}" version >/dev/null 2>&1; then
+                      echo "${PACKAGE}@${VERSION} is already published; skipping"
+                      continue
+                    fi
+
+                    echo "Publishing ${PACKAGE}@${VERSION} with dist-tag ${DIST_TAG}"
+                    (cd "packages/${name}" && pnpm publish --access public --no-git-checks --tag "${DIST_TAG}")
+                  done
+
+            - name: Generate release log
+              uses: devs-des1re/releaselog@v1
+              with:
+                  token: ${{ secrets.GITHUB_TOKEN }}
+                  dev-branch: dev
+                  main-branch: main
+                  current-tag: ${{ github.ref_name }}
+                  previous-tag: ${{ steps.base.outputs.previous_tag }}
+                  release-name: erlc.js ${{ github.ref_name }}
+                  release-prerelease: auto
+                  humanize: false
+                  include-merge-commits: false
+                  include-pr-numbers: true
+                  breaking-changes: true
+                  exclude-bots: true
+                  output-file: release-notes.md
+
+            - name: Upload release notes
+              uses: actions/upload-artifact@v4
+              with:
+                  name: release-notes
+                  path: release-notes.md
+
+    pages:
+        name: Deploy docs
+        needs: ci
+        runs-on: ubuntu-latest
+        timeout-minutes: 25
+        permissions:
+            contents: read
+            pages: write
+            id-token: write
+        environment:
+            name: github-pages
+            url: ${{ steps.deployment.outputs.page_url }}
+        concurrency:
+            group: pages
+            cancel-in-progress: false
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+
+            - name: Enable pnpm
+              uses: pnpm/action-setup@v4
+              with:
+                  version: 10.27.0
+                  run_install: false
+
+            - name: Set up Node
+              uses: actions/setup-node@v4
+              with:
+                  node-version: '22'
+
+            - name: Install dependencies
+              run: pnpm install --no-frozen-lockfile
+
+            - name: Configure GitHub Pages
+              id: pages
+              uses: actions/configure-pages@v5
+
+            - name: Build docs for GitHub Pages
+              env:
+                  KRATE_BASE_PATH: ${{ steps.pages.outputs.base_path }}
+                  KRATE_SITE_URL: ${{ steps.pages.outputs.base_url }}
+              run: pnpm docs:build
+
+            - name: Prefix GitHub Pages URLs
+              run: node apps/docs/scripts/prefix-pages.mjs "${{ steps.pages.outputs.base_path }}"
+
+            - name: Check GitHub Pages URLs
+              run: node apps/docs/scripts/check-pages-urls.mjs "${{ steps.pages.outputs.base_path }}"
+
+            - name: Upload Pages artifact
+              uses: actions/upload-pages-artifact@v3
+              with:
+                  path: apps/docs/dist
+
+            - name: Deploy to GitHub Pages
+              id: deployment
+              uses: actions/deploy-pages@v4

@@ -16,9 +16,22 @@ interface SearchEntry {
 
 let indexPromise: Promise<SearchEntry[]> | null = null;
 
+function getBasePath(): string {
+  if (typeof window === 'undefined') return '';
+  const config = (window as Window & { __KRATE_CFG__?: { basePath?: string } }).__KRATE_CFG__;
+  return (config?.basePath || '').replace(/\/+$/, '');
+}
+
+function withBasePath(value: string): string {
+  const base = getBasePath();
+  if (!base || !value.startsWith('/') || value.startsWith('//')) return value;
+  if (value === base || value.startsWith(`${base}/`)) return value;
+  return `${base}${value}`;
+}
+
 function loadIndex(): Promise<SearchEntry[]> {
   if (!indexPromise) {
-    indexPromise = fetch('/docs/data/search-index.json')
+    indexPromise = fetch(withBasePath('/docs/data/search-index.json'))
       .then((response) => (response.ok ? response.json() : []))
       .then((data) => (Array.isArray(data) ? data : []))
       .catch(() => []);
@@ -27,8 +40,11 @@ function loadIndex(): Promise<SearchEntry[]> {
 }
 
 function groupRank(path: string): number {
-  if (path.startsWith('/docs/guides')) return 0;
-  if (path.startsWith('/docs/api')) return 2;
+  const base = getBasePath();
+  const normalized = base && path.startsWith(`${base}/`) ? path.slice(base.length) : path;
+
+  if (normalized.startsWith('/docs/guides')) return 0;
+  if (normalized.startsWith('/docs/api')) return 2;
   return 1;
 }
 
@@ -56,7 +72,7 @@ function searchIndex(entries: SearchEntry[], query: string, limit: number): Hit[
     })
     .slice(0, limit)
     .map(({ entry }) => ({
-      href: entry.path || '/',
+      href: withBasePath(entry.path || '/'),
       title: entry.title || 'Untitled',
       body: (entry.content || '').slice(0, 150),
     }));

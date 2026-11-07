@@ -10,6 +10,7 @@ dashboards, and live maps without writing HTTP glue.
 
 [![License](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](LICENSE)
 [![npm](https://img.shields.io/npm/v/@erlcjs/core.svg)](https://www.npmjs.com/package/@erlcjs/core)
+[![CI](https://github.com/erlc-js/erlcjs/actions/workflows/ci.yml/badge.svg)](https://github.com/erlc-js/erlcjs/actions/workflows/ci.yml)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
 
 </div>

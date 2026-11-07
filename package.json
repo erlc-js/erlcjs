@@ -15,7 +15,7 @@
     "format": "prettier --write \"packages/*/src/**/*.ts\"",
     "extract": "pnpm turbo run extract --filter=!apps-docs",
     "docs:generate": "pnpm extract && node apps/docs/scripts/generate-api.mjs",
-    "docs:build": "pnpm build && pnpm docs:generate && pnpm --filter apps-docs build",
+    "docs:build": "pnpm build && pnpm docs:generate && pnpm --filter @erlcjs/core build && pnpm --filter apps-docs build",
     "docs:dev": "node apps/docs/scripts/dev.mjs",
     "test": "pnpm turbo run test",
     "test:watch": "vitest",

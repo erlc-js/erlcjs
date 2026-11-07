@@ -13,3 +13,4 @@ zig-pkg/
 .zig-global-cache/
 .env
 packages/map/map.png
+release-notes.md
