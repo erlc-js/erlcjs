@@ -297,7 +297,7 @@ export class Server {
      * Returns a boolean whether the server is currently full.
      */
     public get isFull(): boolean {
-        return this.info?.currentPlayers === this.info?.maxPlayers;
+        return this.info ? this.info.currentPlayers === this.info.maxPlayers : false;
     }
 
     /**

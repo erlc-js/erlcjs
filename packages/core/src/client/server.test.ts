@@ -63,4 +63,12 @@ describe('Server polling', () => {
         expect(online).toBe(1);
         client.destroy();
     });
+
+    it('is not full before server information has loaded', () => {
+        const client = new Client({ servers: ['PRC-111111111-key'] });
+        const server = client.servers.get('111111111')!;
+
+        expect(server.isFull).toBe(false);
+        client.destroy();
+    });
 });
