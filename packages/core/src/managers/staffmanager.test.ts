@@ -59,4 +59,16 @@ describe('StaffManager', () => {
         expect(staff.player).toBeUndefined();
         server.client.destroy();
     });
+
+    it('treats missing role lists as empty', () => {
+        const server = makeServer();
+        server.staff.updateCache({ Admins: { '1': 'Alex' }, Mods: {}, Helpers: {} });
+        expect(server.staff.admins.size).toBe(1);
+
+        expect(() => server.staff.updateCache({} as any)).not.toThrow();
+        expect(server.staff.admins.size).toBe(0);
+        expect(server.staff.mods.size).toBe(0);
+        expect(server.staff.helpers.size).toBe(0);
+        server.client.destroy();
+    });
 });

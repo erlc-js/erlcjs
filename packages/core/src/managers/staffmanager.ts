@@ -52,9 +52,9 @@ export class StaffManager {
      * @returns The updated staff cache Collection.
      */
     public updateCache(rawStaff: RawStaffData) {
-        this._updateCache(rawStaff.Admins, 'Admin');
-        this._updateCache(rawStaff.Mods, 'Mod');
-        this._updateCache(rawStaff.Helpers, 'Helper');
+        this._updateCache(rawStaff.Admins ?? {}, 'Admin');
+        this._updateCache(rawStaff.Mods ?? {}, 'Mod');
+        this._updateCache(rawStaff.Helpers ?? {}, 'Helper');
 
         return new Collection<string, Collection<number, Staff>>()
             .set('Admins', this.admins)
