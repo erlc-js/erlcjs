@@ -216,4 +216,25 @@ describe('Client', () => {
         ).toThrow(CustomCommandError);
         client.destroy();
     });
+
+    it('unregisters a command and all of its aliases', () => {
+        const client = new Client({ servers: ['PRC-111111111-key'] });
+        const server = client.servers.get('111111111')!;
+        const ran: string[] = [];
+
+        client.registerCommand({
+            name: 'main',
+            aliases: ['alias', 'other'],
+            execute: () => { ran.push('main'); },
+        });
+        client.unregisterCommand(';MAIN');
+
+        const player = new Player(server, rawPlayer('Alex', 1));
+        client.emit(ERLCEvents.customCommand, player, 'main', []);
+        client.emit(ERLCEvents.customCommand, player, 'alias', []);
+        client.emit(ERLCEvents.customCommand, player, 'other', []);
+
+        expect(ran).toEqual([]);
+        client.destroy();
+    });
 });

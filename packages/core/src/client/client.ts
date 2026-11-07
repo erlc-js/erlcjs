@@ -242,7 +242,16 @@ export class Client extends EventEmitter<ClientEvents> {
      * @param commandName - The command name to unregister.
      */
     public unregisterCommand(commandName: string) {
-        this.inGameCommands.delete(commandName.toLowerCase());
+        const name = commandName.startsWith(';') ? commandName.slice(1) : commandName;
+        const key = name.toLowerCase();
+        const command = this.inGameCommands.get(key);
+        if (!command) return;
+
+        this.inGameCommands.delete(key);
+        for (const alias of command.aliases ?? []) {
+            const aliasName = alias.startsWith(';') ? alias.slice(1) : alias;
+            this.inGameCommands.delete(aliasName.toLowerCase());
+        }
     }
 
     private handleCustomCommands() {
