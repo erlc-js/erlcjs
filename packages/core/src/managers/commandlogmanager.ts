@@ -10,7 +10,7 @@ import { Collection } from '../util/collection.js';
  */
 export class CommandLogManager {
     /**
-     * Collection cache of logged commands, keyed by a composite `Player:Timestamp` key.
+     * Collection cache of logged commands, keyed by a composite `Player:Timestamp:Command` key.
      */
     public cache = new Collection<string, CommandLog>();
 
@@ -44,7 +44,7 @@ export class CommandLogManager {
      */
     public updateCache(rawCommands: RawCommandLog[]) {
         for (const rawData of rawCommands) {
-            const key = `${rawData.Player}:${rawData.Timestamp}`;
+            const key = `${rawData.Player}:${rawData.Timestamp}:${rawData.Command}`;
             const cachedPlayer = this.cache.get(key);
 
             if (!cachedPlayer) {
