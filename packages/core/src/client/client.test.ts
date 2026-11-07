@@ -2,7 +2,7 @@ import { afterEach, describe, expect, it } from 'vitest';
 import { Client } from './client.js';
 import { ERLCEvents } from './events.js';
 import { Player } from '../structures/player.js';
-import { DuplicateServerError } from '../errors/index.js';
+import { DuplicateServerError, CustomCommandError } from '../errors/index.js';
 
 const originalFetch = globalThis.fetch;
 
@@ -177,6 +177,34 @@ describe('Client', () => {
         const player = new Player(client.servers.get('111111111')!, rawPlayer('Alex', 1));
         expect(() => client.emit(ERLCEvents.customCommand, player, 'fail', [])).not.toThrow();
         await new Promise((resolve) => setTimeout(resolve, 0));
+        client.destroy();
+    });
+
+    it('does not register aliases when a command is invalid', () => {
+        const client = new Client({ servers: ['PRC-111111111-key'] });
+
+        expect(() =>
+            client.registerCommand({
+                name: 'invalid',
+                aliases: ['invalid-alias'],
+                // @ts-expect-error deliberately invalid command
+                execute: undefined,
+            }),
+        ).toThrow(CustomCommandError);
+        expect(() =>
+            client.registerCommand({ name: 'invalid', aliases: ['invalid-alias'], execute: () => {} }),
+        ).not.toThrow();
+        client.destroy();
+    });
+
+    it('does not partially register a command whose alias is a duplicate', () => {
+        const client = new Client({ servers: ['PRC-111111111-key'] });
+        client.registerCommand({ name: 'existing', execute: () => {} });
+
+        expect(() =>
+            client.registerCommand({ name: 'fresh', aliases: ['existing'], execute: () => {} }),
+        ).toThrow(CustomCommandError);
+        expect(() => client.registerCommand({ name: 'fresh', execute: () => {} })).not.toThrow();
         client.destroy();
     });
 });

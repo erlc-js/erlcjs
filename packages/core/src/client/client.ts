@@ -209,17 +209,27 @@ export class Client extends EventEmitter<ClientEvents> {
         const command = { ...cmd };
         if (command.name.startsWith(';')) command.name = command.name.slice(1);
         command.name = command.name.toLowerCase();
-        if (this.inGameCommands.has(command.name)) {
-            throw new CustomCommandError(`Command with name "${command.name}" is already registered.`);
-        }
-        if (command.aliases?.length && command.aliases.length > 0) command.aliases.forEach((alias) => {
-            const aliasCmd = { ...command };
-            aliasCmd.name = alias;
-            aliasCmd.aliases = undefined;
-            this.registerCommand(aliasCmd);
-        });
         if (!command.name || !command.execute) {
             throw new CustomCommandError('Invalid command: must have a name and an execute function.');
+        }
+
+        const aliases = (command.aliases ?? []).map((alias) => {
+            const name = alias.startsWith(';') ? alias.slice(1) : alias;
+            return name.toLowerCase();
+        });
+        const names = [command.name, ...aliases];
+
+        if (new Set(names).size !== names.length) {
+            throw new CustomCommandError(`Command name and aliases must be unique.`);
+        }
+        for (const name of names) {
+            if (this.inGameCommands.has(name)) {
+                throw new CustomCommandError(`Command with name "${name}" is already registered.`);
+            }
+        }
+
+        for (const alias of aliases) {
+            this.inGameCommands.set(alias, { ...command, name: alias, aliases: undefined });
         }
         this.inGameCommands.set(command.name, command);
     }
