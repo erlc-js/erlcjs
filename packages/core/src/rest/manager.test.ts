@@ -140,6 +140,23 @@ describe('RestManager', () => {
         expect(rm.getRateLimits()).toEqual({});
     });
 
+    it('ignores malformed rate-limit headers', async () => {
+        globalThis.fetch = (async () => resp(200, {
+            'x-ratelimit-bucket': 'global',
+            'x-ratelimit-limit': 'not-a-number',
+            'x-ratelimit-remaining': 'not-a-number',
+            'x-ratelimit-reset': 'not-a-number',
+        }, { ok: true })) as any;
+
+        const rm = new RestManager();
+        await expect(rm.request('GET', '/bad-headers')).resolves.toEqual({ ok: true });
+
+        const limits = rm.getRateLimits();
+        expect(limits['global']?.limit).toBe(0);
+        expect(limits['global']?.remaining).toBe(0);
+        expect(limits['global']?.reset).toBe(0);
+    });
+
     it('shares the budget across servers using the same bucket', async () => {
         let inflight = 0;
         let maxConcurrent = 0;

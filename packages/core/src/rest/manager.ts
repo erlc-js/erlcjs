@@ -190,7 +190,13 @@ export class RestManager {
         const resetHeader = headers.get('x-ratelimit-reset');
 
         if (resetHeader) {
-            const resetTime = parseInt(resetHeader, 10) * 1000;
+            const resetSeconds = parseInt(resetHeader, 10);
+
+            if (!Number.isFinite(limit) || !Number.isFinite(remaining) || !Number.isFinite(resetSeconds)) {
+                return;
+            }
+
+            const resetTime = resetSeconds * 1000;
             const routeKey = this.getRouteKey(endpoint, serverKey);
 
             this.routeToBucket.set(routeKey, bucketId);
