@@ -118,12 +118,11 @@ export class Server {
      */
     public async fetch(): Promise<RawServerData> {
         const rawServerData: RawServerData = await this.rest.request('GET', FULL_POLL_QUERY);
-        if (this.offline) {
-            this.offline = false;
-            this.client.emit(ERLCEvents.serverOnline, this);
-        }
+        const wasOffline = this.offline;
+        if (wasOffline) this.offline = false;
         this.applyPollData(rawServerData);
         this.consecutiveFailures = 0;
+        if (wasOffline) this.client.emit(ERLCEvents.serverOnline, this);
         return rawServerData;
     }
 
@@ -174,23 +173,24 @@ export class Server {
         try {
             const rawServerData: RawServerData = await this.rest.request('GET', FULL_POLL_QUERY);
 
-            if (this.offline) {
-                this.offline = false;
-                this.client.emit(ERLCEvents.serverOnline, this);
-            }
+            const wasOffline = this.offline;
+            if (wasOffline) this.offline = false;
 
             this.applyPollData(rawServerData);
             this.consecutiveFailures = 0;
             success = true;
+
+            if (wasOffline) this.client.emit(ERLCEvents.serverOnline, this);
         } catch (err) {
             this.consecutiveFailures++;
 
             if (err instanceof ServerOfflineError || this.consecutiveFailures >= OFFLINE_FAILURE_THRESHOLD) {
-                if (!this.offline) {
-                    this.offline = true;
+                const wasOffline = this.offline;
+                this.offline = true;
+                this.clearCaches();
+                if (!wasOffline) {
                     this.client.emit(ERLCEvents.serverOffline, this);
                 }
-                this.clearCaches();
                 if (!(err instanceof ServerOfflineError)) {
                     this.client._emitError(err);
                 }

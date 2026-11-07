@@ -64,14 +64,19 @@ describe('Server polling', () => {
         const server = client.servers.get('111111111')!;
         server.offline = true;
 
-        vi.spyOn(server.rest, 'request').mockResolvedValue(rawServer());
+        vi.spyOn(server.rest, 'request').mockResolvedValue({ ...rawServer(), Players: [rawPlayer('Alex', 1)] });
         let online = 0;
-        client.on(ERLCEvents.serverOnline, () => online++);
+        const counts: number[] = [];
+        client.on(ERLCEvents.serverOnline, () => {
+            online++;
+            counts.push(server.players.cache.size);
+        });
 
         await server.fetch();
 
         expect(server.offline).toBe(false);
         expect(online).toBe(1);
+        expect(counts).toEqual([1]);
         client.destroy();
     });
 
