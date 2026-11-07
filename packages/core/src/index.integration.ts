@@ -15,7 +15,7 @@ const client = new Client({
 
 const server = Array.from(client.servers.values())[0]!;
 
-console.log(server.authorizationLink);
+if (process.env.APP_ID) console.log(server.authorizationLink);
 
 client.on(ERLCEvents.vehicleAdd, (vehicle) => {
     if (vehicle.name === Vehicles.CHEVLON_COMMUTER_VAN_2006) {
