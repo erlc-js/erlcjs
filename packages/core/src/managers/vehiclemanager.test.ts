@@ -34,7 +34,7 @@ describe('VehicleManager', () => {
         const vehicle = server.vehicles.cache.get('ABC123');
         expect(added).toEqual(['ABC123']);
         expect(vehicle?.ownerId).toBe(7);
-        expect(vehicle?.owner.username).toBe('Alex');
+        expect(vehicle?.owner?.username).toBe('Alex');
         expect(vehicle?.server).toBe(server);
 
         client.destroy();

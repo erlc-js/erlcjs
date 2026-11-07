@@ -9,9 +9,9 @@ import { Player } from './player.js';
  */
 export class EmergencyCall extends Base {
     /**
-     * The Player instance representing the caller.
+     * The Player instance representing the caller, if they are still cached.
      */
-    caller!: Player;
+    caller?: Player;
     /**
      * The UserId of the player who made the emergency call.
      */
@@ -66,7 +66,7 @@ export class EmergencyCall extends Base {
      */
     public _patch(data: RawEmergencyCall): this {
         this.callerId = data.Caller;
-        this.caller = this.server.players.cache.get(this.callerId)!;
+        this.caller = this.server.players.cache.get(this.callerId);
         this.team = data.Team;
         this.playerIds = data.Players;
         this.players = [];

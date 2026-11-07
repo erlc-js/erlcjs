@@ -9,9 +9,9 @@ import { Player } from './player.js';
  */
 export class CommandLog extends Base {
     /**
-     * The player instance representing who ran the command.
+     * The player instance representing who ran the command, if they are still cached.
      */
-    player!: Player;
+    player?: Player;
     /**
      * The UserId of the player who ran the command.
      */
@@ -48,7 +48,7 @@ export class CommandLog extends Base {
         const splitPlayer = data.Player.split(':');
         this.playerId = Number(splitPlayer[1]);
         this.playerUsername = splitPlayer[0]!;
-        this.player = this.server.players.cache.get(this.playerId)!;
+        this.player = this.server.players.cache.get(this.playerId);
         this.command = data.Command;
         this.timestamp = data.Timestamp;
         return this;

@@ -9,11 +9,11 @@ import type { Allowlist } from "./types";
  * @param timespan - The timespan in which the number of kills must be reached in seconds.
  * @example
  * ```typescript
- * client.on(ERLCEvents.Kill, RDM((log) => log.killer.kick()));
+ * client.on(ERLCEvents.Kill, RDM((log) => log.killer?.kick()));
  * ```
  * @example
  * ```typescript
- * client.on(ERLCEvents.Kill, RDM((log) => log.killer.kick(), [ PlayerPermission.Administrator, PlayerPermission.Owner ], 5, 30));
+ * client.on(ERLCEvents.Kill, RDM((log) => log.killer?.kick(), [ PlayerPermission.Administrator, PlayerPermission.Owner ], 5, 30));
  * ```
  * @returns - Callback function to pass into client event.
  * @public

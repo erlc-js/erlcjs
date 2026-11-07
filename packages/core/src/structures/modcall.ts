@@ -9,9 +9,9 @@ import { Player } from './player.js';
  */
 export class ModCall extends Base {
     /**
-     * The Player instance representing the caller.
+     * The Player instance representing the caller, if they are still cached.
      */
-    caller!: Player;
+    caller?: Player;
     /**
      * The UserId of the player who made the moderator call.
      */
@@ -56,12 +56,12 @@ export class ModCall extends Base {
         const splitCaller = data.Caller.split(':');
         this.callerId = Number(splitCaller[1]);
         this.callerUsername = splitCaller[0]!;
-        this.caller = this.server.players.cache.get(this.callerId)!;
+        this.caller = this.server.players.cache.get(this.callerId);
         if (data.Moderator) {
             const splitModerator = data.Moderator.split(':');
             this.moderatorId = Number(splitModerator[1]);
             this.moderatorUsername = splitModerator[0]!;
-            this.moderator = this.server.players.cache.get(this.moderatorId)!;
+            this.moderator = this.server.players.cache.get(this.moderatorId);
         }
         this.timestamp = data.Timestamp;
         return this;

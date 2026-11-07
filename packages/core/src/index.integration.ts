@@ -19,14 +19,14 @@ console.log(server.authorizationLink);
 
 client.on(ERLCEvents.vehicleAdd, (vehicle) => {
     if (vehicle.name === Vehicles.CHEVLON_COMMUTER_VAN_2006) {
-        vehicle.owner.message('Restricted vehicle. Change.');
+        vehicle.owner?.message('Restricted vehicle. Change.');
         setTimeout(() => {
             if (
                 server.vehicles.cache.get(vehicle.plate)?.ownerId !== vehicle.ownerId &&
                 server.vehicles.cache.get(vehicle.plate)?.name !== vehicle.name
             )
                 return;
-            vehicle.owner.message('Change the vehicle in 10 seconds or you will be kicked.');
+            vehicle.owner?.message('Change the vehicle in 10 seconds or you will be kicked.');
         }, 10000);
     }
 });
