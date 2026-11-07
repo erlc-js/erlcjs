@@ -207,4 +207,13 @@ describe('Client', () => {
         expect(() => client.registerCommand({ name: 'fresh', execute: () => {} })).not.toThrow();
         client.destroy();
     });
+
+    it('rejects empty aliases', () => {
+        const client = new Client({ servers: ['PRC-111111111-key'] });
+
+        expect(() =>
+            client.registerCommand({ name: 'empty', aliases: [';'], execute: () => {} }),
+        ).toThrow(CustomCommandError);
+        client.destroy();
+    });
 });

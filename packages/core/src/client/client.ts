@@ -219,6 +219,9 @@ export class Client extends EventEmitter<ClientEvents> {
         });
         const names = [command.name, ...aliases];
 
+        if (aliases.some((alias) => alias.length === 0)) {
+            throw new CustomCommandError('Command aliases cannot be empty.');
+        }
         if (new Set(names).size !== names.length) {
             throw new CustomCommandError(`Command name and aliases must be unique.`);
         }
