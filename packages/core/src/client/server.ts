@@ -158,7 +158,6 @@ export class Server {
             this.client.emit(ERLCEvents.serverCreate, this.info);
         }
 
-        this.client.emit(ERLCEvents.poll, this);
         if (rawServerData.Players) this.players.updateCache(rawServerData.Players);
         if (rawServerData.Vehicles) this.vehicles.updateCache(rawServerData.Vehicles);
         if (rawServerData.CommandLogs) this.commandLogs.updateCache(rawServerData.CommandLogs);
@@ -166,6 +165,7 @@ export class Server {
         if (rawServerData.KillLogs) this.killLogs.updateCache(rawServerData.KillLogs);
         if (rawServerData.ModCalls) this.modCalls.updateCache(rawServerData.ModCalls);
         if (rawServerData.Staff) this.staff.updateCache(rawServerData.Staff);
+        this.client.emit(ERLCEvents.poll, this);
     }
 
     private async poll() {

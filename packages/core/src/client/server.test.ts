@@ -26,6 +26,17 @@ function rawServer() {
     };
 }
 
+function rawPlayer(name: string, id: number): any {
+    return {
+        Player: `${name}:${id}`,
+        Permission: 'Normal',
+        Team: 'Civilian',
+        Callsign: '',
+        Location: { LocationX: 0, LocationZ: 0, PostalCode: '0', StreetName: '', BuildingNumber: '' },
+        WantedStars: 0,
+    };
+}
+
 describe('Server polling', () => {
     it('does not start overlapping loops when restarted during the first poll', async () => {
         vi.useFakeTimers();
@@ -69,6 +80,23 @@ describe('Server polling', () => {
         const server = client.servers.get('111111111')!;
 
         expect(server.isFull).toBe(false);
+        client.destroy();
+    });
+
+    it('emits poll after the caches have been updated', async () => {
+        const client = new Client({ servers: ['PRC-111111111-key'] });
+        const server = client.servers.get('111111111')!;
+        vi.spyOn(server.rest, 'request').mockResolvedValue({
+            ...rawServer(),
+            Players: [rawPlayer('Alex', 1)],
+        });
+
+        const playerCounts: number[] = [];
+        client.on(ERLCEvents.poll, () => playerCounts.push(server.players.cache.size));
+
+        await server.fetch();
+
+        expect(playerCounts).toEqual([1]);
         client.destroy();
     });
 });
