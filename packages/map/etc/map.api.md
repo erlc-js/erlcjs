@@ -32,7 +32,11 @@ export enum MapType {
     fall = "fall_blank.png",
     fall_postals = "fall_postals.png",
     snow = "snow_blank.png",
-    snow_postals = "snow_postals.png"
+    snow_postals = "snow_postals.png",
+    spring = "spring_blank.png",
+    spring_postals = "spring_postals.png",
+    summer = "summer_blank.png",
+    summer_postals = "summer_postals.png"
 }
 
 // (No @packageDocumentation comment for this package)

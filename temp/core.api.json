@@ -1,7 +1,7 @@
 {
   "metadata": {
     "toolPackage": "@microsoft/api-extractor",
-    "toolVersion": "7.58.9",
+    "toolVersion": "7.60.1",
     "schemaVersion": 1011,
     "oldestForwardsCompatibleVersion": 1001,
     "tsdocConfig": {
@@ -305,7 +305,7 @@
         {
           "kind": "Class",
           "canonicalReference": "@erlcjs/core!Client:class",
-          "docComment": "/**\n * The main client for interacting with the ER:LC API and gateway. Manages multiple ER:LC game servers, each with its own caches and polling loop.\n *\n * @public\n */\n",
+          "docComment": "/**\n * The main client for interacting with the ER:LC API and gateway.\n * Manages multiple ER:LC game servers, each with its own caches and polling loop.\n *\n * @public\n */\n",
           "excerptTokens": [
             {
               "kind": "Content",
@@ -376,7 +376,7 @@
             {
               "kind": "Method",
               "canonicalReference": "@erlcjs/core!Client#addServer:member(1)",
-              "docComment": "/**\n * Adds a server to the client at runtime, returning the created server. Polling is started automatically if the client options enable auto-start polling.\n *\n * @param key - The ER:LC Server API key.\n *\n * @returns The created Server.\n */\n",
+              "docComment": "/**\n * Adds a server to the client at runtime, returning the created server.\n * Polling is started automatically if the client options enable auto-start polling.\n *\n * @param key - The ER:LC Server API key.\n *\n * @returns The created Server.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -516,7 +516,7 @@
             {
               "kind": "Method",
               "canonicalReference": "@erlcjs/core!Client#onceReady:member(1)",
-              "docComment": "/**\n * Resolves once the client is ready (after every server's first poll), or immediately if it is already ready.\n *\n * @returns This client.\n */\n",
+              "docComment": "/**\n * Resolves once the client is ready (after every server's first poll), or immediately\n * if it is already ready.\n *\n * @returns This client.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -2255,7 +2255,7 @@
             {
               "kind": "PropertySignature",
               "canonicalReference": "@erlcjs/core!ClientOptions#servers:member",
-              "docComment": "/**\n * The ER:LC Server API keys the client should manage. The server ID of each server is parsed from its key.\n */\n",
+              "docComment": "/**\n * The ER:LC Server API keys the client should manage.\n * The server ID of each server is parsed from its key.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -2290,7 +2290,7 @@
                 },
                 {
                   "kind": "Content",
-                  "text": "{\n        enabled: boolean;\n        port: number;\n        path?: string;\n    }"
+                  "text": "{\n        enabled: boolean;\n        port: number;\n        path?: string;\n        timestampTolerance?: number;\n    }"
                 },
                 {
                   "kind": "Content",
@@ -2312,7 +2312,7 @@
         {
           "kind": "Class",
           "canonicalReference": "@erlcjs/core!Collection:class",
-          "docComment": "/**\n * A collection class that extends the built-in Map class, providing additional utility methods for managing key-value pairs.  @template K - The type of keys in the collection.  @template V - The type of values in the collection.\n *\n * @public\n */\n",
+          "docComment": "/**\n * A collection class that extends the built-in Map class, providing additional utility methods for managing key-value pairs.\n * @template K - The type of keys in the collection.\n * @template V - The type of values in the collection.\n *\n * @public\n */\n",
           "excerptTokens": [
             {
               "kind": "Content",
@@ -2881,11 +2881,11 @@
             {
               "kind": "Property",
               "canonicalReference": "@erlcjs/core!CommandLog#player:member",
-              "docComment": "/**\n * The player instance representing who ran the command.\n */\n",
+              "docComment": "/**\n * The player instance representing who ran the command, if they are still cached.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "player: "
+                  "text": "player?: "
                 },
                 {
                   "kind": "Reference",
@@ -2898,7 +2898,7 @@
                 }
               ],
               "isReadonly": false,
-              "isOptional": false,
+              "isOptional": true,
               "releaseTag": "Public",
               "name": "player",
               "propertyTypeTokenRange": {
@@ -3150,7 +3150,7 @@
             {
               "kind": "Method",
               "canonicalReference": "@erlcjs/core!CommandLogManager#fetchAll:member(1)",
-              "docComment": "/**\n * Fetches all command logs from the game server. Updates the command log cache.\n *\n * @returns A promise resolving to a Collection of CommandLogs.\n */\n",
+              "docComment": "/**\n * Fetches all command logs from the game server.\n * Updates the command log cache.\n *\n * @returns A promise resolving to a Collection of CommandLogs.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -3204,7 +3204,7 @@
             {
               "kind": "Method",
               "canonicalReference": "@erlcjs/core!CommandLogManager#updateCache:member(1)",
-              "docComment": "/**\n * Re-synchronizes the cache with the raw command logs. Emits command event for new logs.\n *\n * @param rawCommands - Raw command logs payload.\n *\n * @returns The updated CommandLog cache Collection.\n */\n",
+              "docComment": "/**\n * Re-synchronizes the cache with the raw command logs.\n * Emits command event for new logs.\n *\n * @param rawCommands - Raw command logs payload.\n *\n * @returns The updated CommandLog cache Collection.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -3379,7 +3379,7 @@
         {
           "kind": "Function",
           "canonicalReference": "@erlcjs/core!convertToPascalCase:function(1)",
-          "docComment": "/**\n * Recursively converts all object keys in a JSON payload from camelCase to PascalCase.\n *\n * @param obj - The raw JSON payload or array.\n *\n * @returns The converted object with PascalCase keys.\n *\n * @public\n */\n",
+          "docComment": "",
           "excerptTokens": [
             {
               "kind": "Content",
@@ -3692,11 +3692,11 @@
             {
               "kind": "Property",
               "canonicalReference": "@erlcjs/core!EmergencyCall#caller:member",
-              "docComment": "/**\n * The Player instance representing the caller.\n */\n",
+              "docComment": "/**\n * The Player instance representing the caller, if they are still cached.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "caller: "
+                  "text": "caller?: "
                 },
                 {
                   "kind": "Reference",
@@ -3709,7 +3709,7 @@
                 }
               ],
               "isReadonly": false,
-              "isOptional": false,
+              "isOptional": true,
               "releaseTag": "Public",
               "name": "caller",
               "propertyTypeTokenRange": {
@@ -4086,7 +4086,7 @@
             {
               "kind": "Method",
               "canonicalReference": "@erlcjs/core!EmergencyCallManager#addCall:member(1)",
-              "docComment": "/**\n * Adds a call to the emergency call cache with data from the webhook. Emits emergencyCallAdd events.\n *\n * @param callData - The raw emergency call payload from the webhook.\n */\n",
+              "docComment": "/**\n * Adds a call to the emergency call cache with data from the webhook.\n * Emits emergencyCallAdd events.\n *\n * @param callData - The raw emergency call payload from the webhook.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -4179,7 +4179,7 @@
             {
               "kind": "Method",
               "canonicalReference": "@erlcjs/core!EmergencyCallManager#fetchAll:member(1)",
-              "docComment": "/**\n * Fetches all active emergency calls from the game server. Updates the emergency call cache.\n *\n * @returns A promise resolving to a Collection of active EmergencyCalls.\n */\n",
+              "docComment": "/**\n * Fetches all active emergency calls from the game server.\n * Updates the emergency call cache.\n *\n * @returns A promise resolving to a Collection of active EmergencyCalls.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -4233,7 +4233,7 @@
             {
               "kind": "Method",
               "canonicalReference": "@erlcjs/core!EmergencyCallManager#removeCall:member(1)",
-              "docComment": "/**\n * Removes a call from the emergency call cache with data from the webhook. Emits emergencyCallRemove events.\n *\n * @param callData - The raw emergency call payload from the webhook.\n */\n",
+              "docComment": "/**\n * Removes a call from the emergency call cache with data from the webhook.\n * Emits emergencyCallRemove events.\n *\n * @param callData - The raw emergency call payload from the webhook.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -4282,7 +4282,7 @@
             {
               "kind": "Method",
               "canonicalReference": "@erlcjs/core!EmergencyCallManager#updateCache:member(1)",
-              "docComment": "/**\n * Re-synchronizes the cache with the raw emergency calls payload. Emits emergencyCallAdd, emergencyCallRemove, and emergencyCallUpdate events.\n *\n * @param rawCalls - Raw active emergency calls payload.\n *\n * @returns The updated EmergencyCall cache Collection.\n */\n",
+              "docComment": "/**\n * Re-synchronizes the cache with the raw emergency calls payload.\n * Emits emergencyCallAdd, emergencyCallRemove, and emergencyCallUpdate events.\n *\n * @param rawCalls - Raw active emergency calls payload.\n *\n * @returns The updated EmergencyCall cache Collection.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -5023,7 +5023,16 @@
                 },
                 {
                   "kind": "Content",
-                  "text": ";\n        args: string[];\n    }) => void"
+                  "text": ";\n        args: string[];\n    }) => void | "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Promise",
+                  "canonicalReference": "!Promise:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<void>"
                 },
                 {
                   "kind": "Content",
@@ -5036,7 +5045,7 @@
               "name": "execute",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
-                "endIndex": 4
+                "endIndex": 6
               }
             },
             {
@@ -5433,11 +5442,11 @@
             {
               "kind": "Property",
               "canonicalReference": "@erlcjs/core!KillLog#killed:member",
-              "docComment": "/**\n * The Player instance representing the player who was killed.\n */\n",
+              "docComment": "/**\n * The Player instance representing the player who was killed, if they are still cached.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "killed: "
+                  "text": "killed?: "
                 },
                 {
                   "kind": "Reference",
@@ -5450,7 +5459,7 @@
                 }
               ],
               "isReadonly": false,
-              "isOptional": false,
+              "isOptional": true,
               "releaseTag": "Public",
               "name": "killed",
               "propertyTypeTokenRange": {
@@ -5524,11 +5533,11 @@
             {
               "kind": "Property",
               "canonicalReference": "@erlcjs/core!KillLog#killer:member",
-              "docComment": "/**\n * The Player instance representing the player who did the killing.\n */\n",
+              "docComment": "/**\n * The Player instance representing the player who did the killing, if they are still cached.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "killer: "
+                  "text": "killer?: "
                 },
                 {
                   "kind": "Reference",
@@ -5541,7 +5550,7 @@
                 }
               ],
               "isReadonly": false,
-              "isOptional": false,
+              "isOptional": true,
               "releaseTag": "Public",
               "name": "killer",
               "propertyTypeTokenRange": {
@@ -5793,7 +5802,7 @@
             {
               "kind": "Method",
               "canonicalReference": "@erlcjs/core!KillLogManager#fetchAll:member(1)",
-              "docComment": "/**\n * Fetches all kill logs from the game server. Updates the kill log cache.\n *\n * @returns A promise resolving to a Collection of KillLogs.\n */\n",
+              "docComment": "/**\n * Fetches all kill logs from the game server.\n * Updates the kill log cache.\n *\n * @returns A promise resolving to a Collection of KillLogs.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -5847,7 +5856,7 @@
             {
               "kind": "Method",
               "canonicalReference": "@erlcjs/core!KillLogManager#updateCache:member(1)",
-              "docComment": "/**\n * Re-synchronizes the cache with the raw kill logs. Emits a kill event for new logs.\n *\n * @param rawCommands - Raw kill logs payload.\n *\n * @returns The updated KillLog cache Collection.\n */\n",
+              "docComment": "/**\n * Re-synchronizes the cache with the raw kill logs.\n * Emits a kill event for new logs.\n *\n * @param rawCommands - Raw kill logs payload.\n *\n * @returns The updated KillLog cache Collection.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -6041,11 +6050,11 @@
             {
               "kind": "Property",
               "canonicalReference": "@erlcjs/core!ModCall#caller:member",
-              "docComment": "/**\n * The Player instance representing the caller.\n */\n",
+              "docComment": "/**\n * The Player instance representing the caller, if they are still cached.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "caller: "
+                  "text": "caller?: "
                 },
                 {
                   "kind": "Reference",
@@ -6058,7 +6067,7 @@
                 }
               ],
               "isReadonly": false,
-              "isOptional": false,
+              "isOptional": true,
               "releaseTag": "Public",
               "name": "caller",
               "propertyTypeTokenRange": {
@@ -6401,7 +6410,7 @@
             {
               "kind": "Method",
               "canonicalReference": "@erlcjs/core!ModCallManager#fetchAll:member(1)",
-              "docComment": "/**\n * Fetches all moderator calls from the game server. Updates the moderator call cache.\n *\n * @returns A promise resolving to a Collection of ModCalls.\n */\n",
+              "docComment": "/**\n * Fetches all moderator calls from the game server.\n * Updates the moderator call cache.\n *\n * @returns A promise resolving to a Collection of ModCalls.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -6455,7 +6464,7 @@
             {
               "kind": "Method",
               "canonicalReference": "@erlcjs/core!ModCallManager#updateCache:member(1)",
-              "docComment": "/**\n * Re-synchronizes the cache with the raw moderator calls. Emits a modCall event for new calls.\n *\n * @param rawModCalls - Raw moderator calls payload.\n *\n * @returns The updated ModCall cache Collection.\n */\n",
+              "docComment": "/**\n * Re-synchronizes the cache with the raw moderator calls.\n * Emits a modCall event for new calls.\n *\n * @param rawModCalls - Raw moderator calls payload.\n *\n * @returns The updated ModCall cache Collection.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -6832,7 +6841,7 @@
             {
               "kind": "Property",
               "canonicalReference": "@erlcjs/core!Player#commandLogs:member",
-              "docComment": "/**\n * Gets all command logs associated with this player.\n *\n * @remarks\n *\n * This is a convenience getter that filters the command log cache for logs associated with this player. It does not fetch new data from the server, so it may not be up-to-date.\n *\n * @returns A collection of command logs associated with this player.\n */\n",
+              "docComment": "/**\n * Gets all command logs associated with this player.\n *\n * @remarks\n *\n * This is a convenience getter that filters the command log cache for logs associated with this player.\n * It does not fetch new data from the server, so it may not be up-to-date.\n *\n * @returns A collection of command logs associated with this player.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -6867,7 +6876,7 @@
             {
               "kind": "Property",
               "canonicalReference": "@erlcjs/core!Player#deaths:member",
-              "docComment": "/**\n * Gets all kill logs where this player is the killed.\n *\n * @remarks\n *\n * This is a convenience getter that filters the kill log cache for logs where this player is the killed. It does not fetch new data from the server, so it may not be up-to-date.\n *\n * @returns A collection of kill logs where this player is the killed.\n */\n",
+              "docComment": "/**\n * Gets all kill logs where this player is the killed.\n *\n * @remarks\n *\n * This is a convenience getter that filters the kill log cache for logs where this player is the killed.\n * It does not fetch new data from the server, so it may not be up-to-date.\n *\n * @returns A collection of kill logs where this player is the killed.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -7129,7 +7138,7 @@
             {
               "kind": "Property",
               "canonicalReference": "@erlcjs/core!Player#kills:member",
-              "docComment": "/**\n * Gets all kill logs where this player is the killer.\n *\n * @remarks\n *\n * This is a convenience getter that filters the kill log cache for logs where this player is the killer. It does not fetch new data from the server, so it may not be up-to-date.\n *\n * @returns A collection of kill logs where this player is the killer.\n */\n",
+              "docComment": "/**\n * Gets all kill logs where this player is the killer.\n *\n * @remarks\n *\n * This is a convenience getter that filters the kill log cache for logs where this player is the killer.\n * It does not fetch new data from the server, so it may not be up-to-date.\n *\n * @returns A collection of kill logs where this player is the killer.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -7732,7 +7741,7 @@
             {
               "kind": "Property",
               "canonicalReference": "@erlcjs/core!Player#vehicles:member",
-              "docComment": "/**\n * Gets all vehicles owned by this player.\n *\n * @remarks\n *\n * This is a convenience getter that filters the vehicle cache for vehicles owned by this player. It does not fetch new data from the server, so it may not be up-to-date.\n *\n * @returns A collection of vehicles owned by this player.\n */\n",
+              "docComment": "/**\n * Gets all vehicles owned by this player.\n *\n * @remarks\n *\n * This is a convenience getter that filters the vehicle cache for vehicles owned by this player.\n * It does not fetch new data from the server, so it may not be up-to-date.\n *\n * @returns A collection of vehicles owned by this player.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -7964,7 +7973,7 @@
             {
               "kind": "Method",
               "canonicalReference": "@erlcjs/core!PlayerManager#fetchAll:member(1)",
-              "docComment": "/**\n * Fetches all active players currently in the game server. Updates the player cache.\n *\n * @returns A promise resolving to a Collection of active Players.\n */\n",
+              "docComment": "/**\n * Fetches all active players currently in the game server.\n * Updates the player cache.\n *\n * @returns A promise resolving to a Collection of active Players.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -8313,7 +8322,7 @@
             {
               "kind": "Method",
               "canonicalReference": "@erlcjs/core!PlayerManager#updateCache:member(1)",
-              "docComment": "/**\n * Re-synchronizes the cache with the raw player list from the API. Emits playerJoin, playerLeave, and playerUpdate events.\n *\n * @param rawPlayers - Raw player list payload.\n *\n * @returns The updated Player cache Collection.\n */\n",
+              "docComment": "/**\n * Re-synchronizes the cache with the raw player list from the API.\n * Emits playerJoin, playerLeave, and playerUpdate events.\n *\n * @param rawPlayers - Raw player list payload.\n *\n * @returns The updated Player cache Collection.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -10461,7 +10470,7 @@
         {
           "kind": "Class",
           "canonicalReference": "@erlcjs/core!RestManager:class",
-          "docComment": "/**\n * Handles communication with the ER:LC HTTP API for all servers managed by a Client, managing rate limits and request queuing on a shared per-IP budget.\n *\n * Buckets are gated optimistically: each dispatched request immediately decrements the bucket's remaining budget and is tracked as in-flight until its response arrives. A bucket's queue is frozen while a `Retry-After` response is active, and window resets include a small safety buffer to avoid racing the server.\n *\n * @public\n */\n",
+          "docComment": "/**\n * Handles communication with the ER:LC HTTP API for all servers managed by a Client,\n * managing rate limits and request queuing on a shared per-IP budget.\n *\n * Buckets are gated conservatively: the server-reported remaining budget is reduced\n * by tracked in-flight requests, and no request is dispatched while that effective\n * budget is exhausted. A bucket's queue is frozen (with jittered backoff) while a\n * `Retry-After` response is active, and window resets include a small safety buffer\n * to avoid racing the server. In-flight concurrency is hard-capped to bound bursts.\n *\n * @public\n */\n",
           "excerptTokens": [
             {
               "kind": "Content",
@@ -10509,7 +10518,7 @@
             {
               "kind": "Method",
               "canonicalReference": "@erlcjs/core!RestManager#getRateLimits:member(1)",
-              "docComment": "/**\n * Returns a snapshot of the current rate-limit state for all known buckets, useful for monitoring and debugging.\n *\n * @returns A record of bucket ID to rate-limit state.\n */\n",
+              "docComment": "/**\n * Returns a snapshot of the current rate-limit state for all known buckets,\n * useful for monitoring and debugging. `remaining` is the server-reported\n * budget; `effective` subtracts in-flight requests to show the usable budget.\n *\n * @returns A record of bucket ID to rate-limit state.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -10522,7 +10531,7 @@
                 },
                 {
                   "kind": "Content",
-                  "text": "<string, {\n        limit: number;\n        remaining: number;\n        reset: number;\n        inflight: number;\n        frozenUntil: number;\n    }>"
+                  "text": "<string, {\n        limit: number;\n        remaining: number;\n        effective: number;\n        reset: number;\n        inflight: number;\n        frozenUntil: number;\n    }>"
                 },
                 {
                   "kind": "Content",
@@ -10807,7 +10816,7 @@
         {
           "kind": "Class",
           "canonicalReference": "@erlcjs/core!Server:class",
-          "docComment": "/**\n * Represents a single ER:LC game server managed by a {@link Client}. Holds the server's own managers, caches, polling loop, and webhook routing.\n *\n * @public\n */\n",
+          "docComment": "/**\n * Represents a single ER:LC game server managed by a {@link Client}.\n * Holds the server's own managers, caches, polling loop, and webhook routing.\n *\n * @public\n */\n",
           "excerptTokens": [
             {
               "kind": "Content",
@@ -10902,7 +10911,7 @@
             {
               "kind": "Method",
               "canonicalReference": "@erlcjs/core!Server#clearCaches:member(1)",
-              "docComment": "/**\n * Clears all volatile caches for this server. Called automatically when the server goes offline.\n */\n",
+              "docComment": "/**\n * Clears all volatile caches for this server.\n * Called automatically when the server goes offline.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -13261,7 +13270,7 @@
             {
               "kind": "Method",
               "canonicalReference": "@erlcjs/core!StaffManager#fetchAll:member(1)",
-              "docComment": "/**\n * Fetches all staff members. Updates the staff cache.\n *\n * @returns A promise resolving to a Collection of active Vehicles.\n */\n",
+              "docComment": "/**\n * Fetches all staff members.\n * Updates the staff cache.\n *\n * @returns A promise resolving to a Collection of active Vehicles.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -13412,7 +13421,7 @@
             {
               "kind": "Method",
               "canonicalReference": "@erlcjs/core!StaffManager#updateCache:member(1)",
-              "docComment": "/**\n * Re-synchronizes the cache with the raw staff list from the API. Emits staffAdd and staffRemove events.\n *\n * @param rawStaff - Raw staff list payload.\n *\n * @returns The updated staff cache Collection.\n */\n",
+              "docComment": "/**\n * Re-synchronizes the cache with the raw staff list from the API.\n * Emits staffAdd and staffRemove events.\n *\n * @param rawStaff - Raw staff list payload.\n *\n * @returns The updated staff cache Collection.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -13551,7 +13560,7 @@
         {
           "kind": "Class",
           "canonicalReference": "@erlcjs/core!UnauthorizedError:class",
-          "docComment": "/**\n * Error thrown if the request was unauthorized. This is normally thrown when the IP was not whitelisted or the global app was not authorized for that server. To authorize an IP go to https://api.erlc.gg/server-owners. To create a global app for an authorization link go to https://api.erlc.gg/developers/applications. To create an authorization link for your global app do `console.log(client.authorizationLink)`.\n *\n * @public\n */\n",
+          "docComment": "/**\n * Error thrown if the request was unauthorized.\n * This is normally thrown when the IP was not whitelisted or the global app was not authorized for that server.\n * To authorize an IP go to https://api.erlc.gg/server-owners.\n * To create a global app for an authorization link go to https://api.erlc.gg/developers/applications.\n * To create an authorization link for your global app do `console.log(server.authorizationLink)`.\n *\n * @public\n */\n",
           "excerptTokens": [
             {
               "kind": "Content",
@@ -13833,7 +13842,7 @@
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "owner: "
+                  "text": "owner?: "
                 },
                 {
                   "kind": "Reference",
@@ -13846,7 +13855,7 @@
                 }
               ],
               "isReadonly": false,
-              "isOptional": false,
+              "isOptional": true,
               "releaseTag": "Public",
               "name": "owner",
               "propertyTypeTokenRange": {
@@ -14112,7 +14121,7 @@
             {
               "kind": "Method",
               "canonicalReference": "@erlcjs/core!VehicleManager#fetchAll:member(1)",
-              "docComment": "/**\n * Fetches all active vehicles currently spawned in the game server. Updates the vehicle cache.\n *\n * @returns A promise resolving to a Collection of active Vehicles.\n */\n",
+              "docComment": "/**\n * Fetches all active vehicles currently spawned in the game server.\n * Updates the vehicle cache.\n *\n * @returns A promise resolving to a Collection of active Vehicles.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -14166,7 +14175,7 @@
             {
               "kind": "Method",
               "canonicalReference": "@erlcjs/core!VehicleManager#updateCache:member(1)",
-              "docComment": "/**\n * Re-synchronizes the cache with the raw vehicle list from the API. Emits vehicleAdd, vehicleRemove, and vehicleUpdate events.\n *\n * @param rawVehicles - Raw vehicle list payload.\n *\n * @returns The updated Vehicle cache Collection.\n */\n",
+              "docComment": "/**\n * Re-synchronizes the cache with the raw vehicle list from the API.\n * Emits vehicleAdd, vehicleRemove, and vehicleUpdate events.\n *\n * @param rawVehicles - Raw vehicle list payload.\n *\n * @returns The updated Vehicle cache Collection.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -18243,7 +18252,7 @@
         {
           "kind": "Class",
           "canonicalReference": "@erlcjs/core!WebhookServer:class",
-          "docComment": "/**\n * Webhook Server for handling real-time gateway events pushed by ER:LC for all managed servers. Incoming events are routed to the matching server by their `origin` field.\n *\n * @public\n */\n",
+          "docComment": "/**\n * Webhook Server for handling real-time gateway events pushed by ER:LC for all managed servers.\n * Incoming events are routed to the matching server by the top-level `payload.server` field.\n *\n * @public\n */\n",
           "excerptTokens": [
             {
               "kind": "Content",

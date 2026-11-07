@@ -1,7 +1,7 @@
 {
   "metadata": {
     "toolPackage": "@microsoft/api-extractor",
-    "toolVersion": "7.58.9",
+    "toolVersion": "7.60.1",
     "schemaVersion": 1011,
     "oldestForwardsCompatibleVersion": 1001,
     "tsdocConfig": {
@@ -690,6 +690,90 @@
               },
               "releaseTag": "Public",
               "name": "snow_postals"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/map!MapType.spring:member",
+              "docComment": "/**\n * Spring Map\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "spring = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"spring_blank.png\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "spring"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/map!MapType.spring_postals:member",
+              "docComment": "/**\n * Spring Map with Postals\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "spring_postals = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"spring_postals.png\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "spring_postals"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/map!MapType.summer:member",
+              "docComment": "/**\n * Summer Map\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "summer = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"summer_blank.png\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "summer"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/map!MapType.summer_postals:member",
+              "docComment": "/**\n * Summer Map with Postals\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "summer_postals = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"summer_postals.png\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "summer_postals"
             }
           ]
         }

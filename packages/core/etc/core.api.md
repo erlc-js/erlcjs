@@ -87,6 +87,7 @@ export interface ClientOptions {
         enabled: boolean;
         port: number;
         path?: string;
+        timestampTolerance?: number;
     };
 }
 
@@ -107,7 +108,7 @@ export class CommandLog extends Base {
     constructor(server: Server, data: RawCommandLog);
     command: string;
     _patch(data: RawCommandLog): this;
-    player: Player;
+    player?: Player;
     playerId: number;
     playerUsername: string;
     timestamp: number;
@@ -128,7 +129,7 @@ export class CommandManager {
     execute(command: string): Promise<string>;
 }
 
-// @public
+// @public (undocumented)
 export function convertToPascalCase(obj: any): any;
 
 // @public
@@ -144,7 +145,7 @@ export class DuplicateServerError extends Error {
 // @public
 export class EmergencyCall extends Base {
     constructor(server: Server, data: RawEmergencyCall);
-    caller: Player;
+    caller?: Player;
     callerId: number;
     callNumber: number;
     description: string;
@@ -208,7 +209,7 @@ export interface InGameCommand {
     execute: (context: {
         player: Player;
         args: string[];
-    }) => void;
+    }) => void | Promise<void>;
     name: string;
     permission?: (RawPlayerPermission | PlayerPermission)[];
 }
@@ -231,10 +232,10 @@ export class InvalidServerKeyError extends Error {
 // @public
 export class KillLog extends Base {
     constructor(server: Server, data: RawKillLog);
-    killed: Player;
+    killed?: Player;
     killedId: number;
     killedUsername: string;
-    killer: Player;
+    killer?: Player;
     killerId: number;
     killerUsername: string;
     _patch(data: RawKillLog): this;
@@ -253,7 +254,7 @@ export class KillLogManager {
 // @public
 export class ModCall extends Base {
     constructor(server: Server, data: RawModCall);
-    caller: Player;
+    caller?: Player;
     callerId: number;
     callerUsername: string;
     moderator?: Player;
@@ -467,6 +468,7 @@ export class RestManager {
     getRateLimits(): Record<string, {
         limit: number;
         remaining: number;
+        effective: number;
         reset: number;
         inflight: number;
         frozenUntil: number;
@@ -595,7 +597,7 @@ export class Vehicle extends Base {
     colorHex: string;
     colorName: string;
     name: string;
-    owner: Player;
+    owner?: Player;
     ownerId: number;
     ownerUsername: string;
     _patch(data: RawVehicle): this;

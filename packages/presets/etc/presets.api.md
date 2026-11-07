@@ -46,7 +46,7 @@ export class CommandPunishments {
 // @public
 export interface Livery {
     livery: string;
-    vehicle: Vehicles;
+    vehicle?: Vehicles;
 }
 
 // @public

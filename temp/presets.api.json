@@ -1,7 +1,7 @@
 {
   "metadata": {
     "toolPackage": "@microsoft/api-extractor",
-    "toolVersion": "7.58.9",
+    "toolVersion": "7.60.1",
     "schemaVersion": 1011,
     "oldestForwardsCompatibleVersion": 1001,
     "tsdocConfig": {
@@ -1033,7 +1033,7 @@
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "vehicle: "
+                  "text": "vehicle?: "
                 },
                 {
                   "kind": "Reference",
@@ -1046,7 +1046,7 @@
                 }
               ],
               "isReadonly": false,
-              "isOptional": false,
+              "isOptional": true,
               "releaseTag": "Public",
               "name": "vehicle",
               "propertyTypeTokenRange": {
@@ -1060,7 +1060,7 @@
         {
           "kind": "Class",
           "canonicalReference": "@erlcjs/presets!LiveryPunishments:class",
-          "docComment": "/**\n * Provides punishment actions for banned liveries.  @class LiveryPunishments\n *\n * @example\n * ```typescript\n * client.on(ERLCEvents.vehicleAdd, banLiveries(\n *   ['Staff'],\n *   LiveryPunishments.warnThenKick(10, true, 'This livery is restricted'),\n *   [PlayerPermission.Mod, PlayerPermission.Administrator]\n * ))\n * ```\n *\n * @public\n */\n",
+          "docComment": "/**\n * Provides punishment actions for banned liveries.\n * @class LiveryPunishments\n *\n * @example\n * ```typescript\n * client.on(ERLCEvents.vehicleAdd, banLiveries(\n *   ['Staff'],\n *   LiveryPunishments.warnThenKick(10, true, 'This livery is restricted'),\n *   [PlayerPermission.Mod, PlayerPermission.Administrator]\n * ))\n * ```\n *\n * @public\n */\n",
           "excerptTokens": [
             {
               "kind": "Content",
@@ -1076,7 +1076,7 @@
             {
               "kind": "Method",
               "canonicalReference": "@erlcjs/presets!LiveryPunishments.warnThenKick:member(1)",
-              "docComment": "/**\n * Warns a player and kicks them if they don't change their livery within the specified delay.  @static\n *\n * @param delay - Time in seconds before kicking the player.\n *\n * @param warning - Whether to send a warning message before kicking.\n *\n * @param message - Custom message to send to the player. Defaults to a generic message.\n *\n * @returns {(vehicle: Vehicle) => void} A callback function that handles the punishment logic.\n *\n * @example\n * ```typescript\n * const punishment = LiveryPunishments.warnThenKick(15, true, 'Change your livery');\n * client.on(ERLCEvents.vehicleAdd, banLiveries(['Staff'], punishment, [PlayerPermission.Mod]))\n * ```\n *\n */\n",
+              "docComment": "/**\n * Warns a player and kicks them if they don't change their livery within the specified delay.\n * @static\n *\n * @param delay - Time in seconds before kicking the player.\n *\n * @param warning - Whether to send a warning message before kicking.\n *\n * @param message - Custom message to send to the player. Defaults to a generic message.\n *\n * @returns {(vehicle: Vehicle) => void} A callback function that handles the punishment logic.\n *\n * @example\n * ```typescript\n * const punishment = LiveryPunishments.warnThenKick(15, true, 'Change your livery');\n * client.on(ERLCEvents.vehicleAdd, banLiveries(['Staff'], punishment, [PlayerPermission.Mod]))\n * ```\n *\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -1168,7 +1168,7 @@
         {
           "kind": "Function",
           "canonicalReference": "@erlcjs/presets!RDM:function(1)",
-          "docComment": "/**\n * Fires an action if a player reaches a kill threshold in a specific timespan.\n *\n * @param action - The callback to run if a match if found.\n *\n * @param allowlist - Users/Permissions that can RDM.\n *\n * @param minKills - The minimum number of kills in the threshold.\n *\n * @param timespan - The timespan in which the number of kills must be reached in seconds.\n *\n * @returns - Callback function to pass into client event.\n *\n * @example\n * ```typescript\n * client.on(ERLCEvents.Kill, RDM((log) => log.killer.kick()));\n * ```\n *\n * @example\n * ```typescript\n * client.on(ERLCEvents.Kill, RDM((log) => log.killer.kick(), [ PlayerPermission.Administrator, PlayerPermission.Owner ], 5, 30));\n * ```\n *\n * @public\n */\n",
+          "docComment": "/**\n * Fires an action if a player reaches a kill threshold in a specific timespan.\n *\n * @param action - The callback to run if a match if found.\n *\n * @param allowlist - Users/Permissions that can RDM.\n *\n * @param minKills - The minimum number of kills in the threshold.\n *\n * @param timespan - The timespan in which the number of kills must be reached in seconds.\n *\n * @returns - Callback function to pass into client event.\n *\n * @example\n * ```typescript\n * client.on(ERLCEvents.Kill, RDM((log) => log.killer?.kick()));\n * ```\n *\n * @example\n * ```typescript\n * client.on(ERLCEvents.Kill, RDM((log) => log.killer?.kick(), [ PlayerPermission.Administrator, PlayerPermission.Owner ], 5, 30));\n * ```\n *\n * @public\n */\n",
           "excerptTokens": [
             {
               "kind": "Content",
@@ -1280,7 +1280,7 @@
         {
           "kind": "Class",
           "canonicalReference": "@erlcjs/presets!VehiclePunishments:class",
-          "docComment": "/**\n * Provides punishment actions for banned vehicles.  @class VehiclePunishments\n *\n * @example\n * ```typescript\n * client.on(ERLCEvents.vehicleAdd, banVehicles(\n *   [Vehicles.BUGATTI_VEYRON],\n *   VehiclePunishments.warnThenKick(15, true, 'This vehicle is not allowed')\n * ))\n * ```\n *\n * @public\n */\n",
+          "docComment": "/**\n * Provides punishment actions for banned vehicles.\n * @class VehiclePunishments\n *\n * @example\n * ```typescript\n * client.on(ERLCEvents.vehicleAdd, banVehicles(\n *   [Vehicles.BUGATTI_VEYRON],\n *   VehiclePunishments.warnThenKick(15, true, 'This vehicle is not allowed')\n * ))\n * ```\n *\n * @public\n */\n",
           "excerptTokens": [
             {
               "kind": "Content",
@@ -1296,7 +1296,7 @@
             {
               "kind": "Method",
               "canonicalReference": "@erlcjs/presets!VehiclePunishments.warnThenKick:member(1)",
-              "docComment": "/**\n * Warns a player and kicks them if they don't change vehicles within the specified delay.  @static\n *\n * @param delay - Time in seconds before kicking the player.\n *\n * @param warning - Whether to send a warning message before kicking.\n *\n * @param message - Custom message to send to the player. Defaults to a generic message.\n *\n * @returns {(vehicle: Vehicle) => void} A callback function that handles the punishment logic.\n *\n * @example\n * ```typescript\n * const punishment = VehiclePunishments.warnThenKick(15, true, 'Please change your vehicle');\n * client.on(ERLCEvents.vehicleAdd, banVehicles([Vehicles.BUGATTI_VEYRON], punishment))\n * ```\n *\n */\n",
+              "docComment": "/**\n * Warns a player and kicks them if they don't change vehicles within the specified delay.\n * @static\n *\n * @param delay - Time in seconds before kicking the player.\n *\n * @param warning - Whether to send a warning message before kicking.\n *\n * @param message - Custom message to send to the player. Defaults to a generic message.\n *\n * @returns {(vehicle: Vehicle) => void} A callback function that handles the punishment logic.\n *\n * @example\n * ```typescript\n * const punishment = VehiclePunishments.warnThenKick(15, true, 'Please change your vehicle');\n * client.on(ERLCEvents.vehicleAdd, banVehicles([Vehicles.BUGATTI_VEYRON], punishment))\n * ```\n *\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
