@@ -8,6 +8,8 @@ import type { MapType } from "./enums";
  * @public
  */
 export async function fetchRobloxHeadshots(userIds: number[], size: string = '60x60'): Promise<Map<number, string>> {
+    if (userIds.length === 0) return new Map();
+
     const query = new URLSearchParams({
         userIds: userIds.join(','),
         includeBackground: 'false',
@@ -36,5 +38,6 @@ export async function fetchRobloxHeadshots(userIds: number[], size: string = '60
  */
 export async function fetchMap(map: MapType): Promise<ArrayBuffer> {
     const response = await fetch(`https://api.erlc.gg/maps/${map}`);
+    if (!response.ok) throw new Error(`${response.status}: ${response.statusText}`);
     return await response.arrayBuffer();
 }
