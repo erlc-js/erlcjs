@@ -51,11 +51,12 @@ export class ModCallManager {
                 const newCall = new ModCall(this.server, rawData);
                 this.cache.set(key, newCall);
                 this.server.client.emit(ERLCEvents.modCall, newCall);
-                if (newCall.moderator) {
+                if (rawData.Moderator) {
                     this.server.client.emit(ERLCEvents.modCallAnswered, newCall);
                 }
             } else {
-                if (!cachedCall.moderator && rawData.Moderator) {
+                const hadModerator = Boolean(cachedCall.moderatorId);
+                if (!hadModerator && rawData.Moderator) {
                     cachedCall._patch(rawData);
                     this.server.client.emit(ERLCEvents.modCallAnswered, cachedCall);
                 }
