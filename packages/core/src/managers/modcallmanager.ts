@@ -65,12 +65,26 @@ export class ModCallManager {
 
         if (this.maxCacheSize && this.maxCacheSize > 0) {
             while (this.cache.size > this.maxCacheSize) {
-                const oldestKey = this.cache.keys().next().value;
+                const oldestKey = this.findOldestKey();
                 if (oldestKey === undefined) break;
                 this.cache.delete(oldestKey);
             }
         }
 
         return this.cache;
+    }
+
+    private findOldestKey(): string | undefined {
+        let oldestKey: string | undefined;
+        let oldestTimestamp = Number.POSITIVE_INFINITY;
+
+        for (const [key, call] of this.cache) {
+            if (call.timestamp < oldestTimestamp) {
+                oldestTimestamp = call.timestamp;
+                oldestKey = key;
+            }
+        }
+
+        return oldestKey;
     }
 }

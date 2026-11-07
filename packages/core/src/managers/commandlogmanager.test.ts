@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { Client } from '../client/client.js';
 import { ERLCEvents } from '../client/events.js';
+import { CommandLogManager } from './commandlogmanager.js';
 
 function makeServer() {
     const client = new Client({ servers: ['PRC-111111111-key'] });
@@ -21,6 +22,21 @@ describe('CommandLogManager', () => {
         expect(commands).toEqual([':admin Bob', ':mod Bob']);
         expect(server.commandLogs.cache.size).toBe(2);
 
+        server.client.destroy();
+    });
+
+    it('evicts the oldest logs by timestamp regardless of insertion order', () => {
+        const server = makeServer();
+        const manager = new CommandLogManager(server, 2);
+
+        manager.updateCache([
+            { Player: 'Alex:1', Timestamp: 3, Command: ':newest' },
+            { Player: 'Alex:1', Timestamp: 1, Command: ':oldest' },
+            { Player: 'Alex:1', Timestamp: 2, Command: ':middle' },
+        ]);
+
+        const timestamps = Array.from(manager.cache.values()).map((log) => log.timestamp);
+        expect(timestamps.sort()).toEqual([2, 3]);
         server.client.destroy();
     });
 });
