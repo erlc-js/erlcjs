@@ -65,18 +65,6 @@ jobs:
             - name: Check docs quality
               run: pnpm --filter apps-docs exec krate check
 
-            - name: Build docs site for GitHub Pages
-              env:
-                  KRATE_BASE_PATH: /erlcjs
-                  KRATE_SITE_URL: https://erlc-js.github.io/erlcjs
-              run: pnpm --filter apps-docs build
-
-            - name: Prefix GitHub Pages URLs
-              run: node apps/docs/scripts/prefix-pages.mjs /erlcjs
-
-            - name: Check GitHub Pages URLs
-              run: node apps/docs/scripts/check-pages-urls.mjs /erlcjs
-
     compatibility:
         name: Node 20 compatibility
         runs-on: ubuntu-latest

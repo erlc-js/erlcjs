@@ -85,8 +85,7 @@ apps/
 Releases are tag-triggered. Pushing a semver tag runs the full CI suite, syncs
 every published package to the tag version, publishes `@erlcjs/core`,
 `@erlcjs/map`, and `@erlcjs/presets` to npm, generates release notes with
-`devs-des1re/releaselog` without AI humanizing, and deploys the docs to GitHub
-Pages.
+`devs-des1re/releaselog` without AI humanizing, and runs the Pages workflow.
 
 ```sh
 git tag v2.0.0
@@ -99,8 +98,9 @@ planning and changelog context, but the tag drives the release.
 
 The release workflow requires an `NPM_TOKEN` repository secret.
 
-The GitHub Pages build is published at
-`https://erlc-js.github.io/erlcjs/`.
+The GitHub Pages build is published at `https://erlcjs.xyz/`. The `Pages`
+workflow runs on version tags and can also be dispatched manually after it is
+present on the default branch.
 
 ## Coding Conventions
 

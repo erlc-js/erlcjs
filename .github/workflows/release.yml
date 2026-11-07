@@ -7,8 +7,6 @@ on:
 
 permissions:
     contents: write
-    pages: write
-    id-token: write
 
 concurrency:
     group: release-${{ github.ref }}
@@ -143,61 +141,3 @@ jobs:
               with:
                   name: release-notes
                   path: release-notes.md
-
-    pages:
-        name: Deploy docs
-        needs: ci
-        runs-on: ubuntu-latest
-        timeout-minutes: 25
-        permissions:
-            contents: read
-            pages: write
-            id-token: write
-        environment:
-            name: github-pages
-            url: ${{ steps.deployment.outputs.page_url }}
-        concurrency:
-            group: pages
-            cancel-in-progress: false
-        steps:
-            - name: Checkout
-              uses: actions/checkout@v4
-
-            - name: Enable pnpm
-              uses: pnpm/action-setup@v4
-              with:
-                  version: 10.27.0
-                  run_install: false
-
-            - name: Set up Node
-              uses: actions/setup-node@v4
-              with:
-                  node-version: '22'
-
-            - name: Install dependencies
-              run: pnpm install --no-frozen-lockfile
-
-            - name: Configure GitHub Pages
-              id: pages
-              uses: actions/configure-pages@v5
-
-            - name: Build docs for GitHub Pages
-              env:
-                  KRATE_BASE_PATH: ${{ steps.pages.outputs.base_path }}
-                  KRATE_SITE_URL: ${{ steps.pages.outputs.base_url }}
-              run: pnpm docs:build
-
-            - name: Prefix GitHub Pages URLs
-              run: node apps/docs/scripts/prefix-pages.mjs "${{ steps.pages.outputs.base_path }}"
-
-            - name: Check GitHub Pages URLs
-              run: node apps/docs/scripts/check-pages-urls.mjs "${{ steps.pages.outputs.base_path }}"
-
-            - name: Upload Pages artifact
-              uses: actions/upload-pages-artifact@v3
-              with:
-                  path: apps/docs/dist
-
-            - name: Deploy to GitHub Pages
-              id: deployment
-              uses: actions/deploy-pages@v4

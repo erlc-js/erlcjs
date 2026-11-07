@@ -1,12 +1,6 @@
 import { defineConfig, docs, sitemap } from '@krate/core';
 
-function normalizeBasePath(value: string): string {
-  const trimmed = value.trim().replace(/^\/+|\/+$/g, '');
-  return trimmed ? `/${trimmed}` : '';
-}
-
-const baseUrl = (process.env.KRATE_SITE_URL || 'https://erlcjs.xyz').replace(/\/+$/, '');
-const basePath = normalizeBasePath(process.env.KRATE_BASE_PATH || '');
+const baseUrl = 'https://erlcjs.xyz';
 
 export default defineConfig({
   entry: 'src/pages/index.tsx',
@@ -14,8 +8,6 @@ export default defineConfig({
   pagesDir: 'src/pages',
   publicDir: 'public',
   minify: true,
-
-  basePath,
 
   viewTransitions: 'auto',
 
