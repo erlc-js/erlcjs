@@ -71,7 +71,7 @@ jobs:
                   echo "dist_tag=${DIST_TAG}" >> "$GITHUB_OUTPUT"
                   echo "prerelease=${IS_PRERELEASE}" >> "$GITHUB_OUTPUT"
 
-            - name: Resolve previous release boundary
+            - name: Resolve previous release tag
               id: base
               shell: bash
               run: |
@@ -79,11 +79,8 @@ jobs:
                   PREVIOUS="$(git describe --tags --match 'v*' --abbrev=0 "${GITHUB_REF_NAME}^" 2>/dev/null || true)"
 
                   if [ -z "$PREVIOUS" ]; then
-                    # First release only. v1.4.1 was 60ba5d6, but v1 continued on
-                    # main. acb23dc is the main tip merged into dev before v2, so
-                    # using it excludes all v1 history from the first v2 changelog.
-                    PREVIOUS="acb23dcab78c1e3aca13e282b0571c5c6a0f2d72"
-                    echo "No earlier release tag found; using the pre-v2 history boundary."
+                    echo "::error::No previous release tag found. Push the initial tag before releasing."
+                    exit 1
                   fi
 
                   echo "previous_tag=${PREVIOUS}" >> "$GITHUB_OUTPUT"
