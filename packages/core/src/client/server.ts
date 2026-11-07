@@ -63,6 +63,8 @@ export class Server {
     private timer?: NodeJS.Timeout;
     /** Whether the polling loop is active. */
     private polling = false;
+    /** Incremented whenever the loop is stopped so stale loops cannot reschedule. */
+    private pollGeneration = 0;
     /** Whether the first poll attempt has completed. */
     private _hasPolledOnce = false;
     /** Consecutive poll failures since the last successful poll. */
@@ -125,14 +127,15 @@ export class Server {
      */
     private async beginPolling(pollingRateMs?: number) {
         const rate = this.sanitizePollRate(pollingRateMs);
+        const generation = ++this.pollGeneration;
         const tick = async () => {
-            if (!this.polling) return;
+            if (!this.polling || generation !== this.pollGeneration) return;
             await this.poll();
-            if (this.polling) this.timer = setTimeout(tick, rate);
+            if (this.polling && generation === this.pollGeneration) this.timer = setTimeout(tick, rate);
         };
         this.polling = true;
         await this.poll();
-        if (this.polling) this.timer = setTimeout(tick, rate);
+        if (this.polling && generation === this.pollGeneration) this.timer = setTimeout(tick, rate);
     }
 
     /**
@@ -212,6 +215,7 @@ export class Server {
      */
     public stopPolling() {
         this.polling = false;
+        this.pollGeneration++;
         if (this.timer) {
             clearTimeout(this.timer);
             this.timer = undefined;
