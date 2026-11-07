@@ -96,8 +96,8 @@ describe('Client', () => {
         const b = client.servers.get('222222222')!;
 
         const ran: string[] = [];
-        client.registerCommand({ name: 'global', execute: () => ran.push('global') });
-        a.registerCommand({ name: 'local', execute: () => ran.push('local') });
+        client.registerCommand({ name: 'global', execute: () => { ran.push('global'); } });
+        a.registerCommand({ name: 'local', execute: () => { ran.push('local'); } });
 
         const p1 = new Player(a, rawPlayer('Alex', 1));
         const p2 = new Player(b, rawPlayer('Bob', 2));

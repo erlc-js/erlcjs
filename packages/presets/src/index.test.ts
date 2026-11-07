@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { Client, Player, Vehicle, CommandLog, KillLog, ServerInfo } from '@erlcjs/core';
+import { Client, Player, Vehicle, CommandLog, KillLog, ServerInfo, PlayerPermission } from '@erlcjs/core';
 import { welcomePlayer, banKickRejoin } from './player.js';
 import { banVehicles, banLiveries, VehiclePunishments } from './vehicle.js';
 import { RDM } from './kill.js';
@@ -255,7 +255,7 @@ describe('banCommand', () => {
         const log = new CommandLog(server, { Player: 'Ghost:99', Timestamp: 123, Command: ':admin x' });
         const action = vi.fn();
 
-        expect(() => banCommand([':admin'], action, true, ['Server Owner'])(log)).not.toThrow();
+        expect(() => banCommand([':admin'], action, true, [PlayerPermission.Owner])(log)).not.toThrow();
         expect(action).not.toHaveBeenCalled();
         expect(() => CommandPunishments.kick()(log)).not.toThrow();
 
