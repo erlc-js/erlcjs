@@ -26,6 +26,7 @@ export function banCommand(commands: string | string[], action: (log: CommandLog
         if (currentAllowlist && currentAllowlist.length > 0) {
             for (const allow of currentAllowlist) {
                 if (typeof allow === 'string') {
+                    if (!log.player) return;
                     if (log.player.permission === allow) return;
                 } else {
                     if (log.playerId === allow) return;
@@ -36,8 +37,10 @@ export function banCommand(commands: string | string[], action: (log: CommandLog
         for (const command of commands) {
             if (startsWith && log.command.startsWith(command.trim())) {
                 action(log);
-            } else if (!startsWith && log.command.trim() === command) {
+                return;
+            } else if (!startsWith && log.command.trim() === command.trim()) {
                 action(log);
+                return;
             }
         }
     }
@@ -54,8 +57,14 @@ export class CommandPunishments {
      */
     public static removePermissions(): (log: CommandLog) => void {
         return (log: CommandLog) => {
-            if (log.player.permission === 'Server Administrator') log.player.unadmin();
-            if (log.player.permission === 'Server Moderator') log.player.unmod();
+            const player = log.player;
+            if (!player) return;
+            if (player.permission === 'Server Administrator') {
+                void player.unadmin().catch((err) => player.client._emitError(err));
+            }
+            if (player.permission === 'Server Moderator') {
+                void player.unmod().catch((err) => player.client._emitError(err));
+            }
         }
     }
 
@@ -65,8 +74,10 @@ export class CommandPunishments {
      */
     public static kick(): (log: CommandLog) => void {
         return (log: CommandLog) => {
+            const player = log.player;
+            if (!player) return;
             this.removePermissions()(log);
-            log.player.kick();
+            void player.kick().catch((err) => player.client._emitError(err));
         }
     }
 
@@ -76,8 +87,10 @@ export class CommandPunishments {
      */
     public static ban(): (log: CommandLog) => void {
         return (log: CommandLog) => {
+            const player = log.player;
+            if (!player) return;
             this.removePermissions()(log);
-            log.player.ban();
+            void player.ban().catch((err) => player.client._emitError(err));
         }
     }
 }

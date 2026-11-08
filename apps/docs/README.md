@@ -1,49 +1,50 @@
-# Starlight Starter Kit: Basics
+# erlc.js docs
 
-[![Built with Starlight](https://astro.badg.es/v2/built-with-starlight/tiny.svg)](https://starlight.astro.build)
+The erlc.js documentation site, built with [Krate](https://krate.js.org).
 
-```
-pnpm create astro@latest -- --template starlight
-```
+## Development
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+From this directory:
 
-## 🚀 Project Structure
-
-Inside of your Astro + Starlight project, you'll see the following folders and files:
-
-```
-.
-├── public/
-├── src/
-│   ├── assets/
-│   ├── content/
-│   │   └── docs/
-│   └── content.config.ts
-├── astro.config.mjs
-├── package.json
-└── tsconfig.json
+```bash
+pnpm dev      # krate dev on http://localhost:3000
+pnpm build    # production build dist/
+pnpm serve    # preview the production build
 ```
 
-Starlight looks for `.md` or `.mdx` files in the `src/content/docs/` directory. Each file is exposed as a route based on its file name.
+From the repo root, use `pnpm docs:dev` for a fast docs-only dev server
+(the API reference is generated on first run), or `pnpm docs:build` to
+regenerate the API reference and build the site.
 
-Images can be added to `src/assets/` and embedded in Markdown with a relative link.
+Run `pnpm docs:generate` after changing a public API so the reference picks
+up the new symbols.
 
-Static assets, like favicons, can be placed in the `public/` directory.
+## Structure
 
-## 🧞 Commands
+```
+src/
+  pages/              Homepage, 404, and the marketing shell
+  theme/              Custom docs layout, chrome, search, and styles
+  styles/             Shared tokens, homepage, and docs CSS
+  content/docs/       Guides and the generated API reference
+public/
+  fonts/              JetBrains Mono + Inter
+  logo.png            erlc.js logo
+  og.png              Social card
+krate.config.ts       Site config, docs plugin, search, redirects
+scripts/generate-api.mjs
+```
 
-All commands are run from the root of the project, from a terminal:
+## Content
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `pnpm install`             | Installs dependencies                            |
-| `pnpm dev`             | Starts local dev server at `localhost:4321`      |
-| `pnpm build`           | Build your production site to `./dist/`          |
-| `pnpm preview`         | Preview your build locally, before deploying     |
-| `pnpm astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `pnpm astro -- --help` | Get help using the Astro CLI                     |
+Guides live in `src/content/docs/guides` as Markdown. Frontmatter controls the title and sidebar order:
 
-## 👀 Want to learn more?
+```md
+---
+title: Getting Started
+description: Install erlc.js and run your first script.
+order: 1
+---
+```
 
-Check out [Starlight’s docs](https://starlight.astro.build/), read [the Astro documentation](https://docs.astro.build), or jump into the [Astro Discord server](https://astro.build/chat).
+API pages are generated from the package API Extractor output with `node scripts/generate-api.mjs`. Do not edit `src/content/docs/api` by hand.

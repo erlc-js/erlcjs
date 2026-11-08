@@ -17,7 +17,8 @@ export function banVehicles(vehicles: (Vehicles | string)[], action: (vehicle: V
     return (vehicle: Vehicle) => {
         let currentAllowlist = allowlist as (number | PlayerPermission)[];
         if (typeof allowlist === 'function') currentAllowlist = allowlist();
-        if (currentAllowlist.includes(vehicle.ownerId) || currentAllowlist.includes(vehicle.owner.permission as any)) return;
+        if (currentAllowlist.includes(vehicle.ownerId)) return;
+        if (vehicle.owner && currentAllowlist.includes(vehicle.owner.permission as any)) return;
         if (vehicles.includes(vehicle.name)) {
             action(vehicle)
         }
@@ -41,15 +42,18 @@ export function banLiveries(liveries: (Livery | string)[], action: (vehicle: Veh
         if (!vehicle.texture) return;
         let currentAllowlist = allowlist as (number | PlayerPermission)[];
         if (typeof allowlist === 'function') currentAllowlist = allowlist();
-        if (currentAllowlist.includes(vehicle.ownerId) || currentAllowlist.includes(vehicle.owner.permission as any)) return;
+        if (currentAllowlist.includes(vehicle.ownerId)) return;
+        if (vehicle.owner && currentAllowlist.includes(vehicle.owner.permission as any)) return;
         for (const livery of liveries) {
             if (typeof livery === 'string') {
                 if (livery === vehicle.texture) {
                     action(vehicle);
+                    return;
                 }
             } else if (livery.livery === vehicle.texture) {
-                if (livery.vehicle === vehicle.name || !livery.vehicle) {
+                if (!livery.vehicle || livery.vehicle === vehicle.name) {
                     action(vehicle);
+                    return;
                 }
             }
         }
@@ -84,27 +88,39 @@ export class VehiclePunishments {
      */
     public static warnThenKick(delay: number = 10, warning: boolean = true, message?: string ): (vehicle: Vehicle) => void {
         return (vehicle: Vehicle) => {
-            vehicle.owner.message(message ?? 'The vehicle you are using is restricted. Please change it.');
+            const owner = vehicle.owner;
+            if (!owner) return;
+            void owner.message(message ?? 'The vehicle you are using is restricted. Please change it.').catch((err) => owner.client._emitError(err));
             setTimeout(async () => {
-                await vehicle.client.waitFor(ERLCEvents.poll, 5000);
+                try {
+                    await vehicle.server.waitFor(ERLCEvents.poll, 5000);
+                } catch {
+                    return;
+                }
                 if (
-                    vehicle.client.vehicles.cache.get(vehicle.plate)?.ownerId !== vehicle.ownerId ||
-                    vehicle.client.vehicles.cache.get(vehicle.plate)?.name !== vehicle.name
+                    vehicle.server.vehicles.cache.get(vehicle.plate)?.ownerId !== vehicle.ownerId ||
+                    vehicle.server.vehicles.cache.get(vehicle.plate)?.name !== vehicle.name
                 )
                     return;
                 if (warning) {
-                    vehicle.owner.message(`Change the vehicle in ${delay} seconds or you will be kicked.`);
+                    void owner.message(`Change the vehicle in ${delay} seconds or you will be kicked.`).catch((err) => owner.client._emitError(err));
                     setTimeout(async () => {
-                        await vehicle.client.waitFor(ERLCEvents.poll, 5000);
+                        try {
+                            await vehicle.server.waitFor(ERLCEvents.poll, 5000);
+                        } catch {
+                            return;
+                        }
                         if (
-                            vehicle.client.vehicles.cache.get(vehicle.plate)?.ownerId !== vehicle.ownerId ||
-                            vehicle.client.vehicles.cache.get(vehicle.plate)?.name !== vehicle.name
+                            vehicle.server.vehicles.cache.get(vehicle.plate)?.ownerId !== vehicle.ownerId ||
+                            vehicle.server.vehicles.cache.get(vehicle.plate)?.name !== vehicle.name
                         )
                             return;
-                        if (vehicle.owner.permission === 'Normal') vehicle.owner.kick('Failure to change from a banned vehicle.')
+                        if (owner.permission === 'Normal') {
+                            void owner.kick('Failure to change from a banned vehicle.').catch((err) => owner.client._emitError(err));
+                        }
                     }, delay * 1000)
-                } else if (vehicle.owner.permission === 'Normal') {
-                    vehicle.owner.kick('Failure to change from a banned vehicle.')
+                } else if (owner.permission === 'Normal') {
+                    void owner.kick('Failure to change from a banned vehicle.').catch((err) => owner.client._emitError(err));
                 }
             }, delay * 1000)
         }
@@ -140,27 +156,39 @@ export class LiveryPunishments {
      */
     public static warnThenKick(delay: number = 10, warning: boolean = true, message?: string): (vehicle: Vehicle) => void {
         return (vehicle: Vehicle) => {
-            vehicle.owner.message(message ?? 'The livery you are using is restricted. Please change it.');
+            const owner = vehicle.owner;
+            if (!owner) return;
+            void owner.message(message ?? 'The livery you are using is restricted. Please change it.').catch((err) => owner.client._emitError(err));
             setTimeout(async () => {
-                await vehicle.client.waitFor(ERLCEvents.poll, 5000);
+                try {
+                    await vehicle.server.waitFor(ERLCEvents.poll, 5000);
+                } catch {
+                    return;
+                }
                 if (
-                    vehicle.client.vehicles.cache.get(vehicle.plate)?.ownerId !== vehicle.ownerId ||
-                    vehicle.client.vehicles.cache.get(vehicle.plate)?.name !== vehicle.name
+                    vehicle.server.vehicles.cache.get(vehicle.plate)?.ownerId !== vehicle.ownerId ||
+                    vehicle.server.vehicles.cache.get(vehicle.plate)?.name !== vehicle.name
                 )
                     return;
                 if (warning) {
-                    vehicle.owner.message(`Change the livery in ${delay} seconds or you will be kicked.`);
+                    void owner.message(`Change the livery in ${delay} seconds or you will be kicked.`).catch((err) => owner.client._emitError(err));
                     setTimeout(async () => {
-                        await vehicle.client.waitFor(ERLCEvents.poll, 5000);
+                        try {
+                            await vehicle.server.waitFor(ERLCEvents.poll, 5000);
+                        } catch {
+                            return;
+                        }
                         if (
-                            vehicle.client.vehicles.cache.get(vehicle.plate)?.ownerId !== vehicle.ownerId ||
-                            vehicle.client.vehicles.cache.get(vehicle.plate)?.name !== vehicle.name
+                            vehicle.server.vehicles.cache.get(vehicle.plate)?.ownerId !== vehicle.ownerId ||
+                            vehicle.server.vehicles.cache.get(vehicle.plate)?.name !== vehicle.name
                         )
                             return;
-                        if (vehicle.owner.permission === 'Normal') vehicle.owner.kick('Failure to change from a banned livery.')
+                        if (owner.permission === 'Normal') {
+                            void owner.kick('Failure to change from a banned livery.').catch((err) => owner.client._emitError(err));
+                        }
                     }, delay * 1000)
-                } else if (vehicle.owner.permission === 'Normal') {
-                    vehicle.owner.kick('Failure to change from a banned livery.')
+                } else if (owner.permission === 'Normal') {
+                    void owner.kick('Failure to change from a banned livery.').catch((err) => owner.client._emitError(err));
                 }
             }, delay * 1000)
         }

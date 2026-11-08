@@ -1,4 +1,4 @@
-import { Client } from '../client/client.js';
+import type { Server } from '../client/server.js';
 import { Base } from './base.js';
 import type { RawKillLog } from '../types/index.js';
 import { Player } from './player.js';
@@ -9,9 +9,9 @@ import { Player } from './player.js';
  */
 export class KillLog extends Base {
     /**
-     * The Player instance representing the player who was killed.
+     * The Player instance representing the player who was killed, if they are still cached.
      */
-    killed!: Player;
+    killed?: Player;
     /**
      * The UserId of the player who was killed.
      */
@@ -21,9 +21,9 @@ export class KillLog extends Base {
      */
     killedUsername!: string;
     /**
-     * The Player instance representing the player who did the killing.
+     * The Player instance representing the player who did the killing, if they are still cached.
      */
-    killer!: Player;
+    killer?: Player;
     /**
      * The UserId of the player who did the killing.
      */
@@ -39,11 +39,11 @@ export class KillLog extends Base {
 
     /**
      * Creates an instance of KillLog.
-     * @param client - The ERLCApi client.
+     * @param server - The server the kill occurred in.
      * @param data - The raw kill log data.
      */
-    constructor(client: Client, data: RawKillLog) {
-        super(client);
+    constructor(server: Server, data: RawKillLog) {
+        super(server);
         this._patch(data);
     }
 
@@ -57,10 +57,10 @@ export class KillLog extends Base {
         const splitKiller = data.Killer.split(':');
         this.killedId = Number(splitKilled[1]);
         this.killedUsername = splitKilled[0]!;
-        this.killed = this.client.players.cache.get(this.killedId)!;
+        this.killed = this.server.players.cache.get(this.killedId);
         this.killerId = Number(splitKiller[1]);
         this.killerUsername = splitKiller[0]!;
-        this.killer = this.client.players.cache.get(this.killerId)!;
+        this.killer = this.server.players.cache.get(this.killerId);
         this.timestamp = data.Timestamp;
         return this;
     }

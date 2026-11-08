@@ -12,7 +12,9 @@ import { Player } from "@erlcjs/core";
  */
 export function welcomePlayer(message?: string): (player: Player) => void {
     return (player: Player) => {
-        player.message(message ?? `Welcome to ${player.client.server.cache?.name}!`);
+        void player
+            .message(message ?? `Welcome to ${player.server.info?.name}!`)
+            .catch((err) => player.client._emitError(err));
     }
 }
 
@@ -29,7 +31,16 @@ export function welcomePlayer(message?: string): (player: Player) => void {
 export function banKickRejoin(timespan: number = 1800): (player: Player) => void {
     return (player: Player) => {
         const timestamp = Date.now() / 1000 - timespan
-        const kicks = player.client.commandLogs.cache.filter(v => v.timestamp > timestamp && (v.command.startsWith(`:kick ${player.username}`) || v.command.startsWith(`:kick ${player.id}`)));
-        if (kicks.size >= 1) player.ban(`Rejoin within ${timespan} seconds of a kick.`)
+        const targets = [player.username, String(player.id)];
+        const kicks = player.server.commandLogs.cache.filter((log) => {
+            if (log.timestamp <= timestamp) return false;
+            const command = log.command.trim();
+            return targets.some((target) => command === `:kick ${target}` || command.startsWith(`:kick ${target} `));
+        });
+        if (kicks.size >= 1) {
+            void player
+                .ban(`Rejoin within ${timespan} seconds of a kick.`)
+                .catch((err) => player.client._emitError(err));
+        }
     }
 }

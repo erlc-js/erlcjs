@@ -1,5 +1,6 @@
-import { Client, ERLCEvents } from '../client/client.js';
-import { Collection } from '../index.js';
+import type { Server } from '../client/server.js';
+import { ERLCEvents } from '../client/events.js';
+import { Collection } from '../util/collection.js';
 import { Staff } from '../structures/staff.js';
 import type { RawServerData, RawStaffData } from '../types/index.js';
 
@@ -25,23 +26,23 @@ export class StaffManager {
 
     /**
      * Creates an instance of StaffManager.
-     * @param client - The erlcjs client.
+     * @param server - The server this manager belongs to.
      */
-    constructor(private readonly client: Client) {}
+    constructor(private readonly server: Server) {}
 
     /**
      * Fetches all staff members.
      * Updates the staff cache.
-     * @returns A promise resolving to a Collection of active Vehicles.
+     * @returns A promise resolving to a Collection of staff role collections.
      */
     public async fetchAll(): Promise<Collection<string, Collection<number, Staff>>> {
-        const rawServer: RawServerData = await this.client.rest.request(
+        const rawServer: RawServerData = await this.server.rest.request(
             'GET',
             '/v2/server?Staff=true',
         );
-        const rawVehicles: RawStaffData = rawServer.Staff!;
+        const rawStaff: RawStaffData = rawServer.Staff ?? { Admins: {}, Mods: {}, Helpers: {} };
 
-        return this.updateCache(rawVehicles);
+        return this.updateCache(rawStaff);
     }
 
     /**
@@ -51,9 +52,9 @@ export class StaffManager {
      * @returns The updated staff cache Collection.
      */
     public updateCache(rawStaff: RawStaffData) {
-        this._updateCache(rawStaff.Admins, 'Admin');
-        this._updateCache(rawStaff.Mods, 'Mod');
-        this._updateCache(rawStaff.Helpers, 'Helper');
+        this._updateCache(rawStaff.Admins ?? {}, 'Admin');
+        this._updateCache(rawStaff.Mods ?? {}, 'Mod');
+        this._updateCache(rawStaff.Helpers ?? {}, 'Helper');
 
         return new Collection<string, Collection<number, Staff>>()
             .set('Admins', this.admins)
@@ -63,7 +64,6 @@ export class StaffManager {
 
     private _updateCache(data: Record<string, string>, type: 'Admin' | 'Mod' | 'Helper') {
         const activeUserIds = new Set<number>();
-        const types = `${type}s`;
         let cache: Collection<number, Staff>;
         if (type === 'Admin') cache = this.admins;
         else if (type === 'Mod') cache = this.mods;
@@ -73,15 +73,18 @@ export class StaffManager {
             activeUserIds.add(Number(userId));
             const cachedUser = cache.get(Number(userId));
 
-            if (cachedUser) continue;
-            const newStaff = new Staff(this.client, userId, username);
+            if (cachedUser) {
+                cachedUser._patch(userId, username);
+                continue;
+            }
+            const newStaff = new Staff(this.server, userId, username);
             cache.set(Number(userId), newStaff);
-            this.client.emit(ERLCEvents.staffAdd, newStaff, type);
+            this.server.client.emit(ERLCEvents.staffAdd, newStaff, type);
         }
 
         for (const cachedId of cache.keys()) {
             if (!activeUserIds.has(cachedId)) {
-                this.client.emit(ERLCEvents.staffRemove, cache.get(cachedId)!, type);
+                this.server.client.emit(ERLCEvents.staffRemove, cache.get(cachedId)!, type);
                 cache.delete(cachedId);
             }
         }

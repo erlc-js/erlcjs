@@ -1,11 +1,22 @@
 {
   "name": "@erlcjs/core",
-  "description": "ERLC API Wrapper Core",
-  "version": "1.4.1",
+  "description": "ER:LC API wrapper core, CLI, and bundled docs MCP server",
+  "version": "2.0.0",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
-  "keywords": [ "erlc", "roblox", "prc", "api" ],
+  "bin": {
+    "erlcjs": "./dist/cli.js"
+  },
+  "keywords": [
+    "erlc",
+    "roblox",
+    "prc",
+    "api",
+    "mcp",
+    "cli",
+    "docs"
+  ],
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
@@ -17,6 +28,9 @@
   "files": [
     "dist"
   ],
+  "engines": {
+    "node": ">=20"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/erlc-js/erlcjs.git",
@@ -24,16 +38,21 @@
   },
   "license": "Apache-2.0",
   "scripts": {
-    "build": "tsup src/index.ts --format cjs,esm --dts --clean",
+    "build": "node scripts/generate-mcp-docs.mjs && tsup src/index.ts src/cli.ts --format cjs,esm --dts --clean",
     "lint": "eslint src/**/*.ts",
     "extract": "api-extractor run --local",
-    "test": "pnpm tsx --env-file-if-exists=../../.env src/index.test.ts",
-    "bench": "pnpm tsx src/index.bench.ts"
+    "test": "node scripts/generate-mcp-docs.mjs && vitest run",
+    "test:dist": "pnpm build && node scripts/check-mcp-dist.mjs",
+    "test:real": "tsx --env-file-if-exists=../../.env src/index.integration.ts"
   },
   "publishConfig": {
     "access": "public"
   },
   "devDependencies": {
     "tsup": "^8.5.1"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.32.2",
+    "zod": "^4.6.7"
   }
 }

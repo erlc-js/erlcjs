@@ -2,6 +2,7 @@ node_modules/
 dist/
 */*/temp/
 apps/docs/src/content/docs/api/*
+.krate/
 .turbo/
 *.log
 package-lock.json
@@ -12,3 +13,4 @@ zig-pkg/
 .zig-global-cache/
 .env
 packages/map/map.png
+release-notes.md

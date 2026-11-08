@@ -6,7 +6,14 @@ import prettierConfig from 'eslint-config-prettier';
 export default [
   {
     // Ignore build output and internal metadata folders
-    ignores: ['**/dist/**', '**/temp/**', '**/etc/**', '**/docs/**', 'node_modules/**']
+    ignores: [
+      '**/dist/**',
+      '**/temp/**',
+      '**/etc/**',
+      '**/docs/**',
+      '**/src/cli/generated.ts',
+      'node_modules/**',
+    ]
   },
   {
     files: ['packages/*/src/**/*.ts'],

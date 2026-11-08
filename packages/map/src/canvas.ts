@@ -167,7 +167,6 @@ export async function drawMap(options: MapOptions) {
         const playerHeadshots = await fetchRobloxHeadshots(playerIds, `${size}x${size}`);
 
         for (const player of playersArr) {
-            if (!playerHeadshots.has(player.id)) continue;
             const color = getTeamColor(player.team);
             const pinSVG = createPlayerPinSVG(size, color);
             const pinSize = Math.round(size * 1.6);
@@ -183,14 +182,23 @@ export async function drawMap(options: MapOptions) {
                 left: Math.round(player.location.x - ringSize / 2),
                 top: Math.round(player.location.z - ringSize / 2 - pinSize / 2),
             });
-            const headshotRes = await fetch(playerHeadshots.get(player.id) as string);
-            composites.push({
-                input: await headshotRes.arrayBuffer(),
-                left: Math.round(player.location.x - size / 2),
-                top: Math.round(player.location.z - size / 2 - pinSize / 2),
-            });
+            const headshotUrl = playerHeadshots.get(player.id);
+            if (headshotUrl) {
+                try {
+                    const headshotRes = await fetch(headshotUrl);
+                    if (headshotRes.ok) {
+                        composites.push({
+                            input: await headshotRes.arrayBuffer(),
+                            left: Math.round(player.location.x - size / 2),
+                            top: Math.round(player.location.z - size / 2 - pinSize / 2),
+                        });
+                    }
+                } catch {
+                    // Keep the pin visible even if the headshot cannot be downloaded.
+                }
+            }
             if (showModCalls) {
-                const filtered = player.client.modCalls.cache.filter(v => v.callerId === player.id && (v.moderatorId === null || v.moderatorId === undefined))
+                const filtered = player.server.modCalls.cache.filter(v => v.callerId === player.id && (v.moderatorId === null || v.moderatorId === undefined))
                 if (filtered.size > 0) {
                     const modCallSVG = createModCallSVG(size, '#ffca2a');
                     const modCallSize = Math.round(size * 0.6);
@@ -210,12 +218,15 @@ export async function drawMap(options: MapOptions) {
         const totalHeight = d + tailH;
 
         for (const call of emergencyCallsArr) {
+            const [x, y] = call.position ?? [];
+            if (typeof x !== 'number' || typeof y !== 'number') continue;
+
             const color = getTeamColor(call.team);
             const emSVG = createEmergencyCallSVG(size, color);
             composites.push({
                 input: Buffer.from(emSVG),
-                left: Math.round(call.position![0]! - d / 2),
-                top: Math.round(call.position![1]! - totalHeight),
+                left: Math.round(x - d / 2),
+                top: Math.round(y - totalHeight),
             });
         }
     }

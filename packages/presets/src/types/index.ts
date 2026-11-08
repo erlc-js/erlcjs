@@ -8,7 +8,7 @@ export interface Livery {
     /** The livery/texture name to ban. */
     livery: string,
     /** The vehicle model this livery restriction applies to. */
-    vehicle: Vehicles,
+    vehicle?: Vehicles,
 }
 
 /**

@@ -21,6 +21,42 @@ export class InvalidGlobalKeyError extends Error {
 }
 
 /**
+ * Error thrown when an authorization link is requested without a global app ID.
+ * @public
+ */
+export class MissingGlobalAppIdError extends Error {
+    constructor(message: string = 'No Global App ID is configured. Set ClientOptions.globalAppId to create an authorization link.') {
+        super(message);
+        this.name = 'MissingGlobalAppIdError';
+    }
+}
+
+/**
+ * Error thrown when a command is sent to a private server that has no players.
+ * @public
+ */
+export class NoPlayersInServerError extends Error {
+    constructor(
+        message: string = 'The private server has no players in it.',
+        public readonly commandId?: string,
+    ) {
+        super(message);
+        this.name = 'NoPlayersInServerError';
+    }
+}
+
+/**
+ * Error thrown when unauthenticated requests are made for multiple servers.
+ * @public
+ */
+export class MultipleServersUnauthenticatedError extends Error {
+    constructor(message: string = 'Unauthenticated requests cannot be made for multiple servers. Create a public application and send its global key in the Authorization header.') {
+        super(message);
+        this.name = 'MultipleServersUnauthenticatedError';
+    }
+}
+
+/**
  * Error thrown when a custom in-game command is invalid.
  * @public
  */
@@ -47,7 +83,10 @@ export class TimeoutError extends Error {
  * @public
  */
 export class ERLCAPIError extends Error {
-    constructor(message: string = 'ER:LC API Error.') {
+    constructor(
+        message: string = 'ER:LC API Error.',
+        public readonly commandId?: string,
+    ) {
         super(message);
         this.name = 'ERLCAPIError';
     }
@@ -91,11 +130,11 @@ export class InvalidCommandError extends Error {
  * This is normally thrown when the IP was not whitelisted or the global app was not authorized for that server.
  * To authorize an IP go to https://api.erlc.gg/server-owners.
  * To create a global app for an authorization link go to https://api.erlc.gg/developers/applications.
- * To create an authorization link for your global app do `console.log(client.authorizationLink)`.
+ * To create an authorization link for your global app do `console.log(server.authorizationLink)`.
  * @public
  */
 export class UnauthorizedError extends Error {
-    constructor(message: string = 'You are not authorized to perform this action. Find out more at https://erlcjs.xyz/api/core/unauthorizederror/') {
+    constructor(message: string = 'You are not authorized to perform this action. Find out more at https://erlcjs.xyz/docs/api/core/unauthorizederror/') {
         super(message);
         this.name = 'UnauthorizedError';
     }
@@ -135,7 +174,30 @@ export class RestrictedResourceError extends Error {
 }
 
 /**
+ * Error thrown when a webhook event targets a server that has no configured API key.
+ * @public
+ */
+export class ServerNotConfiguredError extends Error {
+    constructor(serverId?: string, message: string = `No server key is configured for server "${serverId}". Add it to ClientOptions.servers.`) {
+        super(message);
+        this.name = 'ServerNotConfiguredError';
+    }
+}
+
+/**
+ * Error thrown when two configured server keys resolve to the same server ID.
+ * @public
+ */
+export class DuplicateServerError extends Error {
+    constructor(serverId: string, message: string = `Multiple server keys resolve to the same server ID "${serverId}". Each key must belong to a unique server.`) {
+        super(message);
+        this.name = 'DuplicateServerError';
+    }
+}
+
+/**
  * Error thrown when the server being accessed is out of date.
+ * @public
  */
 export class OutOfDateServerError extends Error {
     constructor(message: string = 'The server being accessed is out of date. Try restarting it.') {

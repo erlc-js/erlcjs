@@ -7,9 +7,10 @@ import type { Player } from "../structures/player";
  */
 export interface ClientOptions {
     /**
-     * The ER:LC Server API Key.
+     * The ER:LC Server API keys the client should manage.
+     * The server ID of each server is parsed from its key.
      */
-    serverKey: string;
+    servers: string[];
     /**
      * Optional global key for your application.
      */
@@ -35,9 +36,10 @@ export interface ClientOptions {
          */
         path?: string;
         /**
-         * Secret key used for authenticating incoming webhooks.
+         * Maximum age in seconds a signed webhook may be before it is rejected
+         * as a replay. Defaults to 300.
          */
-        secret?: string;
+        timestampTolerance?: number;
     };
     /**
      * Configuration to poll the ER:LC API endpoints periodically.
@@ -59,11 +61,27 @@ export interface ClientOptions {
     maxCacheSize?: {
         killLog?: number;
         commandLog?: number;
+        joinLog?: number;
         modCalls?: number;
     }
 }
 
+/**
+ * The raw permission values returned by the ER:LC API.
+ * @public
+ */
 export type RawPlayerPermission = 'Normal' | 'Server Administrator' | 'Server Owner' | 'Server Moderator';
+
+/**
+ * Response returned by the ER:LC command endpoint.
+ * @public
+ */
+export interface CommandResponse {
+    /** A message explaining the status of the command. */
+    message: string;
+    /** A unique command execution ID, included on some errors for troubleshooting. */
+    commandId?: string;
+}
 
 /**
  * Raw data structure representing a player from the ERLC API.
@@ -83,9 +101,9 @@ export interface RawPlayerData {
      */
     Team: string;
     /**
-     * The player's optional callsign.
+     * The player's optional callsign. Only present for non-civilian teams.
      */
-    Callsign: string;
+    Callsign?: string | null;
     /**
      * The player's location coordinates and address details.
      */
@@ -135,6 +153,13 @@ export interface RawStaffData {
      */
     Helpers: Record<string, string>;
 }
+
+/**
+ * Raw ban list returned by `GET /v1/server/bans`.
+ * Maps Roblox UserIds to usernames.
+ * @public
+ */
+export type RawBanList = Record<string, string | null>;
 
 /**
  * Raw data structure representing a server join/leave log entry.
@@ -205,7 +230,7 @@ export interface RawModCall {
     /**
      * The identifier of the moderator who responded, if any (`Username:UserId`).
      */
-    Moderator?: string;
+    Moderator?: string | null;
     /**
      * Unix timestamp of the moderator call.
      */
@@ -310,7 +335,7 @@ export interface RawVehicle {
     /**
      * The custom texture path or name of the vehicle.
      */
-    Texture?: string;
+    Texture?: string | null;
     /**
      * Hexadecimal color code of the vehicle.
      */
@@ -421,5 +446,5 @@ export interface InGameCommand {
      * The execution of the command.
      * @param context - An object of the player and args given to the execute function.
      */
-    execute: (context: { player: Player; args: string[] }) => void;
+    execute: (context: { player: Player; args: string[] }) => void | Promise<void>;
 }

@@ -1,4 +1,4 @@
-import { Client } from '../client/client.js';
+import type { Server } from '../client/server.js';
 import { Base } from './base.js';
 import type { RawVehicle } from '../types/index.js';
 import { Player } from './player.js';
@@ -23,7 +23,7 @@ export class Vehicle extends Base {
     /**
      * The Player instance representing the owner, if they are currently online.
      */
-    owner!: Player;
+    owner?: Player;
     /**
      * The license plate text of the vehicle.
      */
@@ -43,11 +43,11 @@ export class Vehicle extends Base {
 
     /**
      * Creates an instance of Vehicle.
-     * @param client - The ERLCApi client.
+     * @param server - The server the vehicle is in.
      * @param data - The raw vehicle data to initialize.
      */
-    constructor(client: Client, data: RawVehicle) {
-        super(client);
+    constructor(server: Server, data: RawVehicle) {
+        super(server);
         this._patch(data);
     }
 
@@ -59,10 +59,10 @@ export class Vehicle extends Base {
     public _patch(data: RawVehicle): this {
         this.name = data.Name;
         this.ownerUsername = data.Owner;
-        this.ownerId = this.client.players.getIdFromName(this.ownerUsername)!;
-        this.owner = this.client.players.cache.get(this.ownerId)!;
+        this.ownerId = this.server.players.getIdFromName(this.ownerUsername) ?? 0;
+        this.owner = this.server.players.cache.get(this.ownerId);
         this.plate = data.Plate;
-        this.texture = data.Texture;
+        this.texture = data.Texture ?? undefined;
         this.colorHex = data.ColorHex;
         this.colorName = data.ColorName;
         return this;

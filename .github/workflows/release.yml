@@ -1,55 +1,143 @@
 name: Release
 
 on:
-  release:
-    types: [published]
+    push:
+        tags:
+            - 'v*'
 
 permissions:
-  contents: write
+    contents: write
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.event.release.tag_name }}
-  cancel-in-progress: false
+    group: release-${{ github.ref }}
+    cancel-in-progress: false
 
 jobs:
-  publish:
-    name: Publish changed packages
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          ref: ${{ github.event.release.tag_name }}
+    ci:
+        name: Verify
+        uses: ./.github/workflows/ci.yml
 
-      - name: Install pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          version: 10.27.0
-
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 22
-          cache: pnpm
-          registry-url: https://registry.npmjs.org/
-
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
-
-      - name: Build
-        run: pnpm build
-
-      - name: Configure git
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-
-      - name: Publish
-        run: pnpm changeset publish
+    publish:
+        name: Publish packages
+        needs: ci
+        runs-on: ubuntu-latest
+        timeout-minutes: 45
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            npm_config_frozen_lockfile: 'false'
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+              with:
+                  fetch-depth: 0
+                  fetch-tags: true
 
-      - name: Push tags
-        if: always()
-        run: git push origin --tags
+            - name: Enable pnpm
+              uses: pnpm/action-setup@v4
+              with:
+                  version: 10.27.0
+                  run_install: false
+
+            - name: Set up Node
+              uses: actions/setup-node@v4
+              with:
+                  node-version: '22'
+                  registry-url: https://registry.npmjs.org
+
+            - name: Determine release version
+              id: release
+              shell: bash
+              run: |
+                  set -euo pipefail
+                  VERSION="${GITHUB_REF_NAME#v}"
+
+                  if [[ ! "$VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+(-[0-9A-Za-z.-]+)?$ ]]; then
+                    echo "::error::Tag ${GITHUB_REF_NAME} is not a valid semver tag"
+                    exit 1
+                  fi
+
+                  if [[ "$VERSION" == *-* ]]; then
+                    PRERELEASE="${VERSION#*-}"
+                    DIST_TAG="${PRERELEASE%%.*}"
+                    DIST_TAG="${DIST_TAG:-beta}"
+                    IS_PRERELEASE=true
+                  else
+                    DIST_TAG=latest
+                    IS_PRERELEASE=false
+                  fi
+
+                  echo "version=${VERSION}" >> "$GITHUB_OUTPUT"
+                  echo "dist_tag=${DIST_TAG}" >> "$GITHUB_OUTPUT"
+                  echo "prerelease=${IS_PRERELEASE}" >> "$GITHUB_OUTPUT"
+
+            - name: Resolve previous release tag
+              id: base
+              shell: bash
+              run: |
+                  set -euo pipefail
+                  PREVIOUS="$(git describe --tags --match 'v*' --abbrev=0 "${GITHUB_REF_NAME}^" 2>/dev/null || true)"
+
+                  if [ -z "$PREVIOUS" ]; then
+                    echo "::error::No previous release tag found. Push the initial tag before releasing."
+                    exit 1
+                  fi
+
+                  echo "previous_tag=${PREVIOUS}" >> "$GITHUB_OUTPUT"
+
+            - name: Sync package versions
+              run: node scripts/set-version.mjs "${{ steps.release.outputs.version }}"
+
+            - name: Install dependencies
+              run: pnpm install --no-frozen-lockfile
+
+            - name: Build packages
+              run: pnpm build
+
+            - name: Generate API reference
+              run: pnpm docs:generate
+
+            - name: Rebuild core with generated API docs
+              run: pnpm --filter @erlcjs/core build
+
+            - name: Publish packages to npm
+              shell: bash
+              env:
+                  NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+              run: |
+                  set -euo pipefail
+                  VERSION="${{ steps.release.outputs.version }}"
+                  DIST_TAG="${{ steps.release.outputs.dist_tag }}"
+
+                  for name in core map presets; do
+                    PACKAGE="@erlcjs/${name}"
+
+                    if npm view "${PACKAGE}@${VERSION}" version >/dev/null 2>&1; then
+                      echo "${PACKAGE}@${VERSION} is already published; skipping"
+                      continue
+                    fi
+
+                    echo "Publishing ${PACKAGE}@${VERSION} with dist-tag ${DIST_TAG}"
+                    (cd "packages/${name}" && pnpm publish --access public --no-git-checks --tag "${DIST_TAG}")
+                  done
+
+            - name: Generate release log
+              uses: devs-des1re/releaselog@v1
+              with:
+                  token: ${{ secrets.GITHUB_TOKEN }}
+                  dev-branch: dev
+                  main-branch: main
+                  current-tag: ${{ github.ref_name }}
+                  previous-tag: ${{ steps.base.outputs.previous_tag }}
+                  release-name: erlc.js ${{ github.ref_name }}
+                  release-prerelease: auto
+                  humanize: false
+                  include-merge-commits: false
+                  include-pr-numbers: true
+                  breaking-changes: true
+                  exclude-bots: true
+                  output-file: release-notes.md
+
+            - name: Upload release notes
+              uses: actions/upload-artifact@v4
+              with:
+                  name: release-notes
+                  path: release-notes.md
