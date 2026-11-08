@@ -10,6 +10,7 @@ export * from './gateway/webhookserver.js';
 export * from './rest/manager.js';
 
 // Managers
+export * from './managers/banmanager.js';
 export * from './managers/commandmanager.js';
 export * from './managers/playermanager.js';
 export * from './managers/servermanager.js';
@@ -23,6 +24,7 @@ export * from './managers/staffmanager.js';
 
 // Structures
 export * from './structures/base.js';
+export * from './structures/ban.js';
 export * from './structures/player.js';
 export * from './structures/serverinfo.js';
 export * from './structures/vehicle.js';

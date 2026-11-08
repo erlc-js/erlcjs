@@ -4,6 +4,7 @@ import type { InGameCommand, RawServerData } from '../types/index.js';
 import type { RestManager } from '../rest/manager.js';
 import { ServerInfo } from '../structures/serverinfo.js';
 import { Base } from '../structures/base.js';
+import { BanManager } from '../managers/banmanager.js';
 import { PlayerManager } from '../managers/playermanager.js';
 import { VehicleManager } from '../managers/vehiclemanager.js';
 import { CommandManager } from '../managers/commandmanager.js';
@@ -43,6 +44,8 @@ export class Server {
 
     /** Manager for fetching and caching general server configuration. */
     public players: PlayerManager;
+    /** Manager for fetching and caching the server's ban list. */
+    public bans: BanManager;
     /** Manager for player caching, joining, and management actions. */
     public commands: CommandManager;
     /** Manager for spawned vehicles cache and events. */
@@ -88,6 +91,7 @@ export class Server {
         };
 
         this.players = new PlayerManager(this);
+        this.bans = new BanManager(this);
         this.commands = new CommandManager(this);
         this.vehicles = new VehicleManager(this);
         this.commandLogs = new CommandLogManager(this, client.options.maxCacheSize?.commandLog);

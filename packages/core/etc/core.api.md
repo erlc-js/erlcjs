@@ -7,6 +7,23 @@
 import { EventEmitter } from 'node:events';
 
 // @public
+export class Ban extends Base {
+    constructor(server: Server, playerId: string | number, username?: string | null);
+    _patch(playerId: string | number, username?: string | null): this;
+    player?: Player;
+    playerId: number;
+    username?: string;
+}
+
+// @public
+export class BanManager {
+    constructor(server: Server);
+    cache: Collection<number, Ban>;
+    fetchAll(): Promise<Collection<number, Ban>>;
+    updateCache(rawBans: RawBanList): Collection<number, Ban>;
+}
+
+// @public
 export class Base {
     constructor(server: Server);
     get client(): Client;
@@ -402,6 +419,9 @@ export class ProhibitedMessageError extends Error {
 }
 
 // @public
+export type RawBanList = Record<string, string | null>;
+
+// @public
 export interface RawCommandLog {
     Command: string;
     Player: string;
@@ -512,7 +532,7 @@ export interface RawWebhookEmergencyCall {
 
 // @public
 export class RestManager {
-    constructor(globalKey?: string | undefined);
+    constructor(globalKey?: string);
     getRateLimits(): Record<string, {
         limit: number;
         remaining: number;
@@ -539,6 +559,7 @@ export class RestrictedResourceError extends Error {
 export class Server {
     constructor(client: Client, key: string);
     get authorizationLink(): string;
+    bans: BanManager;
     clearCaches(): void;
     readonly client: Client;
     commandLogs: CommandLogManager;

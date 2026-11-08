@@ -81,6 +81,8 @@ player?.deaths;      // deaths where this player was killed
 
 These getters read the current caches; they do not fetch new data.
 
+The server's ban list is fetched on demand with `server.bans.fetchAll()`; it is not part of the polling loop. The resulting cache is keyed by UserId and contains `Ban` structures.
+
 ## Filter the cache
 
 ```ts

@@ -15,6 +15,7 @@ const server = client.servers.get('YOUR_SERVER_ID')!;
 | Cache | Key | Structure |
 |-------|-----|-----------|
 | `server.players.cache` | UserId | `Player` |
+| `server.bans.cache` | UserId | `Ban` |
 | `server.vehicles.cache` | License plate | `Vehicle` |
 | `server.staff.admins` | UserId | `Staff` |
 | `server.staff.mods` | UserId | `Staff` |

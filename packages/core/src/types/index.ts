@@ -155,6 +155,13 @@ export interface RawStaffData {
 }
 
 /**
+ * Raw ban list returned by `GET /v1/server/bans`.
+ * Maps Roblox UserIds to usernames.
+ * @public
+ */
+export type RawBanList = Record<string, string | null>;
+
+/**
  * Raw data structure representing a server join/leave log entry.
  * @public
  */
