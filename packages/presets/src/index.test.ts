@@ -186,6 +186,25 @@ describe('banLiveries', () => {
         server.client.destroy();
     });
 
+    it('invokes the action once when multiple livery entries match', () => {
+        const server = makeServer();
+        server.players.updateCache([rawPlayer('Alex', 7)]);
+        const vehicle = new Vehicle(server, {
+            Name: 'Chevlon Captain 1992',
+            Owner: 'Alex',
+            Plate: 'ABC123',
+            ColorHex: '#fff',
+            ColorName: 'White',
+            Texture: 'Staff',
+        } as any);
+        const action = vi.fn();
+
+        banLiveries(['Staff', { livery: 'Staff' }], action)(vehicle);
+
+        expect(action).toHaveBeenCalledTimes(1);
+        server.client.destroy();
+    });
+
     it('supports livery restrictions that apply to all vehicles', () => {
         const server = makeServer();
         server.players.updateCache([rawPlayer('Alex', 7)]);
@@ -250,6 +269,22 @@ describe('banCommand', () => {
         server.client.destroy();
     });
 
+    it('invokes the action once when multiple banned prefixes match', () => {
+        const server = makeServer();
+        server.players.updateCache([rawPlayer('Alex', 1)]);
+        const log = new CommandLog(server, {
+            Player: 'Alex:1',
+            Timestamp: 123,
+            Command: ':admin all x',
+        });
+        const action = vi.fn();
+
+        banCommand([':admin', ':admin all'], action)(log);
+
+        expect(action).toHaveBeenCalledTimes(1);
+        server.client.destroy();
+    });
+
     it('does not throw when the command sender is not cached', () => {
         const server = makeServer();
         const log = new CommandLog(server, { Player: 'Ghost:99', Timestamp: 123, Command: ':admin x' });
@@ -267,7 +302,7 @@ describe('auto helpers', () => {
     it('sends hints on an interval', () => {
         vi.useFakeTimers();
         const server = makeServer();
-        const execute = vi.spyOn(server.commands, 'execute').mockResolvedValue('ok');
+        const execute = vi.spyOn(server.commands, 'execute').mockResolvedValue({ message: 'ok' });
         const interval = autoHint(server, 'Welcome!', 1000);
         vi.advanceTimersByTime(3000);
         expect(execute).toHaveBeenCalledWith(':h Welcome!');
@@ -278,7 +313,7 @@ describe('auto helpers', () => {
     it('sends commands on an interval', () => {
         vi.useFakeTimers();
         const server = makeServer();
-        const execute = vi.spyOn(server.commands, 'execute').mockResolvedValue('ok');
+        const execute = vi.spyOn(server.commands, 'execute').mockResolvedValue({ message: 'ok' });
         const interval = autoCommand(server, ':m hi', 1000);
         vi.advanceTimersByTime(2000);
         expect(execute).toHaveBeenCalledWith(':m hi');

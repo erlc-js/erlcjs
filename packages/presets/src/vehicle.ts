@@ -48,10 +48,12 @@ export function banLiveries(liveries: (Livery | string)[], action: (vehicle: Veh
             if (typeof livery === 'string') {
                 if (livery === vehicle.texture) {
                     action(vehicle);
+                    return;
                 }
             } else if (livery.livery === vehicle.texture) {
                 if (!livery.vehicle || livery.vehicle === vehicle.name) {
                     action(vehicle);
+                    return;
                 }
             }
         }

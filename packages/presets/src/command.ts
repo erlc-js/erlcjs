@@ -37,8 +37,10 @@ export function banCommand(commands: string | string[], action: (log: CommandLog
         for (const command of commands) {
             if (startsWith && log.command.startsWith(command.trim())) {
                 action(log);
-            } else if (!startsWith && log.command.trim() === command) {
+                return;
+            } else if (!startsWith && log.command.trim() === command.trim()) {
                 action(log);
+                return;
             }
         }
     }
