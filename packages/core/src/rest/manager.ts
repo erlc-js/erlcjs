@@ -60,11 +60,15 @@ export class RestManager {
     private headersSeen = false;
     private resumeTimer?: NodeJS.Timeout;
 
+    private readonly globalKey?: string;
+
     /**
      * Creates an instance of RestManager.
      * @param globalKey - The global API key for the application, if any.
      */
-    constructor(private readonly globalKey?: string) {}
+    constructor(globalKey?: string) {
+        this.globalKey = globalKey?.trim() || undefined;
+    }
 
     /**
      * Enqueues and sends an HTTP request to the ER:LC API.

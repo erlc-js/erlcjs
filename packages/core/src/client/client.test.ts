@@ -51,6 +51,12 @@ describe('Client', () => {
         client.destroy();
     });
 
+    it('trims whitespace from global app ids', () => {
+        const client = new Client({ servers: ['PRC-111111111-key'], globalAppId: ' 123 ' });
+        expect(client.globalAppId).toBe('123');
+        client.destroy();
+    });
+
     it('throws DuplicateServerError for keys resolving to the same server id', () => {
         expect(() => new Client({ servers: ['PRC-111111111-key', 'PRC-111111111-other'] })).toThrow(DuplicateServerError);
     });

@@ -25,6 +25,26 @@ describe('CommandLogManager', () => {
         server.client.destroy();
     });
 
+    it('does not re-emit logs that were evicted by the cache limit', () => {
+        const server = makeServer();
+        const commands: string[] = [];
+        server.client.on(ERLCEvents.command, (log) => commands.push(log.command));
+
+        const manager = new CommandLogManager(server, 2);
+        const raw = [
+            { Player: 'Alex:1', Timestamp: 1, Command: ':one' },
+            { Player: 'Alex:1', Timestamp: 2, Command: ':two' },
+            { Player: 'Alex:1', Timestamp: 3, Command: ':three' },
+        ];
+
+        manager.updateCache(raw);
+        manager.updateCache(raw);
+
+        expect(commands).toEqual([':one', ':two', ':three']);
+        expect(manager.cache.size).toBe(2);
+        server.client.destroy();
+    });
+
     it('evicts the oldest logs by timestamp regardless of insertion order', () => {
         const server = makeServer();
         const manager = new CommandLogManager(server, 2);

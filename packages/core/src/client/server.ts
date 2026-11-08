@@ -80,8 +80,8 @@ export class Server {
      */
     constructor(client: Client, key: string) {
         this.client = client;
-        this.key = key;
-        this.id = String(key.split('-')[1]);
+        this.key = key.trim();
+        this.id = String(this.key.split('-')[1]);
 
         this.rest = {
             request: (method, endpoint, body) => this.client.rest.request(method, endpoint, body, this.key),

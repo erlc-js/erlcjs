@@ -4,6 +4,9 @@ import { Collection } from '../util/collection.js';
 import { ModCall } from '../structures/modcall.js';
 import { type RawModCall, type RawServerData } from '../types/index.js';
 
+/** Maximum number of evicted keys remembered to avoid re-emitting old calls. */
+const MAX_SEEN_KEYS = 10_000;
+
 /**
  * Manager responsible for fetching, caching, and updating ModCall structures.
  * @public
@@ -13,6 +16,7 @@ export class ModCallManager {
      * Collection cache of logged moderator calls, keyed by a composite `Caller:Timestamp` key.
      */
     public cache = new Collection<string, ModCall>();
+    private readonly seenKeys = new Set<string>();
 
     /**
      * Creates an instance of ModCallManager.
@@ -48,6 +52,11 @@ export class ModCallManager {
             const cachedCall = this.cache.get(key);
 
             if (!cachedCall) {
+                if (this.maxCacheSize && this.maxCacheSize > 0) {
+                    if (this.seenKeys.has(key)) continue;
+                    this.rememberKey(key);
+                }
+
                 const newCall = new ModCall(this.server, rawData);
                 this.cache.set(key, newCall);
                 this.server.client.emit(ERLCEvents.modCall, newCall);
@@ -72,6 +81,14 @@ export class ModCallManager {
         }
 
         return this.cache;
+    }
+
+    private rememberKey(key: string) {
+        this.seenKeys.add(key);
+        if (this.seenKeys.size <= MAX_SEEN_KEYS) return;
+
+        const oldest = this.seenKeys.values().next().value;
+        if (oldest !== undefined) this.seenKeys.delete(oldest);
     }
 
     private findOldestKey(): string | undefined {

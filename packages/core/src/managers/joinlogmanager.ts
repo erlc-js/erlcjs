@@ -4,6 +4,9 @@ import { JoinLog } from '../structures/joinlog.js';
 import { type RawJoinLog, type RawServerData } from '../types/index.js';
 import { Collection } from '../util/collection.js';
 
+/** Maximum number of evicted keys remembered to avoid re-emitting old logs. */
+const MAX_SEEN_KEYS = 10_000;
+
 /**
  * Manager responsible for fetching, caching, and updating JoinLog structures.
  * @public
@@ -14,6 +17,7 @@ export class JoinLogManager {
      * `Player:Timestamp:Join` key.
      */
     public cache = new Collection<string, JoinLog>();
+    private readonly seenKeys = new Set<string>();
 
     /**
      * Creates an instance of JoinLogManager.
@@ -48,6 +52,11 @@ export class JoinLogManager {
             const key = `${rawData.Player}:${rawData.Timestamp}:${rawData.Join}`;
             if (this.cache.has(key)) continue;
 
+            if (this.maxCacheSize && this.maxCacheSize > 0) {
+                if (this.seenKeys.has(key)) continue;
+                this.rememberKey(key);
+            }
+
             const log = new JoinLog(this.server, rawData);
             this.cache.set(key, log);
             this.server.client.emit(ERLCEvents.joinLog, log);
@@ -62,6 +71,14 @@ export class JoinLogManager {
         }
 
         return this.cache;
+    }
+
+    private rememberKey(key: string) {
+        this.seenKeys.add(key);
+        if (this.seenKeys.size <= MAX_SEEN_KEYS) return;
+
+        const oldest = this.seenKeys.values().next().value;
+        if (oldest !== undefined) this.seenKeys.delete(oldest);
     }
 
     private findOldestKey(): string | undefined {

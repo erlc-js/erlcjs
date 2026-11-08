@@ -4,6 +4,9 @@ import { CommandLog } from '../structures/commandlog.js';
 import { type RawCommandLog, type RawServerData } from '../types/index.js';
 import { Collection } from '../util/collection.js';
 
+/** Maximum number of evicted keys remembered to avoid re-emitting old logs. */
+const MAX_SEEN_KEYS = 10_000;
+
 /**
  * Manager responsible for fetching, caching, and updating CommandLog structures.
  * @public
@@ -13,6 +16,7 @@ export class CommandLogManager {
      * Collection cache of logged commands, keyed by a composite `Player:Timestamp:Command` key.
      */
     public cache = new Collection<string, CommandLog>();
+    private readonly seenKeys = new Set<string>();
 
     /**
      * Creates an instance of CommandLogManager.
@@ -45,13 +49,18 @@ export class CommandLogManager {
     public updateCache(rawCommands: RawCommandLog[]) {
         for (const rawData of rawCommands) {
             const key = `${rawData.Player}:${rawData.Timestamp}:${rawData.Command}`;
-            const cachedPlayer = this.cache.get(key);
+            if (this.cache.has(key)) continue;
 
-            if (!cachedPlayer) {
-                const newCommand = new CommandLog(this.server, rawData);
-                this.cache.set(key, newCommand);
-                this.server.client.emit(ERLCEvents.command, newCommand);
+            // Polls return a rolling window of logs. Remember keys that were
+            // evicted so old logs are not re-added and re-emitted every poll.
+            if (this.maxCacheSize && this.maxCacheSize > 0) {
+                if (this.seenKeys.has(key)) continue;
+                this.rememberKey(key);
             }
+
+            const newCommand = new CommandLog(this.server, rawData);
+            this.cache.set(key, newCommand);
+            this.server.client.emit(ERLCEvents.command, newCommand);
         }
 
         if (this.maxCacheSize && this.maxCacheSize > 0) {
@@ -63,6 +72,14 @@ export class CommandLogManager {
         }
 
         return this.cache;
+    }
+
+    private rememberKey(key: string) {
+        this.seenKeys.add(key);
+        if (this.seenKeys.size <= MAX_SEEN_KEYS) return;
+
+        const oldest = this.seenKeys.values().next().value;
+        if (oldest !== undefined) this.seenKeys.delete(oldest);
     }
 
     private findOldestKey(): string | undefined {

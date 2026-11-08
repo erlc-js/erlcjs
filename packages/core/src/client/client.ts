@@ -35,7 +35,8 @@ export class Client extends EventEmitter<ClientEvents> {
 
         this.rest = new RestManager(options.globalKey);
         this.servers = new ServerManager(this);
-        this.globalAppId = options.globalAppId;
+        this.globalAppId =
+            typeof options.globalAppId === 'string' ? options.globalAppId.trim() : options.globalAppId;
 
         for (const key of options.servers) {
             this.servers.add(new Server(this, key));

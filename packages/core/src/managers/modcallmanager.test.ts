@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { Client } from '../client/client.js';
 import { ERLCEvents } from '../client/events.js';
+import { ModCallManager } from './modcallmanager.js';
 
 function makeServer() {
     const client = new Client({ servers: ['PRC-111111111-key'] });
@@ -23,6 +24,25 @@ describe('ModCallManager', () => {
         server.modCalls.updateCache([answeredCall]);
         expect(answered).toBe(1);
 
+        server.client.destroy();
+    });
+
+    it('does not re-emit calls that were evicted by the cache limit', () => {
+        const server = makeServer();
+        const calls: number[] = [];
+        server.client.on(ERLCEvents.modCall, (call) => calls.push(call.timestamp));
+
+        const manager = new ModCallManager(server, 1);
+        const raw = [
+            { Caller: 'Alex:1', Timestamp: 1 },
+            { Caller: 'Bob:2', Timestamp: 2 },
+        ];
+
+        manager.updateCache(raw);
+        manager.updateCache(raw);
+
+        expect(calls).toEqual([1, 2]);
+        expect(manager.cache.size).toBe(1);
         server.client.destroy();
     });
 

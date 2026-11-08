@@ -30,6 +30,25 @@ describe('JoinLogManager', () => {
         server.client.destroy();
     });
 
+    it('does not re-emit logs that were evicted by the cache limit', () => {
+        const server = makeServer();
+        const logs: string[] = [];
+        server.client.on(ERLCEvents.joinLog, (log) => logs.push(log.playerUsername));
+
+        const manager = new JoinLogManager(server, 1);
+        const raw = [
+            { Join: true, Timestamp: 1, Player: 'Alex:1' },
+            { Join: true, Timestamp: 2, Player: 'Bob:2' },
+        ];
+
+        manager.updateCache(raw);
+        manager.updateCache(raw);
+
+        expect(logs).toEqual(['Alex', 'Bob']);
+        expect(manager.cache.size).toBe(1);
+        server.client.destroy();
+    });
+
     it('evicts the oldest logs by timestamp regardless of insertion order', () => {
         const server = makeServer();
         const manager = new JoinLogManager(server, 2);

@@ -4,6 +4,9 @@ import { Collection } from '../util/collection.js';
 import { KillLog } from '../structures/killlog.js';
 import { type RawKillLog, type RawServerData } from '../types/index.js';
 
+/** Maximum number of evicted keys remembered to avoid re-emitting old logs. */
+const MAX_SEEN_KEYS = 10_000;
+
 /**
  * Manager responsible for fetching, caching, and updating KillLog structures.
  * @public
@@ -13,6 +16,7 @@ export class KillLogManager {
      * Collection cache of logged kills, keyed by a composite `Killer:Killed:Timestamp` key.
      */
     public cache = new Collection<string, KillLog>();
+    private readonly seenKeys = new Set<string>();
 
     /**
      * Creates an instance of KillLogManager.
@@ -45,13 +49,16 @@ export class KillLogManager {
     public updateCache(rawCommands: RawKillLog[]) {
         for (const rawData of rawCommands) {
             const key = `${rawData.Killer}:${rawData.Killed}:${rawData.Timestamp}`;
-            const cachedPlayer = this.cache.get(key);
+            if (this.cache.has(key)) continue;
 
-            if (!cachedPlayer) {
-                const newKill = new KillLog(this.server, rawData);
-                this.cache.set(key, newKill);
-                this.server.client.emit(ERLCEvents.kill, newKill);
+            if (this.maxCacheSize && this.maxCacheSize > 0) {
+                if (this.seenKeys.has(key)) continue;
+                this.rememberKey(key);
             }
+
+            const newKill = new KillLog(this.server, rawData);
+            this.cache.set(key, newKill);
+            this.server.client.emit(ERLCEvents.kill, newKill);
         }
 
         if (this.maxCacheSize && this.maxCacheSize > 0) {
@@ -63,6 +70,14 @@ export class KillLogManager {
         }
 
         return this.cache;
+    }
+
+    private rememberKey(key: string) {
+        this.seenKeys.add(key);
+        if (this.seenKeys.size <= MAX_SEEN_KEYS) return;
+
+        const oldest = this.seenKeys.values().next().value;
+        if (oldest !== undefined) this.seenKeys.delete(oldest);
     }
 
     private findOldestKey(): string | undefined {

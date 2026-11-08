@@ -135,6 +135,19 @@ describe('RestManager', () => {
         expect(wait).toBeLessThanOrEqual(3000);
     });
 
+    it('trims whitespace from the global key before sending Authorization', async () => {
+        let authorization: string | undefined;
+        globalThis.fetch = (async (_url: string, init: any) => {
+            authorization = init.headers.Authorization;
+            return resp(200, rateHeaders({ limit: 35, remaining: 34 }), { ok: true });
+        }) as any;
+
+        const rm = new RestManager('  global-key\n');
+        await rm.request('GET', '/x', undefined, 'server-key');
+
+        expect(authorization).toBe('global-key');
+    });
+
     it('parses a numeric-string retry_after body', () => {
         const rm = new RestManager();
         const response = resp(429, {}, { retry_after: '2' });
