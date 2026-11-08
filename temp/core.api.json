@@ -4515,6 +4515,14 @@
                 },
                 {
                   "kind": "Content",
+                  "text": ", commandId?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string | undefined"
+                },
+                {
+                  "kind": "Content",
                   "text": ");"
                 }
               ],
@@ -4529,8 +4537,46 @@
                     "endIndex": 2
                   },
                   "isOptional": true
+                },
+                {
+                  "parameterName": "commandId",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 3,
+                    "endIndex": 4
+                  },
+                  "isOptional": true
                 }
               ]
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "@erlcjs/core!ERLCAPIError#commandId:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "readonly commandId?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string | undefined"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": true,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "commandId",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false,
+              "isProtected": false,
+              "isAbstract": false
             }
           ],
           "extendsTokenRange": {
@@ -7393,6 +7439,14 @@
                 },
                 {
                   "kind": "Content",
+                  "text": ", commandId?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string | undefined"
+                },
+                {
+                  "kind": "Content",
                   "text": ");"
                 }
               ],
@@ -7407,8 +7461,46 @@
                     "endIndex": 2
                   },
                   "isOptional": true
+                },
+                {
+                  "parameterName": "commandId",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 3,
+                    "endIndex": 4
+                  },
+                  "isOptional": true
                 }
               ]
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "@erlcjs/core!NoPlayersInServerError#commandId:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "readonly commandId?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string | undefined"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": true,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "commandId",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false,
+              "isProtected": false,
+              "isAbstract": false
             }
           ],
           "extendsTokenRange": {
@@ -14187,7 +14279,7 @@
             {
               "kind": "Method",
               "canonicalReference": "@erlcjs/core!StaffManager#fetchAll:member(1)",
-              "docComment": "/**\n * Fetches all staff members.\n * Updates the staff cache.\n *\n * @returns A promise resolving to a Collection of active Vehicles.\n */\n",
+              "docComment": "/**\n * Fetches all staff members.\n * Updates the staff cache.\n *\n * @returns A promise resolving to a Collection of staff role collections.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",

@@ -151,7 +151,7 @@ export class RestManager {
                     }
 
                     if (response.status === 422) {
-                        return reject(new NoPlayersInServerError(data?.message));
+                        return reject(new NoPlayersInServerError(data?.message, data?.commandId));
                     }
 
                     if (response.status === 429 || data.code === 4001) {
@@ -168,11 +168,11 @@ export class RestManager {
                             await new Promise((res) => setTimeout(res, delay));
                             return executeTask();
                         }
-                        return reject(new ERLCAPIError(this.describeError(response, data)));
+                        return reject(new ERLCAPIError(this.describeError(response, data), data?.commandId));
                     }
 
                     if (!response.ok) {
-                        return reject(new ERLCAPIError(this.describeError(response, data)));
+                        return reject(new ERLCAPIError(this.describeError(response, data), data?.commandId));
                     }
 
                     resolve(data);

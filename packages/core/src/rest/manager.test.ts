@@ -142,14 +142,19 @@ describe('RestManager', () => {
         expect(rm.getRetryAfter(response, { retry_after: '2' })).toBe(2000);
     });
 
-    it('maps a 422 no-players response to NoPlayersInServerError', async () => {
+    it('maps a 422 no-players response to NoPlayersInServerError with its command id', async () => {
         globalThis.fetch = (async () => resp(422, {}, {
             message: 'The private server has no players in it',
+            commandId: 'cmd_123',
         })) as any;
 
         const rm = new RestManager();
-        await expect(rm.request('POST', '/v2/server/command', { command: ':heal Alex' }, 'key'))
-            .rejects.toBeInstanceOf(NoPlayersInServerError);
+        const error = await rm
+            .request('POST', '/v2/server/command', { command: ':heal Alex' }, 'key')
+            .catch((err) => err);
+
+        expect(error).toBeInstanceOf(NoPlayersInServerError);
+        expect(error.commandId).toBe('cmd_123');
     });
 
     it('does not include undefined fields in generic API errors', async () => {

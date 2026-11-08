@@ -36,7 +36,10 @@ export class MissingGlobalAppIdError extends Error {
  * @public
  */
 export class NoPlayersInServerError extends Error {
-    constructor(message: string = 'The private server has no players in it.') {
+    constructor(
+        message: string = 'The private server has no players in it.',
+        public readonly commandId?: string,
+    ) {
         super(message);
         this.name = 'NoPlayersInServerError';
     }
@@ -80,7 +83,10 @@ export class TimeoutError extends Error {
  * @public
  */
 export class ERLCAPIError extends Error {
-    constructor(message: string = 'ER:LC API Error.') {
+    constructor(
+        message: string = 'ER:LC API Error.',
+        public readonly commandId?: string,
+    ) {
         super(message);
         this.name = 'ERLCAPIError';
     }

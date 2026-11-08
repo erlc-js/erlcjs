@@ -179,7 +179,9 @@ export class EmergencyCallManager {
 
 // @public
 export class ERLCAPIError extends Error {
-    constructor(message?: string);
+    constructor(message?: string, commandId?: string | undefined);
+    // (undocumented)
+    readonly commandId?: string | undefined;
 }
 
 // @public
@@ -314,7 +316,9 @@ export class MultipleServersUnauthenticatedError extends Error {
 
 // @public
 export class NoPlayersInServerError extends Error {
-    constructor(message?: string);
+    constructor(message?: string, commandId?: string | undefined);
+    // (undocumented)
+    readonly commandId?: string | undefined;
 }
 
 // @public
