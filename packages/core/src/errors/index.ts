@@ -21,6 +21,17 @@ export class InvalidGlobalKeyError extends Error {
 }
 
 /**
+ * Error thrown when unauthenticated requests are made for multiple servers.
+ * @public
+ */
+export class MultipleServersUnauthenticatedError extends Error {
+    constructor(message: string = 'Unauthenticated requests cannot be made for multiple servers. Create a public application and send its global key in the Authorization header.') {
+        super(message);
+        this.name = 'MultipleServersUnauthenticatedError';
+    }
+}
+
+/**
  * Error thrown when a custom in-game command is invalid.
  * @public
  */

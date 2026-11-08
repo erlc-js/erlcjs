@@ -67,7 +67,7 @@ export class Player extends Base {
         this.id = Number(splitPlayer[1]);
         this.username = splitPlayer[0]!;
         this.team = data.Team;
-        this.callsign = data.Callsign;
+        this.callsign = data.Callsign ?? undefined;
         this.location = {
             x: data.Location.LocationX,
             z: data.Location.LocationZ,

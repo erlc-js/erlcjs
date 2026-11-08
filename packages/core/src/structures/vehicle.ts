@@ -62,7 +62,7 @@ export class Vehicle extends Base {
         this.ownerId = this.server.players.getIdFromName(this.ownerUsername) ?? 0;
         this.owner = this.server.players.cache.get(this.ownerId);
         this.plate = data.Plate;
-        this.texture = data.Texture;
+        this.texture = data.Texture ?? undefined;
         this.colorHex = data.ColorHex;
         this.colorName = data.ColorName;
         return this;

@@ -52,11 +52,11 @@ export class VehicleManager {
             if (cachedVehicle) {
                 const oldVehicle = new Vehicle(this.server, cachedVehicle.toJSON());
                 cachedVehicle._patch(rawData);
-                if (oldVehicle.name === rawData.Name) {
-                    this.server.client.emit(ERLCEvents.vehicleUpdate, oldVehicle, cachedVehicle);
-                } else {
+                if (oldVehicle.name !== cachedVehicle.name) {
                     this.server.client.emit(ERLCEvents.vehicleRemove, oldVehicle);
                     this.server.client.emit(ERLCEvents.vehicleAdd, cachedVehicle);
+                } else if (JSON.stringify(oldVehicle.toJSON()) !== JSON.stringify(cachedVehicle.toJSON())) {
+                    this.server.client.emit(ERLCEvents.vehicleUpdate, oldVehicle, cachedVehicle);
                 }
             } else {
                 const newVehicle = new Vehicle(this.server, rawData);

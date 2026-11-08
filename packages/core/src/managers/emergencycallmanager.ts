@@ -57,7 +57,9 @@ export class EmergencyCallManager {
             if (cachedCall) {
                 const oldCall = new EmergencyCall(this.server, cachedCall.toJSON());
                 cachedCall._patch(rawData);
-                this.server.client.emit(ERLCEvents.emergencyCallUpdate, oldCall, cachedCall);
+                if (JSON.stringify(oldCall.toJSON()) !== JSON.stringify(cachedCall.toJSON())) {
+                    this.server.client.emit(ERLCEvents.emergencyCallUpdate, oldCall, cachedCall);
+                }
             } else {
                 const newCall = new EmergencyCall(this.server, rawData);
                 this.cache.set(newCall.callNumber, newCall);

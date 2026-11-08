@@ -1,4 +1,4 @@
-import { ERLCAPIError, InvalidCommandError, InvalidGlobalKeyError, InvalidServerKeyError, OutOfDateServerError, ProhibitedMessageError, RestrictedCommandError, RestrictedResourceError, ServerBannedError, ServerOfflineError, UnauthorizedError } from '../errors/index.js';
+import { ERLCAPIError, InvalidCommandError, InvalidGlobalKeyError, InvalidServerKeyError, MultipleServersUnauthenticatedError, OutOfDateServerError, ProhibitedMessageError, RestrictedCommandError, RestrictedResourceError, ServerBannedError, ServerOfflineError, UnauthorizedError } from '../errors/index.js';
 
 /** Extra time added to rate-limit window resets to avoid racing the server (covers second-truncated reset headers). */
 const SAFETY_BUFFER_MS = 1000;
@@ -127,6 +127,8 @@ export class RestManager {
                                 return reject(new InvalidGlobalKeyError());
                             case 2004:
                                 return reject(new ServerBannedError());
+                            case 2005:
+                                return reject(new MultipleServersUnauthenticatedError());
                             case 3001:
                                 return reject(new InvalidCommandError());
                             case 3002:
@@ -189,6 +191,10 @@ export class RestManager {
         const remaining = parseInt(headers.get('x-ratelimit-remaining') || '0', 10);
         const resetHeader = headers.get('x-ratelimit-reset');
 
+        // Learn the route's bucket even when a 429 response omits the reset
+        // headers, so Retry-After freezes the correct bucket.
+        this.routeToBucket.set(this.getRouteKey(endpoint, serverKey), bucketId);
+
         if (resetHeader) {
             const resetSeconds = parseInt(resetHeader, 10);
 
@@ -197,9 +203,6 @@ export class RestManager {
             }
 
             const resetTime = resetSeconds * 1000;
-            const routeKey = this.getRouteKey(endpoint, serverKey);
-
-            this.routeToBucket.set(routeKey, bucketId);
 
             const bucket = this.buckets.get(bucketId) ?? this.createBucket(bucketId);
             bucket.known = true;

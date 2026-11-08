@@ -38,6 +38,9 @@ describe('PlayerManager', () => {
         expect(updates).toEqual(['Fire']);
         expect(server.players.cache.get(1)?.team).toBe('Fire');
 
+        server.players.updateCache([rawPlayer('Alex', 1, 'Fire')]);
+        expect(updates).toEqual(['Fire']);
+
         server.players.updateCache([rawPlayer('Other', 2)]);
         expect(leaves).toEqual([1]);
         expect(server.players.cache.size).toBe(1);

@@ -39,4 +39,37 @@ describe('VehicleManager', () => {
 
         client.destroy();
     });
+
+    it('only emits updates when vehicle data actually changes', () => {
+        const server = makeServer();
+        const client = server.client;
+        const updates: string[] = [];
+        const added: string[] = [];
+        const removed: string[] = [];
+
+        client.on(ERLCEvents.vehicleUpdate, (_old, next) => updates.push(next.colorName));
+        client.on(ERLCEvents.vehicleAdd, (vehicle) => added.push(vehicle.name));
+        client.on(ERLCEvents.vehicleRemove, (vehicle) => removed.push(vehicle.name));
+
+        const base = {
+            Name: 'Chevlon Captain 1992',
+            Owner: 'Alex',
+            Plate: 'ABC123',
+            ColorHex: '#fff',
+            ColorName: 'White',
+        };
+
+        server.vehicles.updateCache([base]);
+        server.vehicles.updateCache([{ ...base }]);
+        expect(updates).toEqual([]);
+
+        server.vehicles.updateCache([{ ...base, ColorHex: '#000', ColorName: 'Black' }]);
+        expect(updates).toEqual(['Black']);
+
+        server.vehicles.updateCache([{ ...base, Name: 'Chevlon Captain 2009' }]);
+        expect(removed).toEqual(['Chevlon Captain 1992']);
+        expect(added).toEqual(['Chevlon Captain 1992', 'Chevlon Captain 2009']);
+
+        client.destroy();
+    });
 });

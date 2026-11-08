@@ -72,6 +72,17 @@ export interface ClientOptions {
 export type RawPlayerPermission = 'Normal' | 'Server Administrator' | 'Server Owner' | 'Server Moderator';
 
 /**
+ * Response returned by the ER:LC command endpoint.
+ * @public
+ */
+export interface CommandResponse {
+    /** A message explaining the status of the command. */
+    message: string;
+    /** A unique command execution ID, included on some errors for troubleshooting. */
+    commandId?: string;
+}
+
+/**
  * Raw data structure representing a player from the ERLC API.
  * @public
  */
@@ -89,9 +100,9 @@ export interface RawPlayerData {
      */
     Team: string;
     /**
-     * The player's optional callsign.
+     * The player's optional callsign. Only present for non-civilian teams.
      */
-    Callsign: string;
+    Callsign?: string | null;
     /**
      * The player's location coordinates and address details.
      */
@@ -211,7 +222,7 @@ export interface RawModCall {
     /**
      * The identifier of the moderator who responded, if any (`Username:UserId`).
      */
-    Moderator?: string;
+    Moderator?: string | null;
     /**
      * Unix timestamp of the moderator call.
      */
@@ -316,7 +327,7 @@ export interface RawVehicle {
     /**
      * The custom texture path or name of the vehicle.
      */
-    Texture?: string;
+    Texture?: string | null;
     /**
      * Hexadecimal color code of the vehicle.
      */

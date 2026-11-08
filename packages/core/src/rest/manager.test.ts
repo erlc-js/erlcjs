@@ -1,4 +1,5 @@
 import { afterEach, describe, expect, it } from 'vitest';
+import { MultipleServersUnauthenticatedError } from '../errors/index.js';
 import { RestManager } from './manager.js';
 
 const originalFetch = globalThis.fetch;
@@ -134,6 +135,30 @@ describe('RestManager', () => {
         expect(wait).toBeLessThanOrEqual(3000);
     });
 
+    it('learns the route bucket from a 429 even when reset headers are missing', async () => {
+        let callCount = 0;
+        globalThis.fetch = (async () => {
+            callCount++;
+            if (callCount === 1) {
+                return resp(429, { 'x-ratelimit-bucket': 'command', 'retry-after': '0.2' }, {
+                    code: 4001,
+                    message: 'rate limited',
+                });
+            }
+            return resp(200, rateHeaders({ limit: 35, remaining: 34 }), { ok: true });
+        }) as any;
+
+        const rm = new RestManager();
+        const pending = rm.request('POST', '/v2/server/command', { command: ':heal Alex' }, 'key');
+        await sleep(30);
+
+        const limits = rm.getRateLimits();
+        expect(limits['command']).toBeDefined();
+        expect(limits['command']?.frozenUntil).toBeGreaterThan(Date.now());
+
+        await expect(pending).resolves.toEqual({ ok: true });
+    });
+
     it('exposes rate limit introspection', () => {
         const rm = new RestManager();
         expect(rm.inflight).toBe(0);
@@ -155,6 +180,18 @@ describe('RestManager', () => {
         expect(limits['global']?.limit).toBe(0);
         expect(limits['global']?.remaining).toBe(0);
         expect(limits['global']?.reset).toBe(0);
+    });
+
+    it('maps error code 2005 to a multi-server authentication error', async () => {
+        globalThis.fetch = (async () => resp(403, {}, {
+            code: 2005,
+            message: 'Unauthenticated requests for multiple servers are not allowed',
+        })) as any;
+
+        const rm = new RestManager();
+        await expect(rm.request('GET', '/v2/server')).rejects.toBeInstanceOf(
+            MultipleServersUnauthenticatedError,
+        );
     });
 
     it('shares the budget across servers using the same bucket', async () => {

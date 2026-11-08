@@ -45,8 +45,11 @@ describe('Player', () => {
     it('serializes a missing callsign as an empty string', () => {
         const server = makeServer();
         const player = new Player(server, { ...rawPlayer('Alex', 1), Callsign: undefined } as any);
+        const nullPlayer = new Player(server, { ...rawPlayer('Bob', 2), Callsign: null } as any);
 
         expect(player.toJSON().Callsign).toBe('');
+        expect(nullPlayer.callsign).toBeUndefined();
+        expect(nullPlayer.toJSON().Callsign).toBe('');
         server.client.destroy();
     });
 
@@ -54,7 +57,7 @@ describe('Player', () => {
         const server = makeServer();
         const alex = new Player(server, rawPlayer('Alex', 1));
         const bob = new Player(server, rawPlayer('Bob', 2));
-        const execute = vi.spyOn(server.commands, 'execute').mockResolvedValue('ok');
+        const execute = vi.spyOn(server.commands, 'execute').mockResolvedValue({ message: 'ok' });
 
         await alex.tp(bob);
         await alex.tp(3);

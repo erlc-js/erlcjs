@@ -57,7 +57,9 @@ export class PlayerManager {
             if (cachedPlayer) {
                 const oldPlayer = new Player(this.server, cachedPlayer.toJSON());
                 cachedPlayer._patch(rawData);
-                this.server.client.emit(ERLCEvents.playerUpdate, oldPlayer, cachedPlayer);
+                if (JSON.stringify(oldPlayer.toJSON()) !== JSON.stringify(cachedPlayer.toJSON())) {
+                    this.server.client.emit(ERLCEvents.playerUpdate, oldPlayer, cachedPlayer);
+                }
             } else {
                 const newPlayer = new Player(this.server, rawData);
                 this.cache.set(newPlayer.id, newPlayer);
