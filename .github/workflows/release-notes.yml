@@ -1,0 +1,76 @@
+name: Release Notes
+
+on:
+    workflow_dispatch:
+        inputs:
+            tag:
+                description: Existing release tag to regenerate notes for
+                required: true
+                type: string
+            previous-tag:
+                description: Optional previous tag or commit SHA; leave empty to auto-detect
+                required: false
+                type: string
+            dry-run:
+                description: Generate notes without updating the GitHub release
+                required: false
+                type: boolean
+                default: false
+
+permissions:
+    contents: write
+
+concurrency:
+    group: release-notes-${{ inputs.tag }}
+    cancel-in-progress: false
+
+jobs:
+    notes:
+        name: Regenerate release notes
+        runs-on: ubuntu-latest
+        timeout-minutes: 20
+        steps:
+            - name: Checkout release tag
+              uses: actions/checkout@v4
+              with:
+                  ref: ${{ inputs.tag }}
+                  fetch-depth: 0
+                  fetch-tags: true
+
+            - name: Generate release notes
+              uses: devs-des1re/releaselog@v1.0.1
+              with:
+                  token: ${{ secrets.GITHUB_TOKEN }}
+                  dev-branch: dev
+                  main-branch: main
+                  current-tag: ${{ inputs.tag }}
+                  previous-tag: ${{ inputs.previous-tag }}
+                  dry-run: ${{ inputs.dry-run }}
+                  publish: ${{ inputs.dry-run == false }}
+                  release-name: erlc.js ${{ inputs.tag }}
+                  release-prerelease: auto
+                  humanize: false
+                  include-merge-commits: false
+                  include-pr-numbers: true
+                  breaking-changes: true
+                  exclude-bots: true
+                  output-file: release-notes.md
+
+            - name: Upload release notes
+              uses: actions/upload-artifact@v4
+              with:
+                  name: release-notes-${{ inputs.tag }}
+                  path: release-notes.md
+                  if-no-files-found: error
+
+            - name: Summarize
+              shell: bash
+              run: |
+                  {
+                    echo "### Release notes generated for \`${{ inputs.tag }}\`"
+                    echo ""
+                    echo "- Tag: \`${{ inputs.tag }}\`"
+                    echo "- Previous tag: \`${{ inputs.previous-tag }}\`"
+                    echo "- Dry run: \`${{ inputs.dry-run }}\`"
+                    echo "- Release updated: \`${{ inputs.dry-run == false }}\`"
+                  } >> "$GITHUB_STEP_SUMMARY"

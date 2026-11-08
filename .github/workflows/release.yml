@@ -69,20 +69,6 @@ jobs:
                   echo "dist_tag=${DIST_TAG}" >> "$GITHUB_OUTPUT"
                   echo "prerelease=${IS_PRERELEASE}" >> "$GITHUB_OUTPUT"
 
-            - name: Resolve previous release tag
-              id: base
-              shell: bash
-              run: |
-                  set -euo pipefail
-                  PREVIOUS="$(git describe --tags --match 'v*' --abbrev=0 "${GITHUB_REF_NAME}^" 2>/dev/null || true)"
-
-                  if [ -z "$PREVIOUS" ]; then
-                    echo "::error::No previous release tag found. Push the initial tag before releasing."
-                    exit 1
-                  fi
-
-                  echo "previous_tag=${PREVIOUS}" >> "$GITHUB_OUTPUT"
-
             - name: Sync package versions
               run: node scripts/set-version.mjs "${{ steps.release.outputs.version }}"
 
@@ -120,13 +106,13 @@ jobs:
                   done
 
             - name: Generate release log
-              uses: devs-des1re/releaselog@v1
+              # The action resolves the previous stable or pre-release tag itself.
+              uses: devs-des1re/releaselog@v1.0.1
               with:
                   token: ${{ secrets.GITHUB_TOKEN }}
                   dev-branch: dev
                   main-branch: main
                   current-tag: ${{ github.ref_name }}
-                  previous-tag: ${{ steps.base.outputs.previous_tag }}
                   release-name: erlc.js ${{ github.ref_name }}
                   release-prerelease: auto
                   humanize: false
