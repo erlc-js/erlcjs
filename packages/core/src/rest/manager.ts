@@ -1,4 +1,4 @@
-import { ERLCAPIError, InvalidCommandError, InvalidGlobalKeyError, InvalidServerKeyError, MultipleServersUnauthenticatedError, OutOfDateServerError, ProhibitedMessageError, RestrictedCommandError, RestrictedResourceError, ServerBannedError, ServerOfflineError, UnauthorizedError } from '../errors/index.js';
+import { ERLCAPIError, InvalidCommandError, InvalidGlobalKeyError, InvalidServerKeyError, MultipleServersUnauthenticatedError, NoPlayersInServerError, OutOfDateServerError, ProhibitedMessageError, RestrictedCommandError, RestrictedResourceError, ServerBannedError, ServerOfflineError, UnauthorizedError } from '../errors/index.js';
 
 /** Extra time added to rate-limit window resets to avoid racing the server (covers second-truncated reset headers). */
 const SAFETY_BUFFER_MS = 1000;
@@ -150,6 +150,10 @@ export class RestManager {
                         return reject(new InvalidServerKeyError());
                     }
 
+                    if (response.status === 422) {
+                        return reject(new NoPlayersInServerError(data?.message));
+                    }
+
                     if (response.status === 429 || data.code === 4001) {
                         const bucketId = this.routeToBucket.get(route) ?? GLOBAL_BUCKET;
                         this.freezeBucket(bucketId, this.getRetryAfter(response, data));
@@ -164,11 +168,11 @@ export class RestManager {
                             await new Promise((res) => setTimeout(res, delay));
                             return executeTask();
                         }
-                        return reject(new ERLCAPIError(`${response.status}: ${response.statusText}\n${data.code}: ${data.message}`));
+                        return reject(new ERLCAPIError(this.describeError(response, data)));
                     }
 
                     if (!response.ok) {
-                        return reject(new ERLCAPIError(`${response.status}: ${response.statusText}\n${data.code}: ${data.message}`));
+                        return reject(new ERLCAPIError(this.describeError(response, data)));
                     }
 
                     resolve(data);
@@ -183,19 +187,34 @@ export class RestManager {
     }
 
     /**
+     * Builds a readable error message from an HTTP response and its JSON body.
+     */
+    private describeError(response: Response, data: any): string {
+        const status = `${response.status}: ${response.statusText}`;
+        if (!data || typeof data !== 'object') return status;
+
+        const message = data.message ?? data.error;
+        if (typeof message !== 'string' || message.length === 0) return status;
+
+        return data.code === undefined ? `${status}\n${message}` : `${status}\n${data.code}: ${message}`;
+    }
+
+    /**
      * Extracts headers and updates bucket-specific ratelimit.
      */
     private updateRateLimits(endpoint: string, serverKey: string, headers: Headers) {
         const bucketId = headers.get('x-ratelimit-bucket') || GLOBAL_BUCKET;
-        const limit = parseInt(headers.get('x-ratelimit-limit') || '0', 10);
-        const remaining = parseInt(headers.get('x-ratelimit-remaining') || '0', 10);
+        const limitHeader = headers.get('x-ratelimit-limit');
+        const remainingHeader = headers.get('x-ratelimit-remaining');
         const resetHeader = headers.get('x-ratelimit-reset');
 
         // Learn the route's bucket even when a 429 response omits the reset
         // headers, so Retry-After freezes the correct bucket.
         this.routeToBucket.set(this.getRouteKey(endpoint, serverKey), bucketId);
 
-        if (resetHeader) {
+        if (resetHeader && limitHeader !== null && remainingHeader !== null) {
+            const limit = parseInt(limitHeader, 10);
+            const remaining = parseInt(remainingHeader, 10);
             const resetSeconds = parseInt(resetHeader, 10);
 
             if (!Number.isFinite(limit) || !Number.isFinite(remaining) || !Number.isFinite(resetSeconds)) {
@@ -233,7 +252,10 @@ export class RestManager {
                 return Math.max(0, parsedDate - Date.now());
             }
         }
-        if (typeof data?.retry_after === 'number') return data.retry_after * 1000;
+        if (data?.retry_after !== undefined && data?.retry_after !== null) {
+            const seconds = Number(data.retry_after);
+            if (Number.isFinite(seconds) && seconds >= 0) return seconds * 1000;
+        }
         return 5000;
     }
 

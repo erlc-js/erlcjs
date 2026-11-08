@@ -56,8 +56,8 @@ export class ModCallManager {
                 }
             } else {
                 const hadModerator = Boolean(cachedCall.moderatorId);
-                if (!hadModerator && rawData.Moderator) {
-                    cachedCall._patch(rawData);
+                cachedCall._patch(rawData);
+                if (!hadModerator && cachedCall.moderatorId) {
                     this.server.client.emit(ERLCEvents.modCallAnswered, cachedCall);
                 }
             }

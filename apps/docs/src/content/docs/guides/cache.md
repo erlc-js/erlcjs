@@ -20,6 +20,7 @@ const server = client.servers.get('YOUR_SERVER_ID')!;
 | `server.staff.mods` | UserId | `Staff` |
 | `server.staff.helpers` | UserId | `Staff` |
 | `server.commandLogs.cache` | Player + timestamp + command | `CommandLog` |
+| `server.joinLogs.cache` | Player + timestamp + join/leave | `JoinLog` |
 | `server.killLogs.cache` | Killer + killed + timestamp | `KillLog` |
 | `server.modCalls.cache` | Caller + timestamp | `ModCall` |
 | `server.emergencyCalls.cache` | Call number | `EmergencyCall` |
@@ -67,6 +68,7 @@ const client = new Client({
     polling: true,
     maxCacheSize: {
         commandLog: 500,
+        joinLog: 500,
         killLog: 500,
         modCalls: 250,
     },

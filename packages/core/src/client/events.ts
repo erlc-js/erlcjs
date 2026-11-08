@@ -7,6 +7,7 @@ import type { ModCall } from '../structures/modcall.js';
 import type { KillLog } from '../structures/killlog.js';
 import type { EmergencyCall } from '../structures/emergencycall.js';
 import type { Staff } from '../structures/staff.js';
+import type { JoinLog } from '../structures/joinlog.js';
 
 /**
  * Event names emitted by the erlcjs Client.
@@ -57,6 +58,8 @@ export enum ERLCEvents {
     staffAdd = 'STAFF_ADD',
     /** Emitted when a staff member is removed */
     staffRemove = 'STAFF_REMOVE',
+    /** Emitted when a join or leave log entry is received. */
+    joinLog = 'JOIN_LOG',
     /** Emitted when a custom command is executed in-game */
     customCommand = 'CUSTOM_COMMAND',
     /** Emitted when a user enters the webhook in-game */
@@ -117,6 +120,9 @@ export interface ClientEvents {
     [ERLCEvents.staffAdd]: [staff: Staff, type: 'Admin' | 'Mod' | 'Helper'];
     /** Emitted when a player is removed from a staff role. */
     [ERLCEvents.staffRemove]: [staff: Staff, type: 'Admin' | 'Mod' | 'Helper'];
+
+    /** Emitted when a join or leave log entry is received. */
+    [ERLCEvents.joinLog]: [log: JoinLog];
 
     /** Emitted when a custom command is executed in-game. */
     [ERLCEvents.customCommand]: [player: Player, command: string, args: string[]];

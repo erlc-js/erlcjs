@@ -46,6 +46,7 @@ export interface ClientEvents {
     [ERLCEvents.emergencyCallRemove]: [call: EmergencyCall];
     [ERLCEvents.emergencyCallUpdate]: [oldCall: EmergencyCall | null, newCall: EmergencyCall];
     error: [error: unknown];
+    [ERLCEvents.joinLog]: [log: JoinLog];
     [ERLCEvents.kill]: [kill: KillLog];
     [ERLCEvents.modCall]: [call: ModCall];
     [ERLCEvents.modCallAnswered]: [call: ModCall];
@@ -75,6 +76,7 @@ export interface ClientOptions {
     maxCacheSize?: {
         killLog?: number;
         commandLog?: number;
+        joinLog?: number;
         modCalls?: number;
     };
     polling?: {
@@ -126,7 +128,13 @@ export class CommandLogManager {
 // @public
 export class CommandManager {
     constructor(server: Server);
-    execute(command: string): Promise<string>;
+    execute(command: string): Promise<CommandResponse>;
+}
+
+// @public
+export interface CommandResponse {
+    commandId?: string;
+    message: string;
 }
 
 // @public (undocumented)
@@ -181,6 +189,7 @@ export enum ERLCEvents {
     emergencyCallAdd = "EMERGENCY_CALL_ADD",
     emergencyCallRemove = "EMERGENCY_CALL_REMOVE",
     emergencyCallUpdate = "EMERGENCY_CALL_UPDATE",
+    joinLog = "JOIN_LOG",
     kill = "KILL",
     modCall = "MOD_CALL",
     modCallAnswered = "MOD_CALL_ANSWERED",
@@ -230,6 +239,26 @@ export class InvalidServerKeyError extends Error {
 }
 
 // @public
+export class JoinLog extends Base {
+    constructor(server: Server, data: RawJoinLog);
+    joined: boolean;
+    _patch(data: RawJoinLog): this;
+    player?: Player;
+    playerId: number;
+    playerUsername: string;
+    timestamp: number;
+    toJSON(): RawJoinLog;
+}
+
+// @public
+export class JoinLogManager {
+    constructor(server: Server, maxCacheSize?: number | undefined);
+    cache: Collection<string, JoinLog>;
+    fetchAll(): Promise<Collection<string, JoinLog>>;
+    updateCache(rawJoinLogs: RawJoinLog[]): Collection<string, JoinLog>;
+}
+
+// @public
 export class KillLog extends Base {
     constructor(server: Server, data: RawKillLog);
     killed?: Player;
@@ -252,6 +281,11 @@ export class KillLogManager {
 }
 
 // @public
+export class MissingGlobalAppIdError extends Error {
+    constructor(message?: string);
+}
+
+// @public
 export class ModCall extends Base {
     constructor(server: Server, data: RawModCall);
     caller?: Player;
@@ -271,6 +305,16 @@ export class ModCallManager {
     cache: Collection<string, ModCall>;
     fetchAll(): Promise<Collection<string, ModCall>>;
     updateCache(rawModCalls: RawModCall[]): Collection<string, ModCall>;
+}
+
+// @public
+export class MultipleServersUnauthenticatedError extends Error {
+    constructor(message?: string);
+}
+
+// @public
+export class NoPlayersInServerError extends Error {
+    constructor(message?: string);
 }
 
 // @public
@@ -389,13 +433,13 @@ export interface RawKillLog {
 // @public
 export interface RawModCall {
     Caller: string;
-    Moderator?: string;
+    Moderator?: string | null;
     Timestamp: number;
 }
 
 // @public
 export interface RawPlayerData {
-    Callsign: string;
+    Callsign?: string | null;
     Location: {
         LocationX: number;
         LocationZ: number;
@@ -447,7 +491,7 @@ export interface RawVehicle {
     Name: string;
     Owner: string;
     Plate: string;
-    Texture?: string;
+    Texture?: string | null;
 }
 
 // @public
@@ -505,6 +549,7 @@ export class Server {
     readonly inGameCommands: Collection<string, InGameCommand>;
     get isFull(): boolean;
     get isPolling(): boolean;
+    joinLogs: JoinLogManager;
     readonly key: string;
     killLogs: KillLogManager;
     modCalls: ModCallManager;

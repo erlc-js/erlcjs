@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it } from 'vitest';
-import { MultipleServersUnauthenticatedError } from '../errors/index.js';
+import { MultipleServersUnauthenticatedError, NoPlayersInServerError } from '../errors/index.js';
 import { RestManager } from './manager.js';
 
 const originalFetch = globalThis.fetch;
@@ -135,6 +135,30 @@ describe('RestManager', () => {
         expect(wait).toBeLessThanOrEqual(3000);
     });
 
+    it('parses a numeric-string retry_after body', () => {
+        const rm = new RestManager();
+        const response = resp(429, {}, { retry_after: '2' });
+        // @ts-expect-error private method access for testing
+        expect(rm.getRetryAfter(response, { retry_after: '2' })).toBe(2000);
+    });
+
+    it('maps a 422 no-players response to NoPlayersInServerError', async () => {
+        globalThis.fetch = (async () => resp(422, {}, {
+            message: 'The private server has no players in it',
+        })) as any;
+
+        const rm = new RestManager();
+        await expect(rm.request('POST', '/v2/server/command', { command: ':heal Alex' }, 'key'))
+            .rejects.toBeInstanceOf(NoPlayersInServerError);
+    });
+
+    it('does not include undefined fields in generic API errors', async () => {
+        globalThis.fetch = (async () => resp(400, {}, { message: 'Bad request' })) as any;
+
+        const rm = new RestManager();
+        await expect(rm.request('GET', '/v2/server')).rejects.toThrow(/400: OK\nBad request/);
+    });
+
     it('learns the route bucket from a 429 even when reset headers are missing', async () => {
         let callCount = 0;
         globalThis.fetch = (async () => {
@@ -163,6 +187,23 @@ describe('RestManager', () => {
         const rm = new RestManager();
         expect(rm.inflight).toBe(0);
         expect(rm.getRateLimits()).toEqual({});
+    });
+
+    it('does not treat missing limit headers as a zero budget', async () => {
+        globalThis.fetch = (async () => resp(200, {
+            'x-ratelimit-bucket': 'global',
+            'x-ratelimit-reset': String(Math.floor(Date.now() / 1000) + 60),
+        }, { ok: true })) as any;
+
+        const rm = new RestManager();
+        await expect(rm.request('GET', '/missing-limit')).resolves.toEqual({ ok: true });
+
+        const limits = rm.getRateLimits();
+        expect(limits['global']?.limit).toBe(0);
+        expect(limits['global']?.reset).toBe(0);
+
+        // A second request must not be blocked by an invented empty budget.
+        await expect(rm.request('GET', '/missing-limit')).resolves.toEqual({ ok: true });
     });
 
     it('ignores malformed rate-limit headers', async () => {

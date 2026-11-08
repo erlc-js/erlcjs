@@ -83,19 +83,16 @@ export class EmergencyCallManager {
      * @param callData - The raw emergency call payload from the webhook.
      */
     public addCall(callData: RawWebhookEmergencyCall) {
-        const callNum = callData.callNumber;
-        const cachedCall = this.cache.get(callNum);
-
         const pascalCallData = convertToPascalCase(callData) as RawEmergencyCall;
+        const callNum = pascalCallData.CallNumber;
+        if (!Number.isFinite(callNum)) return;
 
-        if (cachedCall) {
-            // Polling found first ignore.
-            return;
-        } else {
-            const newCall = new EmergencyCall(this.server, pascalCallData);
-            this.cache.set(newCall.callNumber, newCall);
-            this.server.client.emit(ERLCEvents.emergencyCallAdd, newCall);
-        }
+        // Polling found the call first; ignore the duplicate webhook event.
+        if (this.cache.has(callNum)) return;
+
+        const newCall = new EmergencyCall(this.server, pascalCallData);
+        this.cache.set(newCall.callNumber, newCall);
+        this.server.client.emit(ERLCEvents.emergencyCallAdd, newCall);
     }
 
     /**
@@ -104,10 +101,13 @@ export class EmergencyCallManager {
      * @param callData - The raw emergency call payload from the webhook.
      */
     public removeCall(callData: RawWebhookEmergencyCall) {
-        const callNum = callData.callNumber;
-        const exists = this.cache.has(callNum);
-        if (!exists) return;
-        this.server.client.emit(ERLCEvents.emergencyCallRemove, this.cache.get(callNum)!);
+        const pascalCallData = convertToPascalCase(callData) as RawEmergencyCall;
+        const callNum = pascalCallData.CallNumber;
+        if (!Number.isFinite(callNum)) return;
+
+        const call = this.cache.get(callNum);
+        if (!call) return;
+        this.server.client.emit(ERLCEvents.emergencyCallRemove, call);
         this.cache.delete(callNum);
     }
 }

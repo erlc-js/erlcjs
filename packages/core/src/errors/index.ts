@@ -21,6 +21,28 @@ export class InvalidGlobalKeyError extends Error {
 }
 
 /**
+ * Error thrown when an authorization link is requested without a global app ID.
+ * @public
+ */
+export class MissingGlobalAppIdError extends Error {
+    constructor(message: string = 'No Global App ID is configured. Set ClientOptions.globalAppId to create an authorization link.') {
+        super(message);
+        this.name = 'MissingGlobalAppIdError';
+    }
+}
+
+/**
+ * Error thrown when a command is sent to a private server that has no players.
+ * @public
+ */
+export class NoPlayersInServerError extends Error {
+    constructor(message: string = 'The private server has no players in it.') {
+        super(message);
+        this.name = 'NoPlayersInServerError';
+    }
+}
+
+/**
  * Error thrown when unauthenticated requests are made for multiple servers.
  * @public
  */

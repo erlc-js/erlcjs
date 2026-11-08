@@ -62,6 +62,10 @@ export class ModCall extends Base {
             this.moderatorId = Number(splitModerator[1]);
             this.moderatorUsername = splitModerator[0]!;
             this.moderator = this.server.players.cache.get(this.moderatorId);
+        } else {
+            this.moderatorId = undefined;
+            this.moderatorUsername = undefined;
+            this.moderator = undefined;
         }
         this.timestamp = data.Timestamp;
         return this;

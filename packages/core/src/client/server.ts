@@ -10,10 +10,11 @@ import { CommandManager } from '../managers/commandmanager.js';
 import { CommandLogManager } from '../managers/commandlogmanager.js';
 import { EmergencyCallManager } from '../managers/emergencycallmanager.js';
 import { KillLogManager } from '../managers/killlogmanager.js';
+import { JoinLogManager } from '../managers/joinlogmanager.js';
 import { ModCallManager } from '../managers/modcallmanager.js';
 import { StaffManager } from '../managers/staffmanager.js';
 import { Collection } from '../util/collection.js';
-import { CustomCommandError, InvalidGlobalKeyError, ServerOfflineError, TimeoutError } from '../errors/index.js';
+import { CustomCommandError, MissingGlobalAppIdError, ServerOfflineError, TimeoutError } from '../errors/index.js';
 
 const FULL_POLL_QUERY =
     '/v2/server?Players=true&Vehicles=true&Staff=true&JoinLogs=true&Queue=true&KillLogs=true&CommandLogs=true&ModCalls=true&EmergencyCalls=true';
@@ -52,6 +53,8 @@ export class Server {
     public emergencyCalls: EmergencyCallManager;
     /** Manager for kill logs. */
     public killLogs: KillLogManager;
+    /** Manager for join and leave logs. */
+    public joinLogs: JoinLogManager;
     /** Manager for moderator call logs. */
     public modCalls: ModCallManager;
     /** Manager for staff members. */
@@ -90,6 +93,7 @@ export class Server {
         this.commandLogs = new CommandLogManager(this, client.options.maxCacheSize?.commandLog);
         this.emergencyCalls = new EmergencyCallManager(this);
         this.killLogs = new KillLogManager(this, client.options.maxCacheSize?.killLog);
+        this.joinLogs = new JoinLogManager(this, client.options.maxCacheSize?.joinLog);
         this.modCalls = new ModCallManager(this, client.options.maxCacheSize?.modCalls);
         this.staff = new StaffManager(this);
     }
@@ -157,13 +161,16 @@ export class Server {
             this.client.emit(ERLCEvents.serverCreate, this.info);
         }
 
-        if (rawServerData.Players) this.players.updateCache(rawServerData.Players);
-        if (rawServerData.Vehicles) this.vehicles.updateCache(rawServerData.Vehicles);
-        if (rawServerData.CommandLogs) this.commandLogs.updateCache(rawServerData.CommandLogs);
-        if (rawServerData.EmergencyCalls) this.emergencyCalls.updateCache(rawServerData.EmergencyCalls);
-        if (rawServerData.KillLogs) this.killLogs.updateCache(rawServerData.KillLogs);
-        if (rawServerData.ModCalls) this.modCalls.updateCache(rawServerData.ModCalls);
-        if (rawServerData.Staff) this.staff.updateCache(rawServerData.Staff);
+        // Polls always request every optional field. If a field is missing, the
+        // server currently has none of that data, so clear stale cache entries.
+        this.players.updateCache(rawServerData.Players ?? []);
+        this.vehicles.updateCache(rawServerData.Vehicles ?? []);
+        this.commandLogs.updateCache(rawServerData.CommandLogs ?? []);
+        this.emergencyCalls.updateCache(rawServerData.EmergencyCalls ?? []);
+        this.killLogs.updateCache(rawServerData.KillLogs ?? []);
+        this.joinLogs.updateCache(rawServerData.JoinLogs ?? []);
+        this.modCalls.updateCache(rawServerData.ModCalls ?? []);
+        this.staff.updateCache(rawServerData.Staff ?? { Admins: {}, Mods: {}, Helpers: {} });
         this.client.emit(ERLCEvents.poll, this);
     }
 
@@ -289,7 +296,7 @@ export class Server {
      * Creates an authorization link for this server to allow post requests.
      */
     public get authorizationLink() {
-        if (!this.client.globalAppId) throw new InvalidGlobalKeyError('No Global App ID.');
+        if (!this.client.globalAppId) throw new MissingGlobalAppIdError();
         return `https://api.erlc.gg/server-owners/server/${this.id}/authorize/${this.client.globalAppId}`;
     }
 

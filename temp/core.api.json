@@ -1255,6 +1255,51 @@
             },
             {
               "kind": "PropertySignature",
+              "canonicalReference": "@erlcjs/core!ClientEvents#JOIN_LOG:member",
+              "docComment": "/**\n * Emitted when a join or leave log entry is received.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "["
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ERLCEvents.joinLog",
+                  "canonicalReference": "@erlcjs/core!ERLCEvents.joinLog:member"
+                },
+                {
+                  "kind": "Content",
+                  "text": "]: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "[log: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "JoinLog",
+                  "canonicalReference": "@erlcjs/core!JoinLog:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": "]"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "JOIN_LOG",
+              "propertyTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 6
+              }
+            },
+            {
+              "kind": "PropertySignature",
               "canonicalReference": "@erlcjs/core!ClientEvents#KILL:member",
               "docComment": "/**\n * Emitted when a player is killed.\n */\n",
               "excerptTokens": [
@@ -2209,7 +2254,7 @@
                 },
                 {
                   "kind": "Content",
-                  "text": "{\n        killLog?: number;\n        commandLog?: number;\n        modCalls?: number;\n    }"
+                  "text": "{\n        killLog?: number;\n        commandLog?: number;\n        joinLog?: number;\n        modCalls?: number;\n    }"
                 },
                 {
                   "kind": "Content",
@@ -3323,7 +3368,7 @@
             {
               "kind": "Method",
               "canonicalReference": "@erlcjs/core!CommandManager#execute:member(1)",
-              "docComment": "/**\n * Executes a server command via the ER:LC API.\n *\n * @param command - The full command string to execute (e.g. `:pm alex hello`).\n *\n * @returns A promise resolving to the API response string status.\n */\n",
+              "docComment": "/**\n * Executes a server command via the ER:LC API.\n *\n * @param command - The full command string to execute (e.g. `:pm alex hello`).\n *\n * @returns A promise resolving to the API command response.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -3344,7 +3389,16 @@
                 },
                 {
                   "kind": "Content",
-                  "text": "<string>"
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "CommandResponse",
+                  "canonicalReference": "@erlcjs/core!CommandResponse:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">"
                 },
                 {
                   "kind": "Content",
@@ -3354,7 +3408,7 @@
               "isStatic": false,
               "returnTypeTokenRange": {
                 "startIndex": 3,
-                "endIndex": 5
+                "endIndex": 7
               },
               "releaseTag": "Public",
               "isProtected": false,
@@ -3375,6 +3429,78 @@
             }
           ],
           "implementsTokenRanges": []
+        },
+        {
+          "kind": "Interface",
+          "canonicalReference": "@erlcjs/core!CommandResponse:interface",
+          "docComment": "/**\n * Response returned by the ER:LC command endpoint.\n *\n * @public\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "interface CommandResponse "
+            }
+          ],
+          "fileUrlPath": "dist/index.d.ts",
+          "releaseTag": "Public",
+          "name": "CommandResponse",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@erlcjs/core!CommandResponse#commandId:member",
+              "docComment": "/**\n * A unique command execution ID, included on some errors for troubleshooting.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "commandId?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "commandId",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@erlcjs/core!CommandResponse#message:member",
+              "docComment": "/**\n * A message explaining the status of the command.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "message: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "message",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            }
+          ],
+          "extendsTokenRanges": []
         },
         {
           "kind": "Function",
@@ -4535,6 +4661,27 @@
             },
             {
               "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!ERLCEvents.joinLog:member",
+              "docComment": "/**\n * Emitted when a join or leave log entry is received.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "joinLog = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"JOIN_LOG\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "joinLog"
+            },
+            {
+              "kind": "EnumMember",
               "canonicalReference": "@erlcjs/core!ERLCEvents.kill:member",
               "docComment": "/**\n * Emitted when a player is killed.\n */\n",
               "excerptTokens": [
@@ -5317,6 +5464,553 @@
         },
         {
           "kind": "Class",
+          "canonicalReference": "@erlcjs/core!JoinLog:class",
+          "docComment": "/**\n * Represents a server join or leave log entry.\n *\n * @public\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "declare class JoinLog extends "
+            },
+            {
+              "kind": "Reference",
+              "text": "Base",
+              "canonicalReference": "@erlcjs/core!Base:class"
+            },
+            {
+              "kind": "Content",
+              "text": " "
+            }
+          ],
+          "fileUrlPath": "dist/index.d.ts",
+          "releaseTag": "Public",
+          "isAbstract": false,
+          "name": "JoinLog",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "Method",
+              "canonicalReference": "@erlcjs/core!JoinLog#_patch:member(1)",
+              "docComment": "/**\n * Patches the JoinLog structure with new raw data.\n *\n * @param data - The new raw join log data.\n *\n * @returns This join log instance.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "_patch(data: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "RawJoinLog",
+                  "canonicalReference": "@erlcjs/core!RawJoinLog:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "this"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "data",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "_patch"
+            },
+            {
+              "kind": "Constructor",
+              "canonicalReference": "@erlcjs/core!JoinLog:constructor(1)",
+              "docComment": "/**\n * Creates an instance of JoinLog.\n *\n * @param server - The server the event happened in.\n *\n * @param data - The raw join log data to initialize.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "constructor(server: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Server",
+                  "canonicalReference": "@erlcjs/core!Server:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", data: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "RawJoinLog",
+                  "canonicalReference": "@erlcjs/core!RawJoinLog:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ");"
+                }
+              ],
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "server",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                },
+                {
+                  "parameterName": "data",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 3,
+                    "endIndex": 4
+                  },
+                  "isOptional": false
+                }
+              ]
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "@erlcjs/core!JoinLog#joined:member",
+              "docComment": "/**\n * Whether the player joined (true) or left (false).\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "joined: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "joined",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false,
+              "isProtected": false,
+              "isAbstract": false
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "@erlcjs/core!JoinLog#player:member",
+              "docComment": "/**\n * The Player instance representing the player, if they are still cached.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "player?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Player",
+                  "canonicalReference": "@erlcjs/core!Player:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "player",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false,
+              "isProtected": false,
+              "isAbstract": false
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "@erlcjs/core!JoinLog#playerId:member",
+              "docComment": "/**\n * The UserId of the player.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "playerId: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "playerId",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false,
+              "isProtected": false,
+              "isAbstract": false
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "@erlcjs/core!JoinLog#playerUsername:member",
+              "docComment": "/**\n * The Roblox username of the player.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "playerUsername: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "playerUsername",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false,
+              "isProtected": false,
+              "isAbstract": false
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "@erlcjs/core!JoinLog#timestamp:member",
+              "docComment": "/**\n * Unix timestamp of when the event occurred.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "timestamp: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "timestamp",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false,
+              "isProtected": false,
+              "isAbstract": false
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@erlcjs/core!JoinLog#toJSON:member(1)",
+              "docComment": "/**\n * Converts this JoinLog instance to raw JSON representation.\n *\n * @returns The raw join log data.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "toJSON(): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "RawJoinLog",
+                  "canonicalReference": "@erlcjs/core!RawJoinLog:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "toJSON"
+            }
+          ],
+          "extendsTokenRange": {
+            "startIndex": 1,
+            "endIndex": 2
+          },
+          "implementsTokenRanges": []
+        },
+        {
+          "kind": "Class",
+          "canonicalReference": "@erlcjs/core!JoinLogManager:class",
+          "docComment": "/**\n * Manager responsible for fetching, caching, and updating JoinLog structures.\n *\n * @public\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "declare class JoinLogManager "
+            }
+          ],
+          "fileUrlPath": "dist/index.d.ts",
+          "releaseTag": "Public",
+          "isAbstract": false,
+          "name": "JoinLogManager",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "Constructor",
+              "canonicalReference": "@erlcjs/core!JoinLogManager:constructor(1)",
+              "docComment": "/**\n * Creates an instance of JoinLogManager.\n *\n * @param server - The server this manager belongs to.\n *\n * @param maxCacheSize - The maximum number of join logs to hold in cache.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "constructor(server: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Server",
+                  "canonicalReference": "@erlcjs/core!Server:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", maxCacheSize?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number | undefined"
+                },
+                {
+                  "kind": "Content",
+                  "text": ");"
+                }
+              ],
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "server",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                },
+                {
+                  "parameterName": "maxCacheSize",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 3,
+                    "endIndex": 4
+                  },
+                  "isOptional": true
+                }
+              ]
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "@erlcjs/core!JoinLogManager#cache:member",
+              "docComment": "/**\n * Collection cache of join and leave logs, keyed by a composite\n * `Player:Timestamp:Join` key.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "cache: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Collection",
+                  "canonicalReference": "@erlcjs/core!Collection:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<string, "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "JoinLog",
+                  "canonicalReference": "@erlcjs/core!JoinLog:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "cache",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 5
+              },
+              "isStatic": false,
+              "isProtected": false,
+              "isAbstract": false
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@erlcjs/core!JoinLogManager#fetchAll:member(1)",
+              "docComment": "/**\n * Fetches all join logs from the game server.\n * Updates the join log cache.\n *\n * @returns A promise resolving to a Collection of JoinLogs.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "fetchAll(): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Promise",
+                  "canonicalReference": "!Promise:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Collection",
+                  "canonicalReference": "@erlcjs/core!Collection:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<string, "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "JoinLog",
+                  "canonicalReference": "@erlcjs/core!JoinLog:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 7
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "fetchAll"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@erlcjs/core!JoinLogManager#updateCache:member(1)",
+              "docComment": "/**\n * Re-synchronizes the cache with the raw join logs.\n * Emits a joinLog event for new logs.\n *\n * @param rawJoinLogs - Raw join logs payload.\n *\n * @returns The updated JoinLog cache Collection.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "updateCache(rawJoinLogs: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "RawJoinLog",
+                  "canonicalReference": "@erlcjs/core!RawJoinLog:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "[]"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Collection",
+                  "canonicalReference": "@erlcjs/core!Collection:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<string, "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "JoinLog",
+                  "canonicalReference": "@erlcjs/core!JoinLog:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 4,
+                "endIndex": 8
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "rawJoinLogs",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 3
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "updateCache"
+            }
+          ],
+          "implementsTokenRanges": []
+        },
+        {
+          "kind": "Class",
           "canonicalReference": "@erlcjs/core!KillLog:class",
           "docComment": "/**\n * Represents a log of a player death event (kill).\n *\n * @public\n */\n",
           "excerptTokens": [
@@ -5925,6 +6619,70 @@
         },
         {
           "kind": "Class",
+          "canonicalReference": "@erlcjs/core!MissingGlobalAppIdError:class",
+          "docComment": "/**\n * Error thrown when an authorization link is requested without a global app ID.\n *\n * @public\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "declare class MissingGlobalAppIdError extends "
+            },
+            {
+              "kind": "Reference",
+              "text": "Error",
+              "canonicalReference": "!Error:interface"
+            },
+            {
+              "kind": "Content",
+              "text": " "
+            }
+          ],
+          "fileUrlPath": "dist/index.d.ts",
+          "releaseTag": "Public",
+          "isAbstract": false,
+          "name": "MissingGlobalAppIdError",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "Constructor",
+              "canonicalReference": "@erlcjs/core!MissingGlobalAppIdError:constructor(1)",
+              "docComment": "/**\n * Constructs a new instance of the `MissingGlobalAppIdError` class\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "constructor(message?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ");"
+                }
+              ],
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "message",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": true
+                }
+              ]
+            }
+          ],
+          "extendsTokenRange": {
+            "startIndex": 1,
+            "endIndex": 2
+          },
+          "implementsTokenRanges": []
+        },
+        {
+          "kind": "Class",
           "canonicalReference": "@erlcjs/core!ModCall:class",
           "docComment": "/**\n * Represents a request for moderation help (moderator call) in the ER:LC server.\n *\n * @public\n */\n",
           "excerptTokens": [
@@ -6529,6 +7287,134 @@
               "name": "updateCache"
             }
           ],
+          "implementsTokenRanges": []
+        },
+        {
+          "kind": "Class",
+          "canonicalReference": "@erlcjs/core!MultipleServersUnauthenticatedError:class",
+          "docComment": "/**\n * Error thrown when unauthenticated requests are made for multiple servers.\n *\n * @public\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "declare class MultipleServersUnauthenticatedError extends "
+            },
+            {
+              "kind": "Reference",
+              "text": "Error",
+              "canonicalReference": "!Error:interface"
+            },
+            {
+              "kind": "Content",
+              "text": " "
+            }
+          ],
+          "fileUrlPath": "dist/index.d.ts",
+          "releaseTag": "Public",
+          "isAbstract": false,
+          "name": "MultipleServersUnauthenticatedError",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "Constructor",
+              "canonicalReference": "@erlcjs/core!MultipleServersUnauthenticatedError:constructor(1)",
+              "docComment": "/**\n * Constructs a new instance of the `MultipleServersUnauthenticatedError` class\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "constructor(message?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ");"
+                }
+              ],
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "message",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": true
+                }
+              ]
+            }
+          ],
+          "extendsTokenRange": {
+            "startIndex": 1,
+            "endIndex": 2
+          },
+          "implementsTokenRanges": []
+        },
+        {
+          "kind": "Class",
+          "canonicalReference": "@erlcjs/core!NoPlayersInServerError:class",
+          "docComment": "/**\n * Error thrown when a command is sent to a private server that has no players.\n *\n * @public\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "declare class NoPlayersInServerError extends "
+            },
+            {
+              "kind": "Reference",
+              "text": "Error",
+              "canonicalReference": "!Error:interface"
+            },
+            {
+              "kind": "Content",
+              "text": " "
+            }
+          ],
+          "fileUrlPath": "dist/index.d.ts",
+          "releaseTag": "Public",
+          "isAbstract": false,
+          "name": "NoPlayersInServerError",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "Constructor",
+              "canonicalReference": "@erlcjs/core!NoPlayersInServerError:constructor(1)",
+              "docComment": "/**\n * Constructs a new instance of the `NoPlayersInServerError` class\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "constructor(message?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ");"
+                }
+              ],
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "message",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": true
+                }
+              ]
+            }
+          ],
+          "extendsTokenRange": {
+            "startIndex": 1,
+            "endIndex": 2
+          },
           "implementsTokenRanges": []
         },
         {
@@ -9173,7 +10059,7 @@
                 },
                 {
                   "kind": "Content",
-                  "text": "string"
+                  "text": "string | null"
                 },
                 {
                   "kind": "Content",
@@ -9237,15 +10123,15 @@
             {
               "kind": "PropertySignature",
               "canonicalReference": "@erlcjs/core!RawPlayerData#Callsign:member",
-              "docComment": "/**\n * The player's optional callsign.\n */\n",
+              "docComment": "/**\n * The player's optional callsign. Only present for non-civilian teams.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "Callsign: "
+                  "text": "Callsign?: "
                 },
                 {
                   "kind": "Content",
-                  "text": "string"
+                  "text": "string | null"
                 },
                 {
                   "kind": "Content",
@@ -9253,7 +10139,7 @@
                 }
               ],
               "isReadonly": false,
-              "isOptional": false,
+              "isOptional": true,
               "releaseTag": "Public",
               "name": "Callsign",
               "propertyTypeTokenRange": {
@@ -10214,7 +11100,7 @@
                 },
                 {
                   "kind": "Content",
-                  "text": "string"
+                  "text": "string | null"
                 },
                 {
                   "kind": "Content",
@@ -11356,6 +12242,37 @@
               "isOptional": false,
               "releaseTag": "Public",
               "name": "isPolling",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false,
+              "isProtected": false,
+              "isAbstract": false
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "@erlcjs/core!Server#joinLogs:member",
+              "docComment": "/**\n * Manager for join and leave logs.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "joinLogs: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "JoinLogManager",
+                  "canonicalReference": "@erlcjs/core!JoinLogManager:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "joinLogs",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2

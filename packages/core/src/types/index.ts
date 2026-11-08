@@ -37,7 +37,7 @@ export interface ClientOptions {
         path?: string;
         /**
          * Maximum age in seconds a signed webhook may be before it is rejected
-         * as a replay. Defaults to 5.
+         * as a replay. Defaults to 300.
          */
         timestampTolerance?: number;
     };
@@ -61,6 +61,7 @@ export interface ClientOptions {
     maxCacheSize?: {
         killLog?: number;
         commandLog?: number;
+        joinLog?: number;
         modCalls?: number;
     }
 }

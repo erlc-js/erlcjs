@@ -37,7 +37,7 @@ await server.commands.execute(':pm jamie hello');
 | `globalAppId` | `string \| number` | Optional app ID, used for authorization links. |
 | `polling` | `object \| true` | Poll settings, or `true` for the defaults. |
 | `webhook` | `object` | Webhook gateway settings. |
-| `maxCacheSize` | `object` | Limits for `killLog`, `commandLog`, and `modCalls` caches. |
+| `maxCacheSize` | `object` | Limits for `killLog`, `commandLog`, `joinLog`, and `modCalls` caches. |
 
 ## Polling
 
@@ -74,7 +74,7 @@ const client = new Client({
         enabled: true,
         port: 3000,
         path: '/webhook',
-        timestampTolerance: 5,
+        timestampTolerance: 300,
     },
 });
 ```
@@ -110,3 +110,5 @@ For public applications, generate a link that lets server owners authorize your 
 ```ts
 console.log(server.authorizationLink);
 ```
+
+The client must have `globalAppId` set; otherwise reading `authorizationLink` throws `MissingGlobalAppIdError`.

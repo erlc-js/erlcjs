@@ -33,7 +33,7 @@ export class StaffManager {
     /**
      * Fetches all staff members.
      * Updates the staff cache.
-     * @returns A promise resolving to a Collection of active Vehicles.
+     * @returns A promise resolving to a Collection of staff role collections.
      */
     public async fetchAll(): Promise<Collection<string, Collection<number, Staff>>> {
         const rawServer: RawServerData = await this.server.rest.request(

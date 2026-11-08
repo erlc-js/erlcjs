@@ -54,6 +54,7 @@ Events carry a structure with a `server` property (or the `Server` itself), so m
 | Event | Fires when | Arguments |
 |-------|------------|-----------|
 | `command` | A console command is logged | `commandLog` |
+| `joinLog` | A player joins or leaves the server | `joinLog` |
 | `kill` | A player is killed | `killLog` |
 | `modCall` | A player requests a moderator | `modCall` |
 | `modCallAnswered` | A moderator answers a call | `modCall` |

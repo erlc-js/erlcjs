@@ -8,6 +8,21 @@ import { ServerNotConfiguredError } from '../errors/index.js';
 const MAX_BODY_BYTES = 1024 * 1024;
 
 /**
+ * Resolves the player identifier from a webhook origin, which may be a UserId
+ * or a `Username:UserId` string.
+ * @param origin - The raw `origin` field from a webhook event.
+ * @returns The UserId, or undefined when the origin is not a valid identifier.
+ */
+function resolveOriginId(origin: unknown): number | undefined {
+    if (typeof origin === 'number') return Number.isInteger(origin) ? origin : undefined;
+    if (typeof origin !== 'string') return undefined;
+
+    const value = origin.includes(':') ? origin.split(':').pop()! : origin;
+    const id = Number(value);
+    return value.length > 0 && Number.isInteger(id) ? id : undefined;
+}
+
+/**
  * Splits an argument string into tokens, respecting single and double quoted segments.
  * @param input - The raw argument string from a webhook custom command event.
  * @returns The parsed arguments.
@@ -54,9 +69,12 @@ export class WebhookServer {
      */
     constructor(private readonly client: Client) {
         this.server = createServer((req, res) => {
-            const configPath = this.client.options.webhook?.path || '/';
+            const configuredPath = this.client.options.webhook?.path || '/';
+            const configPath = configuredPath.startsWith('/') ? configuredPath : `/${configuredPath}`;
+            const requestPath = (req.url ?? '').split('?')[0]!;
+            const matchesPath = requestPath.replace(/\/+$/, '') === configPath.replace(/\/+$/, '');
 
-            if (req.method === 'POST' && req.url === configPath) {
+            if (req.method === 'POST' && matchesPath) {
                 let bodyChunks: Buffer[] = [];
                 let bodySize = 0;
                 let bodyTooLarge = false;
@@ -91,7 +109,7 @@ export class WebhookServer {
                     }
 
                     const timestampSeconds = Number(timestamp);
-                    const tolerance = this.client.options.webhook?.timestampTolerance ?? 5;
+                    const tolerance = this.client.options.webhook?.timestampTolerance ?? 300;
                     if (!Number.isFinite(timestampSeconds) || Math.abs(Date.now() / 1000 - timestampSeconds) > tolerance) {
                         res.writeHead(401, { 'Content-Type': 'text/plain' });
                         return res.end('Invalid Signature');
@@ -154,28 +172,60 @@ export class WebhookServer {
      * @param payload - Raw JSON payload received.
      */
     private async handleGatewayEvent(payload: any) {
-        const server = this.resolveServer(payload.server);
+        const server = this.resolveServer(payload?.server ?? payload?.Server);
         if (!server) return;
 
-        const events = payload.events;
+        const events = Array.isArray(payload?.events)
+            ? payload.events
+            : Array.isArray(payload?.Events)
+              ? payload.Events
+              : [];
         for (const event of events) {
-            if (event.event === 'WebhookProbe') {
+            if (!event || typeof event !== 'object') continue;
+
+            const eventName = event.event ?? event.Event;
+            const data = event.data ?? event.Data ?? {};
+
+            if (eventName === 'WebhookProbe') {
                 this.client.emit(ERLCEvents.webhookProbe, server);
-            } else if (event.event === 'EmergencyCallStarted') {
-                server.emergencyCalls.addCall(event.data);
-            } else if (event.event === 'EmergencyCallEnded') {
-                server.emergencyCalls.removeCall(event.data);
-            } else if (event.event === 'CustomCommand') {
-                let command = event.data?.command?.trim();
+            } else if (eventName === 'EmergencyCallStarted') {
+                server.emergencyCalls.addCall(data);
+            } else if (eventName === 'EmergencyCallEnded') {
+                server.emergencyCalls.removeCall(data);
+            } else if (eventName === 'CustomCommand') {
+                let command = (data.command ?? data.Command ?? '').trim();
                 if (!command) continue;
                 if (command.startsWith(';')) command = command.slice(1);
-                const args = parseArgs(event.data?.argument ?? '');
-                let player = server.players.cache.get(Number(event.origin));
+
+                const playerId = resolveOriginId(event.origin ?? event.Origin);
+                if (playerId === undefined) continue;
+
+                const args = parseArgs(data.argument ?? data.Argument ?? '');
+                let player = server.players.cache.get(playerId);
+
                 if (!player) {
-                    await server.waitFor(ERLCEvents.poll, 5000);
-                    player = server.players.cache.get(Number(event.origin));
-                    if (!player) continue;
+                    // Webhooks can arrive before the first poll or for a player
+                    // who joined between polls. Refresh the player cache instead
+                    // of dropping the command when polling is disabled.
+                    try {
+                        await server.players.fetchAll();
+                    } catch (err) {
+                        this.client._emitError(err);
+                    }
+                    player = server.players.cache.get(playerId);
                 }
+
+                if (!player) {
+                    // The API may lag behind the game; give the next poll a chance.
+                    try {
+                        await server.waitFor(ERLCEvents.poll, 5000);
+                    } catch {
+                        // The command is dropped below if the player never appears.
+                    }
+                    player = server.players.cache.get(playerId);
+                }
+
+                if (!player) continue;
                 this.client.emit(
                     ERLCEvents.customCommand,
                     player,
@@ -189,7 +239,7 @@ export class WebhookServer {
     /**
      * Resolves a server by the webhook payload's server field.
      */
-    private resolveServer(serverId: string): Server | undefined {
+    private resolveServer(serverId: string | number): Server | undefined {
         const server = this.client.servers.resolve(serverId);
         if (!server) {
             this.client._emitError(new ServerNotConfiguredError(String(serverId)));
